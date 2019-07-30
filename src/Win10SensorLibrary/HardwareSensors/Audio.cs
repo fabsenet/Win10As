@@ -48,11 +48,11 @@ namespace mqttclient.HardwareSensors
             }
 
         }
-        public string GetVolume()
+        public double GetVolume()
         {
             try
             {
-                return defaultPlaybackDevice.Volume + "%";
+                return defaultPlaybackDevice.Volume;
             }
             catch (Exception)
             {

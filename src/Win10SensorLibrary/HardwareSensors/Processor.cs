@@ -15,9 +15,8 @@ namespace mqttclient.HardwareSensors
                 cpuCounter.NextValue();
                 Thread.Sleep(1000);
 
-                string t = Convert.ToString(Math.Round(Convert.ToDecimal(cpuCounter.NextValue().ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture), 2), CultureInfo.CurrentCulture);
-
-                return t + "%";
+                var t = Convert.ToString(Math.Round(Convert.ToDecimal(cpuCounter.NextValue().ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture), 2), CultureInfo.CurrentCulture);
+                return t;
 
             }
             catch (Exception)

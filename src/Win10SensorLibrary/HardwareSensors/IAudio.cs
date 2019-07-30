@@ -4,7 +4,7 @@ namespace mqttclient.HardwareSensors
 {
     public interface IAudio
     {
-        string GetVolume();
+        double GetVolume();
         bool IsMuted();
         void Mute(bool Enable);
         void Volume(int level);

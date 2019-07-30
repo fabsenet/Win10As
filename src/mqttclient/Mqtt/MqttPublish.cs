@@ -79,7 +79,7 @@ namespace mqttclient.Mqtt
         }
         private void PublishAudio()
         {
-            _mqtt.Publish("volume", _audioobj.GetVolume(), true);
+            _mqtt.Publish("volume", _audioobj.GetVolume() + "", true);
 
             try
             {
