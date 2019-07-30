@@ -80,14 +80,14 @@ namespace mqttclient.Mqtt
         {
             try
             {
-                if (!Helpers.IsEmptyOrWhitespaced(hostname))
+                if (hostname + "" != "")
                 {
                     try
                     {
 
                         _client = new MqttClient(hostname, portNumber, false, null, null, MqttSslProtocols.None, null);
 
-                        if (Helpers.IsEmptyOrWhitespaced(username))
+                        if (username + "" == "")
                             _client.Connect(Guid.NewGuid().ToString());
                         else
                             _client.Connect(Guid.NewGuid().ToString(), username, password);
