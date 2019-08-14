@@ -12,7 +12,6 @@ namespace mqttclient
             var builder = new ContainerBuilder();
 
             builder.RegisterType<MainForm>().AsSelf().SingleInstance();
-            builder.RegisterType<Logger>().As<ILogger>();
             builder.RegisterType<Mqtt.Mqtt>().As<IMqtt>().SingleInstance();
             builder.RegisterType<MqttPublish>().As<IMqttPublish>();
             builder.RegisterType<Audio>().As<IAudio>();

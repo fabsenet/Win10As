@@ -20,7 +20,7 @@ namespace mqttclient.Mqtt
     {
         private readonly IToastMessage _toastMessage;
         private readonly IAudio _audio;
-        private readonly ILogger _logger;
+
         private MqttClient _client;
         public enum SensorType { BinarySensor, Switch, Light, Sensor };
         public string GMqtttopic { get; set; }
@@ -33,12 +33,13 @@ namespace mqttclient.Mqtt
                 return _client.IsConnected;
             }
         }
-        public Mqtt(IAudio audio, IToastMessage toastMessage, ILogger logger)
+
+        public Mqtt(IAudio audio, IToastMessage toastMessage)
         {
             _audio = audio;
             _toastMessage = toastMessage;
-            _logger = logger;
         }
+
         public void PublishImage(string topic, string file)
         {
             if (File.Exists(file))
@@ -47,7 +48,7 @@ namespace mqttclient.Mqtt
                 {
                     var fullTopic = FullTopic(topic);
                     _client.Publish(fullTopic, File.ReadAllBytes(file));
-                    _logger.Log("image published:" + fullTopic);
+                    Log.Add("image published:" + fullTopic);
                 }
             }
         }
@@ -57,7 +58,7 @@ namespace mqttclient.Mqtt
             {
                 var fullTopic = FullTopic(topic);
                 _client.Publish(fullTopic, bytes);
-                _logger.Log("bytes published:" + fullTopic);
+                Log.Add("bytes published:" + fullTopic);
             }
         }
         public void Publish(string topic, string message, bool retain = false)
@@ -73,7 +74,7 @@ namespace mqttclient.Mqtt
                 {
                     _client.Publish(fullTopic, Encoding.UTF8.GetBytes(message));
                 }
-                _logger.Log("message published:" + fullTopic + " value " + message);
+                Log.Add("message published:" + fullTopic + " value " + message);
             }
         }
         public bool Connect(string hostname, int portNumber, string username, string password)
@@ -108,7 +109,7 @@ namespace mqttclient.Mqtt
                             _client.MqttMsgPublished += ClientMqttMsgPublished;
                             _client.ConnectionClosed += ClientMqttConnectionClosed;
 
-                            _logger.Log("connected");
+                            Log.Add("connected");
 
                             GMqtttopic = Properties.Settings.Default["mqtttopic"].ToString() + "/#";
 
@@ -157,11 +158,11 @@ namespace mqttclient.Mqtt
         {
             try
             {
-                _logger.Log("MessageId = " + e.MessageId + " Published = " + e.IsPublished);
+                Log.Add("MessageId = " + e.MessageId + " Published = " + e.IsPublished);
             }
             catch (Exception ex)
             {
-                _logger.Log("error: " + ex.Message);
+                Log.Add("error: " + ex.Message);
             }
             catch
             {
@@ -173,11 +174,11 @@ namespace mqttclient.Mqtt
         {
             try
             {
-                _logger.Log("Mqtt Connection closed");
+                Log.Add("Mqtt Connection closed");
             }
             catch (Exception ex)
             {
-                _logger.Log("error: " + ex.Message);
+                Log.Add("error: " + ex.Message);
             }
 
         }
@@ -185,11 +186,11 @@ namespace mqttclient.Mqtt
         {
             try
             {
-                _logger.Log($"Subscribed for id = {e.MessageId}");
+                Log.Add($"Subscribed for id = {e.MessageId}");
             }
             catch (Exception ex)
             {
-                _logger.Log($"error: {ex.Message}");
+                Log.Add($"error: {ex.Message}");
             }
 
         }
@@ -198,7 +199,7 @@ namespace mqttclient.Mqtt
             try
             {
                 string message = Encoding.UTF8.GetString(e.Message);
-                _logger.Log("Message recived " + e.Topic + " value " + message);
+                Log.Add("Message recived " + e.Topic + " value " + message);
 
                 string TopLevel = GMqtttopic.Replace("/#", "");
                 string subtopic = e.Topic.Replace(TopLevel + "/", "");
@@ -208,7 +209,7 @@ namespace mqttclient.Mqtt
             }
             catch (Exception ex)
             {
-                _logger.Log("error: " + ex.Message);
+                Log.Add("error: " + ex.Message);
             }
 
         }

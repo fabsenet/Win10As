@@ -59,10 +59,6 @@ namespace mqttclient
             timer1.Start();
         }
 
-        //private void client_MqttConnectionClosed(object sender, EventArgs e)
-        //{
-        //    toolStripStatusLabel1.Text = "not connected";
-        //}
         delegate void SetTextCallback(string text);
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -85,18 +81,12 @@ namespace mqttclient
             HandleUnhandledException(e.Exception);
         }
 
-        private void ListBox1_KeyUp(object sender, KeyEventArgs e)
+        private void lbLogs_KeyUp(object sender, KeyEventArgs e)
         {
             if (sender != lbLogs) return;
 
             if (e.Control && e.KeyCode == Keys.C)
-                try
-                {
-                    Clipboard.SetText(lbLogs.SelectedItems[0].ToString());
-                }
-                catch (Exception)
-                {
-                }
+                Clipboard.SetText(lbLogs.SelectedItems[0].ToString());
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,31 +108,29 @@ namespace mqttclient
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
                 if (MqttSettings.MinimizeToTray)
                 {
                     notifyIcon1.Visible = true;
-                    this.ShowInTaskbar = false;
-                    this.Hide();
+                    ShowInTaskbar = false;
+                    Hide();
                 }
             }
             else
-            {
-                this.Show();
-            }
+                Show();
         }
 
         private void NotifyIcon1_BalloonTipClicked(object sender, EventArgs e)
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
+            Show();
+            WindowState = FormWindowState.Normal;
         }
 
         private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
+            Show();
+            WindowState = FormWindowState.Normal;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

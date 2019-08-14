@@ -164,9 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainerConfig.cs" />
-    <Compile Include="ILogger.cs" />
     <Compile Include="IToastMessage.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="MqttSettings.cs" />
     <Compile Include="Mqtt\IMqtt.cs" />
     <Compile Include="Mqtt\IMqttPublish.cs" />
@@ -226,7 +225,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="description.txt" />
     <Content Include="License-LGPL.txt" />
     <Content Include="mqtticon-large_400x400.ico" />
   </ItemGroup>

@@ -56,7 +56,7 @@
             this.lbLogs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbLogs.Size = new System.Drawing.Size(484, 288);
             this.lbLogs.TabIndex = 26;
-            this.lbLogs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ListBox1_KeyUp);
+            this.lbLogs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lbLogs_KeyUp);
             // 
             // menuStrip1
             // 
