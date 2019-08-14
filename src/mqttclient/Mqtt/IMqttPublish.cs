@@ -2,6 +2,7 @@
 {
     public interface IMqttPublish
     {
-        void PublishSystemData();
+        void SendDiscoveryInfo();
+        void SendWorkerUpdates();
     }
 }

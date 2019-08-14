@@ -1,5 +1,4 @@
 ﻿using MqttClient.Mqtt;
-using MqttClient.Mqtt.Workers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,6 +15,9 @@ namespace MqttClient.Workers
 
         public override List<MqttMessage> SendDiscovery()
         {
+            if (!Utils.Settings.PerformanceInfoEnabled)
+                return null;
+
             var result = new List<MqttMessage>();
 
             foreach (var attr in ATTRIBUTES)
@@ -26,11 +28,13 @@ namespace MqttClient.Workers
 
                 if (attr == "cpu")
                 {
+                    // payload.Add("icon", "mdi:cpu");
                     payload.Add("name", $"CPU usage");
                     payload.Add("unit_of_measurement", "%");
                 }
                 else if (attr == "ram")
                 {
+                    payload.Add("icon", "mdi:memory");
                     payload.Add("name", $"Free RAM");
                     payload.Add("unit_of_measurement", "MB");
                 }
@@ -45,10 +49,13 @@ namespace MqttClient.Workers
 
         public override List<MqttMessage> UpdateStatus()
         {
+            if (!Utils.Settings.PerformanceInfoEnabled)
+                return null;
+
             var result = new List<MqttMessage>();
 
-            result.Add(new MqttMessage(StateTopic("cpu"), GetCpuProcessorTime() + "", true));
-            result.Add(new MqttMessage(StateTopic("ram"), GetFreeMemory(), true));
+            result.Add(new MqttMessage(StateTopic("cpu"), GetCpuProcessorTime()));
+            result.Add(new MqttMessage(StateTopic("ram"), GetFreeMemory()));
 
             return result;
         }
@@ -67,6 +74,11 @@ namespace MqttClient.Workers
             Thread.Sleep(1000);
 
             return Math.Round(Convert.ToDecimal(cpuCounter.NextValue() + ""), 2);
+        }
+
+        public override void HandleCommand(string attribute, string payload)
+        {
+            // Nothing to handle
         }
     }
 }

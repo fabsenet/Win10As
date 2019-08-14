@@ -53,7 +53,7 @@ namespace MqttClient
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            _mqttPublish.PublishSystemData();
+            _mqttPublish.SendWorkerUpdates();
         }
 
         public static void HandleUnhandledException(Exception e)
@@ -94,6 +94,7 @@ namespace MqttClient
         public void ReconnectMqtt()
         {
             _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
+            _mqttPublish.SendDiscoveryInfo();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)

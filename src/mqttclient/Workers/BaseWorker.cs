@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MqttClient.Mqtt;
+using System.Collections.Generic;
 
-namespace MqttClient.Mqtt.Workers
+namespace MqttClient.Workers
 {
-    abstract class BaseWorker
+    public abstract class BaseWorker
     {
         public BaseWorker()
         {
@@ -38,6 +39,7 @@ namespace MqttClient.Mqtt.Workers
 
         public abstract List<MqttMessage> SendDiscovery();
         public abstract List<MqttMessage> UpdateStatus();
+        public abstract void HandleCommand(string attribute, string payload);
     }
 
     public enum SensorType { BinarySensor, Switch, Light, Sensor, MediaPlayer, Climate };

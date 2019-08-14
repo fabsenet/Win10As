@@ -1,15 +1,15 @@
-﻿using MqttClient.Mqtt.Workers;
+﻿using MqttClient.Workers;
 using System.Collections.Generic;
 
 namespace MqttClient.Mqtt
 {
-    class MqttMessage
+    public class MqttMessage
     {
         public string Topic;
         public object Payload;
         public bool Retain;
 
-        public MqttMessage(string topic, object payload, bool retain = false)
+        public MqttMessage(string topic, object payload, bool retain = true)
         {
             Topic = topic;
             Payload = payload;
@@ -17,9 +17,9 @@ namespace MqttClient.Mqtt
         }
     }
 
-    class MqttConfigMessage : MqttMessage
+    public class MqttConfigMessage : MqttMessage
     {
-        public MqttConfigMessage(SensorType sensorType, string name, Dictionary<string, object> payload, bool retain = false) : base("", payload, retain)
+        public MqttConfigMessage(SensorType sensorType, string name, Dictionary<string, object> payload, bool retain = true) : base("", payload, retain)
         {
             Topic = $"{Utils.Settings.MqttTopic}/{name}/config";
             if (Utils.Settings.MqttDiscoveryEnabled && Utils.Settings.MqttDiscoveryPrefix.Length > 0)

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Windows.Forms;
 using MqttClient.HardwareSensors;
+using MqttClient.Workers;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -16,10 +18,17 @@ namespace MqttClient.Mqtt
 {
     public class Mqtt : IMqtt
     {
-        private readonly IToastMessage _toastMessage;
-
         private uPLibrary.Networking.M2Mqtt.MqttClient _client;
-        public string GMqtttopic { get; set; }
+
+        private string CommandPrefix => $"{Utils.Settings.MqttTopic}/cmd";
+
+        private Dictionary<string, BaseWorker> _workers = new Dictionary<string, BaseWorker>();
+        public Dictionary<string, BaseWorker> Workers
+        {
+            get { return _workers; }
+            set { _workers = value; }
+        }
+
         public bool IsConnected
         {
             get
@@ -28,11 +37,6 @@ namespace MqttClient.Mqtt
                     return false;
                 return _client.IsConnected;
             }
-        }
-
-        public Mqtt(IToastMessage toastMessage)
-        {
-            _toastMessage = toastMessage;
         }
 
         public void PublishImage(string topic, string file)
@@ -62,6 +66,7 @@ namespace MqttClient.Mqtt
                 Log.Add("message published:" + topic + " value " + message);
             }
         }
+
         public bool Connect(string hostname, int portNumber, string username, string password)
         {
             try
@@ -83,45 +88,37 @@ namespace MqttClient.Mqtt
                         throw new Exception($"not connected, check connection settings error: {ex.Message}");
                     }
 
-                    try
+                    if (_client.IsConnected)
                     {
 
-                        if (_client.IsConnected)
+                        _client.MqttMsgPublishReceived += ClientMqttMsgPublishReceived;
+                        _client.MqttMsgSubscribed += ClientMqttMsgSubscribed;
+                        _client.MqttMsgPublished += ClientMqttMsgPublished;
+                        _client.ConnectionClosed += ClientMqttConnectionClosed;
+
+                        if (Workers.Count == 0)
                         {
-
-                            _client.MqttMsgPublishReceived += ClientMqttMsgPublishReceived;
-                            _client.MqttMsgSubscribed += ClientMqttMsgSubscribed;
-                            _client.MqttMsgPublished += ClientMqttMsgPublished;
-                            _client.ConnectionClosed += ClientMqttConnectionClosed;
-
-                            Log.Add("connected");
-
-                            GMqtttopic = Utils.Settings["mqtttopic"].ToString() + "/#";
-
-                            var r = new List<string>
-                            {
-                                GMqtttopic
-                            };
-                            _client.Subscribe(r.ToArray(), new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-
-                            return true;
+                            var workers = ReflectiveEnumerator.GetEnumerableOfType<BaseWorker>();
+                            foreach (var worker in workers)
+                                Workers.Add(worker.GetType().Name.ToLower(), worker);
                         }
-                    }
 
-                    catch
-                    {
-                        throw;
+                        Log.Add("Connected to MQTT server");
+
+                        var r = new List<string>
+                        {
+                            $"{CommandPrefix}/#"
+                        };
+                        _client.Subscribe(r.ToArray(), new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+
+                        return true;
                     }
-                }
-                else
-                {
-                    //throw new Exception("not connected, check settings mqttservername not entered");
                 }
             }
 
             catch (Exception ex)
             {
-                throw new Exception("not connected,check settings. Error: {ex.InnerException.ToString()}");
+                throw new Exception($"not connected,check settings. Error: {ex.InnerException.ToString()}");
             }
             return false;
         }
@@ -152,7 +149,7 @@ namespace MqttClient.Mqtt
             }
 
         }
-        private void ClientMqttConnectionClosed(object sender, System.EventArgs e)
+        private void ClientMqttConnectionClosed(object sender, EventArgs e)
         {
             try
             {
@@ -164,29 +161,30 @@ namespace MqttClient.Mqtt
             }
 
         }
+
         private void ClientMqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
         {
-            try
-            {
-                Log.Add($"Subscribed for id = {e.MessageId}");
-            }
-            catch (Exception ex)
-            {
-                Log.Add($"error: {ex.Message}");
-            }
-
+            Log.Add($"Subscribed for id = {e.MessageId}");
         }
+
         private void ClientMqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             try
             {
-                string message = Encoding.UTF8.GetString(e.Message);
+                var message = Encoding.UTF8.GetString(e.Message);
                 Log.Add("Message recived " + e.Topic + " value " + message);
 
-                string TopLevel = GMqtttopic.Replace("/#", "");
-                string subtopic = e.Topic.Replace(TopLevel + "/", "");
+                var subTopic = e.Topic.Replace(CommandPrefix + "/", "");
+                var parts = subTopic.Split('/');
 
-                MessageReceived(subtopic, message);
+                var workerName = parts[0];
+                var attribute = parts[1];
+
+                if (!Workers.ContainsKey(workerName))
+                    return;
+
+                var worker = Workers[workerName];
+                worker.HandleCommand(attribute, message);
 
             }
             catch (Exception ex)
@@ -195,6 +193,7 @@ namespace MqttClient.Mqtt
             }
 
         }
+
         private void MessageReceived(string subtopic, string message)
         {
             try
@@ -252,10 +251,6 @@ namespace MqttClient.Mqtt
                         Publish("mute", message);
                         break;
 
-                    case "volume/set":
-                        Audio.Volume(Convert.ToInt32(message, CultureInfo.CurrentCulture));
-                        break;
-
                     case "hibernate":
                         Application.SetSuspendState(PowerState.Hibernate, true, true);
                         break;
@@ -285,12 +280,10 @@ namespace MqttClient.Mqtt
                         if (words.Length >= 3)
                         {
                             string imageUrl = words[words.Length - 1];
-                            _toastMessage.ShowImage(words, imageUrl);
+                            ToastMessage.ShowImage(words, imageUrl);
                         }
                         else
-                        {
-                            _toastMessage.ShowText(words);
-                        }
+                            ToastMessage.ShowText(words);
                         break;
 
                     case "cmd":

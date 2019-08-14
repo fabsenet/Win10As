@@ -5,17 +5,15 @@ using Windows.UI.Notifications;
 
 namespace MqttClient
 {
-    public class ToastMessage : IToastMessage
+    public static class ToastMessage
     {
-        public void ShowText(IList<string> lines)
+        public static void ShowText(IList<string> lines)
         {
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
 
             XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
             for (int i = 0; i < stringElements.Length; i++)
-            {
                 stringElements[i].AppendChild(toastXml.CreateTextNode(lines[i]));
-            }
 
             ToastNotification toast = new ToastNotification(toastXml);
             toast.Activated += ToastActivated;
@@ -23,15 +21,13 @@ namespace MqttClient
             toast.Failed += ToastFailed;
             ToastNotificationManager.CreateToastNotifier(Utils.AppId).Show(toast);
         }
-        public void ShowImage(IList<string> lines, string imageUrl)
+        public static void ShowImage(IList<string> lines, string imageUrl)
         {
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
+            var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
 
             XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
             for (int i = 0; i < stringElements.Length; i++)
-            {
                 stringElements[i].AppendChild(toastXml.CreateTextNode(lines[i]));
-            }
 
             string imagePath = "file:///" + imageUrl;
 
@@ -45,17 +41,9 @@ namespace MqttClient
             toast.Failed += ToastFailed;
             ToastNotificationManager.CreateToastNotifier(Utils.AppId).Show(toast);
         }
-        private void ToastFailed(ToastNotification sender, ToastFailedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-        private void ToastDismissed(ToastNotification sender, ToastDismissedEventArgs args)
-        {
-            throw new NotImplementedException();
-        }
-        private void ToastActivated(ToastNotification sender, object args)
-        {
-            throw new NotImplementedException();
-        }
+
+        private static void ToastFailed(ToastNotification sender, ToastFailedEventArgs args) => throw new NotImplementedException();
+        private static void ToastDismissed(ToastNotification sender, ToastDismissedEventArgs args) => throw new NotImplementedException();
+        private static void ToastActivated(ToastNotification sender, object args) => throw new NotImplementedException();
     }
 }

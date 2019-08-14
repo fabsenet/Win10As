@@ -1,8 +1,11 @@
-﻿namespace MqttClient.Mqtt
+﻿using MqttClient.Workers;
+using System.Collections.Generic;
+
+namespace MqttClient.Mqtt
 {
     public interface IMqtt
     {
-        string GMqtttopic { get; set; }
+        Dictionary<string, BaseWorker> Workers { get; set; } 
         bool IsConnected { get; }
 
         bool Connect(string hostname, int portNumber, string username, string password);

@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainerConfig.cs" />
-    <Compile Include="IToastMessage.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Mqtt\IMqtt.cs" />
     <Compile Include="Mqtt\IMqttPublish.cs" />

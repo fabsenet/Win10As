@@ -21,47 +21,49 @@ namespace MqttClient.Mqtt
         {
             _mqtt = mqtt;
         }
-        public async void PublishSystemData()
+
+        public async void SendDiscoveryInfo()
         {
-            List<System.Threading.Tasks.Task> task = new List<System.Threading.Tasks.Task>();
+            List<Task> task = new List<Task>();
 
             if (_mqtt.IsConnected == false)
-            {
-
                 _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
-            }
-
 
             if (_mqtt.IsConnected)
             {
-                if (Utils.Settings.VolumeControlEnabled)
+                foreach (var kvp in _mqtt.Workers)
                 {
                     task.Add(Task.Run(() =>
                     {
-                        var worker = new Volume();
+                        var worker = kvp.Value;
                         var msgs = worker.SendDiscovery();
                         foreach (var msg in msgs)
                             _mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
+                    }));
+                }
+                return;
+            }
+        }
 
-                        msgs = worker.UpdateStatus();
+        public async void SendWorkerUpdates()
+        {
+            List<Task> task = new List<Task>();
+
+            if (_mqtt.IsConnected == false)
+                _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
+            
+            if (_mqtt.IsConnected)
+            {
+                foreach (var kvp in _mqtt.Workers)
+                {
+                    task.Add(Task.Run(() => {
+                        var worker = kvp.Value;
+                        var msgs = worker.UpdateStatus();
                         foreach (var msg in msgs)
                             _mqtt.Publish(msg.Topic, msg.Payload + "", msg.Retain);
                     }));
                 }
-                if (Utils.Settings.PerformanceInfoEnabled)
-                {
-                    task.Add(Task.Run(() =>
-                    {
-                        var worker = new Performance();
-                        var msgs = worker.SendDiscovery();
-                        foreach (var msg in msgs)
-                            _mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
-
-                        msgs = worker.UpdateStatus();
-                        foreach (var msg in msgs)
-                            _mqtt.Publish(msg.Topic, msg.Payload + "", msg.Retain);
-                    }));
-                }
+                return;
 
                 if (Utils.Settings.SensorIsComputerUsedEnabled)
                 {
