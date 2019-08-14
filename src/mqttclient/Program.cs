@@ -18,7 +18,7 @@ namespace mqttclient
 
             using (var scope = container.BeginLifetimeScope())
             {
-                FrmMqttMain form1 = scope.Resolve<FrmMqttMain>();
+                var form1 = scope.Resolve<MainForm>();
                 Application.ThreadException += new ThreadExceptionEventHandler(form1.UnhandledThreadExceptionHandler);
                 Application.Run(form1);
             }

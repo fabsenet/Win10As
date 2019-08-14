@@ -32,7 +32,7 @@ namespace mqttclient.Mqtt
                 _mqtt.Connect(MqttSettings.MqttServer, MqttSettings.MqttPort, MqttSettings.MqttUsername, MqttSettings.MqttPassword);
             }
 
-            if (_mqtt.IsConnected == true)
+            if (_mqtt.IsConnected)
             {
                 if (MqttSettings.IsComputerUsed)
                 {
@@ -83,7 +83,7 @@ namespace mqttclient.Mqtt
 
             try
             {
-                if (_audioobj.IsMuted() == true)
+                if (_audioobj.IsMuted())
                 {
                     _mqtt.Publish("mute", "1");
                 }
@@ -157,7 +157,7 @@ namespace mqttclient.Mqtt
         {
             try
             {
-                if (NetworkUp() == true)
+                if (NetworkUp())
                 {
                     using (var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb))
                     {

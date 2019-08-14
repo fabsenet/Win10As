@@ -13,7 +13,7 @@ namespace mqttclient
             {
                 bool isRunning = System.Diagnostics.Process.GetProcessesByName(exename)
                                         .FirstOrDefault(p => p.MainModule.FileName.StartsWith(location)) != default(System.Diagnostics.Process);
-                if (isRunning == true)
+                if (isRunning)
                 {
                     return "1";
                 }
