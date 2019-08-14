@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Windows.Forms;
-using mqttclient.HardwareSensors;
+using MqttClient.HardwareSensors;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-using Win10MqttLibrary;
+using Win10SensorLibrary.HardwareSensors;
 
-
-namespace mqttclient.Mqtt
+namespace MqttClient.Mqtt
 {
     public class Mqtt : IMqtt
     {
         private readonly IToastMessage _toastMessage;
-        private readonly IAudio _audio;
 
-        private MqttClient _client;
-        public enum SensorType { BinarySensor, Switch, Light, Sensor };
+        private uPLibrary.Networking.M2Mqtt.MqttClient _client;
         public string GMqtttopic { get; set; }
         public bool IsConnected
         {
@@ -34,9 +30,8 @@ namespace mqttclient.Mqtt
             }
         }
 
-        public Mqtt(IAudio audio, IToastMessage toastMessage)
+        public Mqtt(IToastMessage toastMessage)
         {
-            _audio = audio;
             _toastMessage = toastMessage;
         }
 
@@ -46,9 +41,8 @@ namespace mqttclient.Mqtt
             {
                 if (_client.IsConnected)
                 {
-                    var fullTopic = FullTopic(topic);
-                    _client.Publish(fullTopic, File.ReadAllBytes(file));
-                    Log.Add("image published:" + fullTopic);
+                    _client.Publish(topic, File.ReadAllBytes(file));
+                    Log.Add("image published:" + topic);
                 }
             }
         }
@@ -56,25 +50,16 @@ namespace mqttclient.Mqtt
         {
             if (_client.IsConnected)
             {
-                var fullTopic = FullTopic(topic);
-                _client.Publish(fullTopic, bytes);
-                Log.Add("bytes published:" + fullTopic);
+                _client.Publish(topic, bytes);
+                Log.Add("bytes published:" + topic);
             }
         }
         public void Publish(string topic, string message, bool retain = false)
         {
-            var fullTopic = FullTopic(topic);
             if (_client.IsConnected)
             {
-                if (retain)
-                {
-                    _client.Publish(fullTopic, Encoding.UTF8.GetBytes(message), 0, retain);
-                }
-                else
-                {
-                    _client.Publish(fullTopic, Encoding.UTF8.GetBytes(message));
-                }
-                Log.Add("message published:" + fullTopic + " value " + message);
+                _client.Publish(topic, Encoding.UTF8.GetBytes(message), 0, retain);
+                Log.Add("message published:" + topic + " value " + message);
             }
         }
         public bool Connect(string hostname, int portNumber, string username, string password)
@@ -86,7 +71,7 @@ namespace mqttclient.Mqtt
                     try
                     {
 
-                        _client = new MqttClient(hostname, portNumber, false, null, null, MqttSslProtocols.None, null);
+                        _client = new uPLibrary.Networking.M2Mqtt.MqttClient(hostname, portNumber, false, null, null, MqttSslProtocols.None, null);
 
                         if (username + "" == "")
                             _client.Connect(Guid.NewGuid().ToString());
@@ -111,7 +96,7 @@ namespace mqttclient.Mqtt
 
                             Log.Add("connected");
 
-                            GMqtttopic = Properties.Settings.Default["mqtttopic"].ToString() + "/#";
+                            GMqtttopic = Utils.Settings["mqtttopic"].ToString() + "/#";
 
                             var r = new List<string>
                             {
@@ -140,10 +125,7 @@ namespace mqttclient.Mqtt
             }
             return false;
         }
-        public string FullTopic(string topic)
-        {
-            return GMqtttopic.Replace("#", topic);
-        }
+
         public void Disconnect()
         {
             if (_client != null)
@@ -261,17 +243,17 @@ namespace mqttclient.Mqtt
                     case "mute/set":
                         if (message == "1" || message == "on")
                         {
-                            _audio.Mute(true);
+                            Audio.Mute(true);
                         }
                         else if (message == "0" || message == "off")
                         {
-                            _audio.Mute(false);
+                            Audio.Mute(false);
                         }
                         Publish("mute", message);
                         break;
 
                     case "volume/set":
-                        _audio.Volume(Convert.ToInt32(message, CultureInfo.CurrentCulture));
+                        Audio.Volume(Convert.ToInt32(message, CultureInfo.CurrentCulture));
                         break;
 
                     case "hibernate":
@@ -356,34 +338,8 @@ namespace mqttclient.Mqtt
         }
         private static int GetDelay(string message)
         {
-            var result = Int32.TryParse(message, out var delay);
-            if (result)
-            {
-                return delay;
-            }
-            else
-            {
-                return 10;
-            }
-        }
-        public void PublishDiscovery(string topic, Mqtt.SensorType sensorType)
-        {
-            switch (sensorType)
-            {
-                case SensorType.BinarySensor:
-                    break;
-                case SensorType.Light:
-                    break;
-                case SensorType.Sensor:
-                    break;
-                case SensorType.Switch:
-                    break;
-            }
-
-
-            //public enum SensorType { Binary_sensor, Switch, Light, Sensor };
-
-
+            var result = int.TryParse(message, out var delay);
+            return result ? delay : 10;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace mqttclient.HardwareSensors
+namespace MqttClient.HardwareSensors
 {
     public static class Monitor
     {

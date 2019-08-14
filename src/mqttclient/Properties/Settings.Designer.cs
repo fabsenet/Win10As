@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mqttclient.Properties {
+namespace MqttClient.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -26,132 +26,132 @@ namespace mqttclient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string mqttserver {
+        public string MqttServer {
             get {
-                return ((string)(this["mqttserver"]));
+                return ((string)(this["MqttServer"]));
             }
             set {
-                this["mqttserver"] = value;
+                this["MqttServer"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string mqttusername {
+        public string MqttUsername {
             get {
-                return ((string)(this["mqttusername"]));
+                return ((string)(this["MqttUsername"]));
             }
             set {
-                this["mqttusername"] = value;
+                this["MqttUsername"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string mqttpassword {
+        public string MqttPassword {
             get {
-                return ((string)(this["mqttpassword"]));
+                return ((string)(this["MqttPassword"]));
             }
             set {
-                this["mqttpassword"] = value;
+                this["MqttPassword"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string mqtttopic {
+        public string MqttTopic {
             get {
-                return ((string)(this["mqtttopic"]));
+                return ((string)(this["MqttTopic"]));
             }
             set {
-                this["mqtttopic"] = value;
+                this["MqttTopic"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string mqtttimerinterval {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public decimal MqttTimerInterval {
             get {
-                return ((string)(this["mqtttimerinterval"]));
+                return ((decimal)(this["MqttTimerInterval"]));
             }
             set {
-                this["mqtttimerinterval"] = value;
+                this["MqttTimerInterval"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ScreenShotEnable {
+        public bool ScreenshotEnable {
             get {
-                return ((bool)(this["ScreenShotEnable"]));
+                return ((bool)(this["ScreenshotEnable"]));
             }
             set {
-                this["ScreenShotEnable"] = value;
+                this["ScreenshotEnable"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ScreenShotInterval {
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public decimal ScreenshotInterval {
             get {
-                return ((string)(this["ScreenShotInterval"]));
+                return ((decimal)(this["ScreenshotInterval"]));
             }
             set {
-                this["ScreenShotInterval"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool BatterySensor {
-            get {
-                return ((bool)(this["BatterySensor"]));
-            }
-            set {
-                this["BatterySensor"] = value;
+                this["ScreenshotInterval"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DiskSensor {
+        public bool SensorBatteryEnabled {
             get {
-                return ((bool)(this["DiskSensor"]));
+                return ((bool)(this["SensorBatteryEnabled"]));
             }
             set {
-                this["DiskSensor"] = value;
+                this["SensorBatteryEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SensorDiskEnabled {
+            get {
+                return ((bool)(this["SensorDiskEnabled"]));
+            }
+            set {
+                this["SensorDiskEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1883")]
-        public int mqttport {
+        public decimal MqttPort {
             get {
-                return ((int)(this["mqttport"]));
+                return ((decimal)(this["MqttPort"]));
             }
             set {
-                this["mqttport"] = value;
+                this["MqttPort"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool MinimizeToTray {
+        public bool ApplicationMinimizeToTray {
             get {
-                return ((bool)(this["MinimizeToTray"]));
+                return ((bool)(this["ApplicationMinimizeToTray"]));
             }
             set {
-                this["MinimizeToTray"] = value;
+                this["ApplicationMinimizeToTray"] = value;
             }
         }
         
@@ -170,240 +170,240 @@ namespace mqttclient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool MqttSlideshow {
+        public bool SlideshowEnabled {
             get {
-                return ((bool)(this["MqttSlideshow"]));
+                return ((bool)(this["SlideshowEnabled"]));
             }
             set {
-                this["MqttSlideshow"] = value;
+                this["SlideshowEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string MqttSlideshowFolder {
+        public string SlideshowFolder {
             get {
-                return ((string)(this["MqttSlideshowFolder"]));
+                return ((string)(this["SlideshowFolder"]));
             }
             set {
-                this["MqttSlideshowFolder"] = value;
+                this["SlideshowFolder"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool RunAtStart {
+        public bool ApplicationRunAtStart {
             get {
-                return ((bool)(this["RunAtStart"]));
+                return ((bool)(this["ApplicationRunAtStart"]));
             }
             set {
-                this["RunAtStart"] = value;
+                this["ApplicationRunAtStart"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Cpusensor {
+        public bool SensorIsComputerUsedEnabled {
             get {
-                return ((bool)(this["Cpusensor"]));
+                return ((bool)(this["SensorIsComputerUsedEnabled"]));
             }
             set {
-                this["Cpusensor"] = value;
+                this["SensorIsComputerUsedEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Freememorysensor {
+        public bool WebCamPublishEnabled {
             get {
-                return ((bool)(this["Freememorysensor"]));
+                return ((bool)(this["WebCamPublishEnabled"]));
             }
             set {
-                this["Freememorysensor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Volumesensor {
-            get {
-                return ((bool)(this["Volumesensor"]));
-            }
-            set {
-                this["Volumesensor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsComputerUsed {
-            get {
-                return ((bool)(this["IsComputerUsed"]));
-            }
-            set {
-                this["IsComputerUsed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EnableWebCamPublish {
-            get {
-                return ((bool)(this["EnableWebCamPublish"]));
-            }
-            set {
-                this["EnableWebCamPublish"] = value;
+                this["WebCamPublishEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string WebCamToPublish {
+        public string WebCamPublishDestination {
             get {
-                return ((string)(this["WebCamToPublish"]));
+                return ((string)(this["WebCamPublishDestination"]));
             }
             set {
-                this["WebCamToPublish"] = value;
+                this["WebCamPublishDestination"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EnableTTS {
+        public bool TTSEnabled {
             get {
-                return ((bool)(this["EnableTTS"]));
+                return ((bool)(this["TTSEnabled"]));
             }
             set {
-                this["EnableTTS"] = value;
+                this["TTSEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdMute {
+        public bool CmdSuspendEnabled {
             get {
-                return ((bool)(this["CmdMute"]));
+                return ((bool)(this["CmdSuspendEnabled"]));
             }
             set {
-                this["CmdMute"] = value;
+                this["CmdSuspendEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdVolume {
+        public bool CmdRebootEnabled {
             get {
-                return ((bool)(this["CmdVolume"]));
+                return ((bool)(this["CmdRebootEnabled"]));
             }
             set {
-                this["CmdVolume"] = value;
+                this["CmdRebootEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdSuspend {
+        public bool CmdShutdownEnabled {
             get {
-                return ((bool)(this["CmdSuspend"]));
+                return ((bool)(this["CmdShutdownEnabled"]));
             }
             set {
-                this["CmdSuspend"] = value;
+                this["CmdShutdownEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdReboot {
+        public bool CmdHibernateEnabled {
             get {
-                return ((bool)(this["CmdReboot"]));
+                return ((bool)(this["CmdHibernateEnabled"]));
             }
             set {
-                this["CmdReboot"] = value;
+                this["CmdHibernateEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdShutdown {
+        public bool CmdTTSEnabled {
             get {
-                return ((bool)(this["CmdShutdown"]));
+                return ((bool)(this["CmdTTSEnabled"]));
             }
             set {
-                this["CmdShutdown"] = value;
+                this["CmdTTSEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdHibernate {
+        public bool CmdToastEnabled {
             get {
-                return ((bool)(this["CmdHibernate"]));
+                return ((bool)(this["CmdToastEnabled"]));
             }
             set {
-                this["CmdHibernate"] = value;
+                this["CmdToastEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdTts {
+        public bool CmdMonitorEnabled {
             get {
-                return ((bool)(this["CmdTts"]));
+                return ((bool)(this["CmdMonitorEnabled"]));
             }
             set {
-                this["CmdTts"] = value;
+                this["CmdMonitorEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdToast {
+        public bool CmdProcessEnabled {
             get {
-                return ((bool)(this["CmdToast"]));
+                return ((bool)(this["CmdProcessEnabled"]));
             }
             set {
-                this["CmdToast"] = value;
+                this["CmdProcessEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdMonitor {
+        public bool MqttDiscoveryEnabled {
             get {
-                return ((bool)(this["CmdMonitor"]));
+                return ((bool)(this["MqttDiscoveryEnabled"]));
             }
             set {
-                this["CmdMonitor"] = value;
+                this["MqttDiscoveryEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("homeassistant")]
+        public string MqttDiscoveryPrefix {
+            get {
+                return ((string)(this["MqttDiscoveryPrefix"]));
+            }
+            set {
+                this["MqttDiscoveryPrefix"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdApp {
+        public bool VolumeControlEnabled {
             get {
-                return ((bool)(this["CmdApp"]));
+                return ((bool)(this["VolumeControlEnabled"]));
             }
             set {
-                this["CmdApp"] = value;
+                this["VolumeControlEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MqttDiscoveryFriendlyName {
+            get {
+                return ((string)(this["MqttDiscoveryFriendlyName"]));
+            }
+            set {
+                this["MqttDiscoveryFriendlyName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PerformanceInfoEnabled {
+            get {
+                return ((bool)(this["PerformanceInfoEnabled"]));
+            }
+            set {
+                this["PerformanceInfoEnabled"] = value;
             }
         }
     }

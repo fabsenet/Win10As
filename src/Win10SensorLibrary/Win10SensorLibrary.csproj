@@ -89,13 +89,10 @@
   <ItemGroup>
     <Compile Include="HardwareSensors\Audio.cs" />
     <Compile Include="HardwareSensors\Camera.cs" />
-    <Compile Include="HardwareSensors\IAudio.cs" />
     <Compile Include="HardwareSensors\IdleTimeFinder.cs" />
-    <Compile Include="HardwareSensors\Memory.cs" />
     <Compile Include="HardwareSensors\Monitor.cs" />
     <Compile Include="HardwareSensors\Power.cs" />
     <Compile Include="HardwareSensors\Process.cs" />
-    <Compile Include="HardwareSensors\Processor.cs" />
     <Compile Include="HardwareSensors\Speaker.cs" />
     <Compile Include="HardwareSensors\SystemShutdown.cs" />
     <Compile Include="HardwareSensors\UsingComputer.cs" />

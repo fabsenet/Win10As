@@ -1,9 +1,7 @@
-﻿using System.Reflection;
-using Autofac;
-using mqttclient.HardwareSensors;
-using mqttclient.Mqtt;
+﻿using Autofac;
+using MqttClient.Mqtt;
 
-namespace mqttclient
+namespace MqttClient
 {
     public static class ContainerConfig
     {
@@ -14,7 +12,6 @@ namespace mqttclient
             builder.RegisterType<MainForm>().AsSelf().SingleInstance();
             builder.RegisterType<Mqtt.Mqtt>().As<IMqtt>().SingleInstance();
             builder.RegisterType<MqttPublish>().As<IMqttPublish>();
-            builder.RegisterType<Audio>().As<IAudio>();
             builder.RegisterType<ToastMessage>().As<IToastMessage>();
 
             //builder.RegisterAssemblyTypes(Assembly.Load(nameof(mqttclient)))

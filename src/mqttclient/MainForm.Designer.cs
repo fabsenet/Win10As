@@ -1,4 +1,4 @@
-﻿namespace mqttclient
+﻿namespace MqttClient
 {
     partial class MainForm
     {

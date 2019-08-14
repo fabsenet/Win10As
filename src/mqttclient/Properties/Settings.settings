@@ -1,101 +1,101 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mqttclient.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MqttClient.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="mqttserver" Type="System.String" Scope="User">
+    <Setting Name="MqttServer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="mqttusername" Type="System.String" Scope="User">
+    <Setting Name="MqttUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="mqttpassword" Type="System.String" Scope="User">
+    <Setting Name="MqttPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="mqtttopic" Type="System.String" Scope="User">
+    <Setting Name="MqttTopic" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="mqtttimerinterval" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="MqttTimerInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="ScreenShotEnable" Type="System.Boolean" Scope="User">
+    <Setting Name="ScreenshotEnable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ScreenShotInterval" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="ScreenshotInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">60</Value>
     </Setting>
-    <Setting Name="BatterySensor" Type="System.Boolean" Scope="User">
+    <Setting Name="SensorBatteryEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="DiskSensor" Type="System.Boolean" Scope="User">
+    <Setting Name="SensorDiskEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="mqttport" Type="System.Int32" Scope="User">
+    <Setting Name="MqttPort" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1883</Value>
     </Setting>
-    <Setting Name="MinimizeToTray" Type="System.Boolean" Scope="User">
+    <Setting Name="ApplicationMinimizeToTray" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="TTSSpeaker" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="MqttSlideshow" Type="System.Boolean" Scope="User">
+    <Setting Name="SlideshowEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="MqttSlideshowFolder" Type="System.String" Scope="User">
+    <Setting Name="SlideshowFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="RunAtStart" Type="System.Boolean" Scope="User">
+    <Setting Name="ApplicationRunAtStart" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Cpusensor" Type="System.Boolean" Scope="User">
+    <Setting Name="SensorIsComputerUsedEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Freememorysensor" Type="System.Boolean" Scope="User">
+    <Setting Name="WebCamPublishEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Volumesensor" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="IsComputerUsed" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="EnableWebCamPublish" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="WebCamToPublish" Type="System.String" Scope="User">
+    <Setting Name="WebCamPublishDestination" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="EnableTTS" Type="System.Boolean" Scope="User">
+    <Setting Name="TTSEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdMute" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdSuspendEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdVolume" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdRebootEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdSuspend" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdShutdownEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdReboot" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdHibernateEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdShutdown" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdTTSEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdHibernate" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdToastEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdTts" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdMonitorEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdToast" Type="System.Boolean" Scope="User">
+    <Setting Name="CmdProcessEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdMonitor" Type="System.Boolean" Scope="User">
+    <Setting Name="MqttDiscoveryEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CmdApp" Type="System.Boolean" Scope="User">
+    <Setting Name="MqttDiscoveryPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">homeassistant</Value>
+    </Setting>
+    <Setting Name="VolumeControlEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MqttDiscoveryFriendlyName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PerformanceInfoEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

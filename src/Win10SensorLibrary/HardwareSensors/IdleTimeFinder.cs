@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace mqttclient.HardwareSensors
+namespace MqttClient.HardwareSensors
 {
     internal struct Lastinputinfo
     {

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace mqttclient
+namespace MqttClient
 {
     public static class Log
     {

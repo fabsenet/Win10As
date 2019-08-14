@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 
-namespace mqttclient
+namespace MqttClient
 {
     static class Program
     {
@@ -22,8 +22,6 @@ namespace mqttclient
                 Application.ThreadException += new ThreadExceptionEventHandler(form1.UnhandledThreadExceptionHandler);
                 Application.Run(form1);
             }
-
-
         }
     }
 }

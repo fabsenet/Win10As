@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Windows.UI.Notifications;
 
-namespace mqttclient
+namespace MqttClient
 {
     public interface IToastMessage
     {

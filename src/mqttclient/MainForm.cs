@@ -2,10 +2,9 @@
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
-using mqttclient.Mqtt;
-using System.Globalization;
+using MqttClient.Mqtt;
 
-namespace mqttclient
+namespace MqttClient
 {
     public partial class MainForm : Form
     {
@@ -24,7 +23,6 @@ namespace mqttclient
                 InitializeComponent();
                 Version version = Assembly.GetExecutingAssembly().GetName().Version;
                 toolStripStatusLabel2.Text = "";
-                MqttSettings.Init();
                 SetupNotify();
             }
             catch (Exception ex)
@@ -47,15 +45,7 @@ namespace mqttclient
 
         private void SetupTimer()
         {
-            try
-            {
-                timer1.Interval = Convert.ToInt32(MqttSettings.MqttTimerInterval, CultureInfo.CurrentCulture);
-            }
-            catch (Exception)
-            {
-                timer1.Interval = 6000;
-            }
-
+            timer1.Interval = decimal.ToInt32(Utils.Settings.MqttTimerInterval) * 1000;
             timer1.Start();
         }
 
@@ -103,14 +93,14 @@ namespace mqttclient
 
         public void ReconnectMqtt()
         {
-            _mqtt.Connect(MqttSettings.MqttServer, MqttSettings.MqttPort, MqttSettings.MqttUsername, MqttSettings.MqttPassword);
+            _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                if (MqttSettings.MinimizeToTray)
+                if (Utils.Settings.ApplicationMinimizeToTray)
                 {
                     notifyIcon1.Visible = true;
                     ShowInTaskbar = false;
@@ -147,11 +137,11 @@ namespace mqttclient
         {
             try
             {
-                if (MqttSettings.MqttServer.Length > 3)
+                if (Utils.Settings.MqttServer.Length > 3)
                 {
                     ReconnectMqtt();
                     if (_mqtt.IsConnected)
-                        toolStripStatusLabel1.Text = "connected to " + MqttSettings.MqttServer;
+                        toolStripStatusLabel1.Text = "connected to " + Utils.Settings.MqttServer;
                     else
                         toolStripStatusLabel1.Text = "not connected";
                 }

@@ -1,15 +1,11 @@
-﻿
-using Newtonsoft.Json;
-using System;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
+using Win10SensorLibrary.HardwareSensors;
 
-namespace mqttclient
+namespace MqttClient
 {
     public partial class OptionsForm : Form
     {
@@ -17,129 +13,37 @@ namespace mqttclient
         public OptionsForm()
         {
             InitializeComponent();
-            
+
             TriggerFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "triggers.json");
-            LoadSettings();
-            if (txtmqtttopic.TextLength == 0)
-                txtmqtttopic.Text = System.Environment.MachineName;
 
-            if (txtMqttTimerInterval.TextLength == 0)
-                txtMqttTimerInterval.Text = "60000";
+            var topic = Utils.Settings.MqttTopic + "";
+            if (topic.Length == 0)
+                topic = (Environment.MachineName + "").ToLower();
 
-            if (txtmqtttopic.Text.Contains("#"))
-            {
-                txtmqtttopic.Text = txtmqtttopic.Text.Replace("/#", "");
-                Properties.Settings.Default["mqtttopic"] = txtmqtttopic.Text;
-                Properties.Settings.Default.Save();
-            }
-            
-            LoadAudioDevices();
-        }
-        private void LoadSettings()
-        {
-            txtmqttserver.Text = MqttSettings.MqttServer;
-            txtmqttusername.Text = MqttSettings.MqttUsername;
-            txtmqttpassword.Text = MqttSettings.MqttPassword;
-            txtmqtttopic.Text = MqttSettings.MqttTopic;
-            txtMqttTimerInterval.Text = MqttSettings.MqttTimerInterval.ToString(CultureInfo.CurrentCulture);
-            ChkBatterySensor.Checked = MqttSettings.BatterySensor;
-            ChkDiskSensor.Checked = MqttSettings.DiskSensor;
-            chkCpuSensor.Checked = MqttSettings.CpuSensor;
-            chkMemorySensor.Checked = MqttSettings.FreeMemorySensor;
-            chkVolumeSensor.Checked = MqttSettings.VolumeSensor;
-            ChkComputerUsed.Checked = MqttSettings.IsComputerUsed;
-            chkMinimizeToTray.Checked = MqttSettings.MinimizeToTray;
-            chkScreenshot.Checked = MqttSettings.ScreenshotEnable;
-            chkTtsEnabled.Checked = MqttSettings.EnableTTS;
-            ChkMonitor.Checked = MqttSettings.Monitor;
-            chktoast.Checked = MqttSettings.Toast;
-            ChkProcesses.Checked = MqttSettings.App;
-            chkTTS.Checked = MqttSettings.Tts;
-            chkHibernate.Checked = MqttSettings.Hibernate;
-            chkShutdown.Checked = MqttSettings.Shutdown;
-            chkReboot.Checked = MqttSettings.Reboot;
-            chkSuspend.Checked = MqttSettings.Suspend;
-            chkmute.Checked = MqttSettings.Mute;
-            ChkVolume.Checked = MqttSettings.Volume;
+            if (topic.Contains("#"))
+                topic = topic.Replace("/#", "");
 
-           
+            Utils.Settings.MqttTopic = topic;
 
-            if (chkTtsEnabled.Checked)
+            if (Utils.Settings.TTSEnabled)
             {
                 cmbSpeaker.DataSource = HardwareSensors.Speaker.GetSpeakers();
-                cmbSpeaker.SelectedItem = Properties.Settings.Default["TTSSpeaker"];
+                cmbSpeaker.SelectedItem = Utils.Settings.TTSSpeaker;
             }
 
-
-            ChkSlideshow.Checked = Convert.ToBoolean(Properties.Settings.Default["MqttSlideshow"].ToString(), CultureInfo.CurrentCulture);
-            txtSlideshowFolder.Text = Properties.Settings.Default["MqttSlideshowFolder"].ToString();
-            chkStartUp.Checked = Convert.ToBoolean(Properties.Settings.Default["RunAtStart"], CultureInfo.CurrentCulture);
-            ChkEnableWebCamPublish.Checked = Convert.ToBoolean(Properties.Settings.Default["EnableWebCamPublish"], CultureInfo.CurrentCulture);
             if (ChkEnableWebCamPublish.Checked)
             {
                 LoadCameraDevices();
-                if (Convert.ToString(Properties.Settings.Default["WebCamToPublish"], CultureInfo.CurrentCulture).Length > 0)
-                {
-                    cmbWebcam.SelectedText = Convert.ToString(Properties.Settings.Default["WebCamToPublish"], CultureInfo.CurrentCulture);
-                }
-            }
-            else
-            {
-                cmbWebcam.Visible = false;
-                CmdWebCamTest.Visible = false;
+                if (Convert.ToString(Utils.Settings["WebCamToPublish"], CultureInfo.CurrentCulture).Length > 0)
+                    cmbWebcam.SelectedText = Convert.ToString(Utils.Settings["WebCamToPublish"], CultureInfo.CurrentCulture);
             }
 
-
-
+            LoadAudioDevices();
         }
+
         private void SaveSettings()
         {
-            MqttSettings.MqttServer = txtmqttserver.Text;
-            MqttSettings.MqttUsername = txtmqttusername.Text;
-            MqttSettings.MqttPassword = txtmqttpassword.Text;
-            MqttSettings.MqttTopic = txtmqtttopic.Text;
-            MqttSettings.MqttTimerInterval = txtMqttTimerInterval.Text;
-            MqttSettings.ScreenshotEnable = Convert.ToBoolean(chkScreenshot.Checked);
-            MqttSettings.MinimizeToTray = chkMinimizeToTray.Checked;
-            MqttSettings.MqttSlideshow = ChkSlideshow.Checked;
-            MqttSettings.MqttSlideshowFolder = txtSlideshowFolder.Text;
-            MqttSettings.CpuSensor = chkCpuSensor.Checked;
-            MqttSettings.FreeMemorySensor = chkMemorySensor.Checked;
-            MqttSettings.VolumeSensor = chkVolumeSensor.Checked;
-            MqttSettings.EnableWebCamPublish = ChkEnableWebCamPublish.Checked;
-            MqttSettings.DiskSensor = (bool)ChkDiskSensor.Checked;
-            MqttSettings.IsComputerUsed = ChkComputerUsed.Checked;
-            MqttSettings.BatterySensor = ChkBatterySensor.Checked;
-            MqttSettings.Monitor = ChkMonitor.Checked;
-            MqttSettings.Toast = chktoast.Checked;
-            MqttSettings.App = ChkProcesses.Checked;
-            MqttSettings.Tts = chkTTS.Checked;
-            MqttSettings.Hibernate = chkHibernate.Checked;
-            MqttSettings.Shutdown = chkShutdown.Checked;
-            MqttSettings.Reboot = chkReboot.Checked;
-            MqttSettings.Suspend = chkSuspend.Checked;
-            MqttSettings.Mute = chkmute.Checked;
-            MqttSettings.Volume = ChkVolume.Checked;
-
-            if (ChkEnableWebCamPublish.Checked)
-            {
-                CmdWebCamTest.Visible = true;
-            }
-            else
-            {
-                CmdWebCamTest.Visible = false;
-            }
-
-            MqttSettings.EnableTTS = chkTtsEnabled.Checked;
-            if (cmbSpeaker.SelectedItem != null)
-            {
-                MqttSettings.TTSSpeaker = cmbSpeaker.SelectedItem.ToString();
-            }
-            if (cmbWebcam.SelectedItem != null)
-            {
-                MqttSettings.WebCamToPublish = cmbWebcam.SelectedItem.ToString();
-            }
-            MqttSettings.Save();
+            Utils.Settings.Save();
         }
         private void CmdClose_Click(object sender, EventArgs e)
         {
@@ -199,19 +103,16 @@ namespace mqttclient
                 Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
                 if (chkStartUp.Checked)
-                {
-                    rk.SetValue(MqttSettings.AppId, Application.ExecutablePath.ToString(CultureInfo.CurrentCulture));
-                }
+                    rk.SetValue(Utils.AppId, Application.ExecutablePath.ToString(CultureInfo.CurrentCulture));
                 else
-                {
-                    rk.DeleteValue(MqttSettings.AppId, false);
-                }
-                Properties.Settings.Default["RunAtStart"] = chkStartUp.Checked;
+                    rk.DeleteValue(Utils.AppId, false);
+
+                Utils.Settings["RunAtStart"] = chkStartUp.Checked;
             }
         }
         private void LoadAudioDevices()
         {
-            cmbAudioOutput.DataSource = HardwareSensors.Audio.GetAudioDevices();
+            cmbAudioOutput.DataSource = Audio.GetAudioDevices();
         }
         private void LoadCameraDevices()
         {
@@ -223,7 +124,7 @@ namespace mqttclient
             {
                 try
                 {
-                    string Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +  @"\cameratest.jpeg";
+                    string Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\cameratest.jpeg";
 
                     if (HardwareSensors.Camera.Save(Filename))
                     {
@@ -246,39 +147,31 @@ namespace mqttclient
         private void ChkEnableWebCamPublish_CheckedChanged(object sender, EventArgs e)
         {
             if (ChkEnableWebCamPublish.Checked)
-            {
-                cmbWebcam.Visible = true;
                 LoadCameraDevices();
-                CmdWebCamTest.Visible = true;
-            }
             else
-            {
                 cmbWebcam.DataSource = null;
-                cmbWebcam.Visible = false;
-                CmdWebCamTest.Visible = false;
-            }
         }
         private void ChkTtsEnabled_CheckedChanged(object sender, EventArgs e)
         {
             if (chkTtsEnabled.Checked)
             {
                 cmbSpeaker.DataSource = HardwareSensors.Speaker.GetSpeakers();
-                cmbSpeaker.SelectedItem = Properties.Settings.Default["TTSSpeaker"];
+                cmbSpeaker.SelectedItem = Utils.Settings["TTSSpeaker"];
             }
         }
         private void Button1_Click_1(object sender, EventArgs e)
         {
             try
             {
-                var client = new MqttClient(txtmqttserver.Text, Convert.ToInt16(textBox1.Text, CultureInfo.CurrentCulture), false, null, null, MqttSslProtocols.None, null);
+                var client = new uPLibrary.Networking.M2Mqtt.MqttClient(tbMqttServer.Text, Convert.ToInt16(Utils.Settings.MqttPort, CultureInfo.CurrentCulture), false, null, null, MqttSslProtocols.None, null);
 
-                if (txtmqttusername.Text.Length == 0)
+                if (tbMqttUsername.Text.Length == 0)
                 {
                     byte code = client.Connect(Guid.NewGuid().ToString());
                 }
                 else
                 {
-                    byte code = client.Connect(Guid.NewGuid().ToString(), txtmqttusername.Text, txtmqttpassword.Text);
+                    byte code = client.Connect(Guid.NewGuid().ToString(), tbMqttUsername.Text, tbMqttPassword.Text);
                 }
                 MessageBox.Show($"connection ok id: {client.ClientId}");
             }
@@ -288,13 +181,12 @@ namespace mqttclient
                 //throw;
             }
         }
+
         private void CmdSelectSlideShowPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txtSlideshowFolder.Text = folderBrowserDialog1.SelectedPath;
-            }
+                Utils.Settings.SlideshowFolder = folderBrowserDialog1.SelectedPath;
         }
     }
 }

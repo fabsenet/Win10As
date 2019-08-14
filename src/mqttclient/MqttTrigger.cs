@@ -1,7 +1,6 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace mqttclient
+namespace MqttClient
 {
     [XmlRoot(ElementName = "mqtttriggers")]
     public class MqttTrigger
@@ -10,6 +9,6 @@ namespace mqttclient
         public string Name { get; set; }
         public string CmdText { get; set; }
         public string CmdParameters { get; set; }
-        public Boolean Predefined { get; set; }
+        public bool Predefined { get; set; }
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Speech.Synthesis;
 using System.Globalization;
 
-namespace mqttclient.HardwareSensors
+namespace MqttClient.HardwareSensors
 {
     public static class Speaker
     {

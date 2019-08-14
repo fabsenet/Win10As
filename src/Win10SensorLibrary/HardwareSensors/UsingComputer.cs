@@ -1,4 +1,4 @@
-﻿namespace mqttclient.HardwareSensors
+﻿namespace MqttClient.HardwareSensors
 {
     public static class UsingComputer
     {

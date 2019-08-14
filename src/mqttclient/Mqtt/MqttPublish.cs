@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MqttClient.HardwareSensors;
+using MqttClient.Workers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -6,96 +9,92 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using mqttclient.HardwareSensors;
 
-namespace mqttclient.Mqtt
+namespace MqttClient.Mqtt
 {
     public class MqttPublish : IMqttPublish
     {
-        private readonly IAudio _audioobj;
         private readonly IMqtt _mqtt;
         private readonly string GLocalScreetshotFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "primonitor.jpg");
         private readonly string GLocalWebcamFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "webcam.png");
-        public MqttPublish(IMqtt mqtt, IAudio audio)
+        public MqttPublish(IMqtt mqtt)
         {
             _mqtt = mqtt;
-            _audioobj = audio;
         }
         public async void PublishSystemData()
         {
-
             List<System.Threading.Tasks.Task> task = new List<System.Threading.Tasks.Task>();
-            
+
             if (_mqtt.IsConnected == false)
             {
 
-                _mqtt.Connect(MqttSettings.MqttServer, MqttSettings.MqttPort, MqttSettings.MqttUsername, MqttSettings.MqttPassword);
+                _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
             }
+
 
             if (_mqtt.IsConnected)
             {
-                if (MqttSettings.IsComputerUsed)
+                if (Utils.Settings.VolumeControlEnabled)
+                {
+                    task.Add(Task.Run(() =>
+                    {
+                        var worker = new Volume();
+                        var msgs = worker.SendDiscovery();
+                        foreach (var msg in msgs)
+                            _mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
+
+                        msgs = worker.UpdateStatus();
+                        foreach (var msg in msgs)
+                            _mqtt.Publish(msg.Topic, msg.Payload + "", msg.Retain);
+                    }));
+                }
+                if (Utils.Settings.PerformanceInfoEnabled)
+                {
+                    task.Add(Task.Run(() =>
+                    {
+                        var worker = new Performance();
+                        var msgs = worker.SendDiscovery();
+                        foreach (var msg in msgs)
+                            _mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
+
+                        msgs = worker.UpdateStatus();
+                        foreach (var msg in msgs)
+                            _mqtt.Publish(msg.Topic, msg.Payload + "", msg.Retain);
+                    }));
+                }
+
+                if (Utils.Settings.SensorIsComputerUsedEnabled)
                 {
                     task.Add(Task.Run(() => PublishStatus()));
                 }
-                if (MqttSettings.CpuSensor)
+                if (Utils.Settings.SlideshowEnabled)
                 {
-                    task.Add(Task.Run(() => _mqtt.Publish("cpuprosessortime", Processor.GetCpuProcessorTime())));
-                }
-                if (MqttSettings.FreeMemorySensor)
-                {
-                    task.Add(Task.Run(() =>  _mqtt.Publish("freememory", Memory.GetFreeMemory())));
-                }
-                if (MqttSettings.VolumeSensor)
-                {
-                    task.Add(Task.Run(() => PublishAudio()));
-                }
-                if (MqttSettings.MqttSlideshow)
-                {
-                    if (Properties.Settings.Default["MqttSlideshowFolder"].ToString().Length > 5)
+                    if (Utils.Settings["MqttSlideshowFolder"].ToString().Length > 5)
                     {
-                        string folder = @Properties.Settings.Default["MqttSlideshowFolder"].ToString();
-                        task.Add(Task.Run(() =>  MqttCameraSlide(folder)));
+                        string folder = @Utils.Settings["MqttSlideshowFolder"].ToString();
+                        task.Add(Task.Run(() => MqttCameraSlide(folder)));
                     }
                 }
-                if (MqttSettings.BatterySensor)
+                if (Utils.Settings.SensorBatteryEnabled)
                 {
                     task.Add(Task.Run(() => PublishBattery()));
                 }
-                if (MqttSettings.DiskSensor)
+                if (Utils.Settings.SensorDiskEnabled)
                 {
                     task.Add(Task.Run(() => PublishDiskStatus()));
                 }
-                if (MqttSettings.EnableWebCamPublish)
+                if (Utils.Settings.WebCamPublishEnabled)
                 {
                     task.Add(Task.Run(() => PublishCamera()));
                 }
-                if (MqttSettings.ScreenshotEnable)
+                if (Utils.Settings.ScreenshotEnable)
                 {
                     task.Add(Task.Run(() => PublishScreenshot()));
                 }
             }
             await Task.WhenAll(task).ConfigureAwait(false);
         }
-        private void PublishAudio()
-        {
-            _mqtt.Publish("volume", _audioobj.GetVolume() + "", true);
 
-            try
-            {
-                if (_audioobj.IsMuted())
-                {
-                    _mqtt.Publish("mute", "1");
-                }
-                else
-                {
-                    _mqtt.Publish("mute", "0");
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
         private async void PublishStatus()
         {
             if (UsingComputer.IsUsing())

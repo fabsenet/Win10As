@@ -1,88 +1,50 @@
-﻿using System;
+﻿using AudioSwitcher.AudioApi.CoreAudio;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using AudioSwitcher.AudioApi.CoreAudio;
 
-namespace mqttclient.HardwareSensors
+namespace Win10SensorLibrary.HardwareSensors
 {
-    public class Audio : IAudio
+    public static class Audio
     {
-        CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+        static CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
 
-        public void Mute(Boolean Enable)
+        public static void Mute(bool Enable)
         {
-            try
-            {
-                defaultPlaybackDevice.Mute(Enable);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+            defaultPlaybackDevice.Mute(Enable);
         }
-        public Boolean IsMuted()
+        public static bool IsMuted()
         {
-            try
-            {
-                return defaultPlaybackDevice.IsMuted;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+            return defaultPlaybackDevice.IsMuted;
         }
-        public void Volume(int level)
+        public static void Volume(int level)
         {
-            try
-            {
-                defaultPlaybackDevice.Volume = Convert.ToDouble(level);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+            defaultPlaybackDevice.Volume = Convert.ToDouble(level);
         }
-        public double GetVolume()
+        public static double GetVolume()
         {
-            try
-            {
-                return defaultPlaybackDevice.Volume;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
+            return defaultPlaybackDevice.Volume;
         }
+
         static public List<string> GetAudioDevices()
         {
             CoreAudioController cac = new CoreAudioController();
             List<string> tmp = new List<string>();
 
             foreach (CoreAudioDevice de in cac.GetPlaybackDevices())
-            {
                 tmp.Add(de.FullName);
-            }
 
             return tmp;
 
         }
-        public void ChangeOutputDevice(string DeviceFullname)
+
+        public static void ChangeOutputDevice(string DeviceFullname)
         {
             CoreAudioController cac = new CoreAudioController();
             foreach (CoreAudioDevice de in cac.GetPlaybackDevices())
             {
                 if (de.FullName.ToLower(CultureInfo.CurrentCulture) == DeviceFullname.ToLower(CultureInfo.CurrentCulture))
-                {
                     defaultPlaybackDevice = de;
-                }
-
             }
         }
     }
