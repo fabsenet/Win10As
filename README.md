@@ -1,6 +1,9 @@
-# Win 10 Assistant
-## Make your windows 10 computer IOT friendly with MQTT
+# Windows MQTT Client
+## Parses information about your PC and sends it to your MQTT server!
 
+
+# Text below is obsolete and will be replaced with new instructions soon!
+```
 ### Publish mqtt senors
 
 #### Cpu prosessor load /cpuprosessortime
@@ -78,3 +81,4 @@ if spotify is running kjetilsv/app/running/Spotify return message = 1
 Message is currently not used, will be impemented in later versions.
 One example of a custom command is lockcomputer. 
 Thanks to @FatBasta it's no added in the hass-example file.
+```
