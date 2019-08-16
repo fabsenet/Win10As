@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MqttClient", "mqttclient\MqttClient.csproj", "{61184F33-8C53-4A4F-83FB-3EAD95088218}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinMqtt", "mqttclient\WinMqtt.csproj", "{61184F33-8C53-4A4F-83FB-3EAD95088218}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Win10MqttLibrary", "Win10MqttLibrary\Win10MqttLibrary.csproj", "{C7A61F18-4BC9-4F0D-91A0-6CD63BC5C64E}"
 EndProject

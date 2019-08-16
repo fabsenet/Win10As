@@ -1,46 +1,42 @@
-﻿using MqttClient.HardwareSensors;
-using MqttClient.Workers;
+﻿using WinMqtt.HardwareSensors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MqttClient.Mqtt
+namespace WinMqtt.Mqtt
 {
     public class MqttPublish : IMqttPublish
     {
-        private readonly IMqtt _mqtt;
         private readonly string GLocalScreetshotFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "primonitor.jpg");
         private readonly string GLocalWebcamFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "webcam.png");
 
-        public MqttPublish(IMqtt mqtt)
+        public MqttPublish()
         {
-            _mqtt = mqtt;
         }
 
         public async void SendDiscoveryInfo()
         {
             List<Task> task = new List<Task>();
 
-            if (_mqtt.IsConnected == false)
-                _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
+            if (Mqtt.IsConnected == false)
+                Mqtt.Connect();
 
-            if (_mqtt.IsConnected)
+            if (Mqtt.IsConnected)
             {
-                foreach (var kvp in _mqtt.Workers)
+                foreach (var kvp in Mqtt.Workers)
                 {
                     task.Add(Task.Run(() =>
                     {
                         var worker = kvp.Value;
-                        var msgs = worker.SendDiscovery();
+                        var msgs = worker.PrepareDiscoveryMessages();
                         if (msgs == null) return;
                         foreach (var msg in msgs)
-                            _mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
+                            Mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
                     }));
                 }
                 return;
@@ -51,65 +47,47 @@ namespace MqttClient.Mqtt
 
         public async void SendWorkerUpdates()
         {
+            return;
+
             List<Task> task = new List<Task>();
 
-            if (_mqtt.IsConnected == false)
-                _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
+            if (Mqtt.IsConnected == false)
+                Mqtt.Connect();
             
-            if (_mqtt.IsConnected)
+            if (Mqtt.IsConnected)
             {
-                foreach (var kvp in _mqtt.Workers)
-                {
-                    task.Add(Task.Run(() => {
-                        var worker = kvp.Value;
-                        var msgs = worker.UpdateStatus();
-                        if (msgs == null) return;
-                        foreach (var msg in msgs)
-                            _mqtt.Publish(msg.Topic, msg.Payload + "", msg.Retain);
-                    }));
-                }
-                return;
-
                 if (Utils.Settings.SensorIsComputerUsedEnabled)
-                {
                     task.Add(Task.Run(() => PublishStatus()));
-                }
                 if (Utils.Settings.SlideshowEnabled)
                 {
-                    if (Utils.Settings["MqttSlideshowFolder"].ToString().Length > 5)
+                    if (Utils.Settings.SlideshowFolder.Length > 5)
                     {
-                        string folder = @Utils.Settings["MqttSlideshowFolder"].ToString();
+                        string folder = Utils.Settings.SlideshowFolder;
                         task.Add(Task.Run(() => MqttCameraSlide(folder)));
                     }
                 }
                 if (Utils.Settings.SensorBatteryEnabled)
-                {
                     task.Add(Task.Run(() => PublishBattery()));
-                }
                 if (Utils.Settings.WebCamPublishEnabled)
-                {
                     task.Add(Task.Run(() => PublishCamera()));
-                }
                 if (Utils.Settings.ScreenshotEnable)
-                {
                     task.Add(Task.Run(() => PublishScreenshot()));
-                }
             }
             await Task.WhenAll(task).ConfigureAwait(false);
         }
 
         private void PublishStatus()
         {
-            _mqtt.Publish("binary_sensor/inUse", UsingComputer.IsUsing() ? "on" : "off");
+            //Mqtt.Publish("binary_sensor/inUse", UsingComputer.IsUsing() ? "on" : "off");
         }
 
         private void PublishBattery()
         {
-            //_mqtt.Publish("Power/BatteryChargeStatus", Power.BatteryChargeStatus());
-            //_mqtt.Publish("Power/BatteryFullLifetime", Power.BatteryFullLifetime());
-            //_mqtt.Publish("Power/BatteryLifePercent", Power.BatteryLifePercent());
-            //_mqtt.Publish("Power/BatteryLifeRemaining", Power.BatteryLifeRemaining());
-            //_mqtt.Publish("Power/PowerLineStatus", Power.PowerLineStatus());
+            //Mqtt.Publish("Power/BatteryChargeStatus", Power.BatteryChargeStatus());
+            //Mqtt.Publish("Power/BatteryFullLifetime", Power.BatteryFullLifetime());
+            //Mqtt.Publish("Power/BatteryLifePercent", Power.BatteryLifePercent());
+            //Mqtt.Publish("Power/BatteryLifeRemaining", Power.BatteryLifeRemaining());
+            //Mqtt.Publish("Power/PowerLineStatus", Power.PowerLineStatus());
         }
 
         private static bool NetworkUp()
@@ -129,7 +107,8 @@ namespace MqttClient.Mqtt
 
 
                         bmpScreenshot.Save(GLocalScreetshotFile, ImageFormat.Png);
-                        _mqtt.PublishImage("screenshot", GLocalScreetshotFile);
+
+                        Mqtt.Publish(new MqttImageMessage("screenshot", GLocalWebcamFile));
 
                     }
                 }
@@ -138,8 +117,8 @@ namespace MqttClient.Mqtt
 
         private void PublishCamera()
         {
-            if (HardwareSensors.Camera.Save(GLocalWebcamFile))
-                _mqtt.PublishImage("webcamera", GLocalWebcamFile);
+            if (Camera.Save(GLocalWebcamFile))
+                Mqtt.Publish(new MqttImageMessage("webcamera", GLocalWebcamFile));
             else
                 MessageBox.Show($"Failed to save image");
         }
@@ -149,7 +128,7 @@ namespace MqttClient.Mqtt
             var rand = new Random();
             var files = Directory.GetFiles(folder, "*.jpg");
             string topic = "slideshow";
-            _mqtt.PublishByte(topic, File.ReadAllBytes(files[rand.Next(files.Length)]));
+            //Mqtt.PublishByte(topic, File.ReadAllBytes(files[rand.Next(files.Length)]));
         }
     }
 }

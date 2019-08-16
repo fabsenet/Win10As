@@ -1,10 +1,10 @@
-﻿using MqttClient.Mqtt;
+﻿using WinMqtt.Mqtt;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace MqttClient.Workers
+namespace WinMqtt.Workers
 {
     class Performance : BaseWorker
     {
@@ -15,7 +15,7 @@ namespace MqttClient.Workers
         protected override bool IsEnabled => Utils.Settings.WorkerPerformanceInfoEnabled;
         protected override decimal UpdateInterval => Utils.Settings.WorkerPerformanceInfoInterval;
 
-        public override List<MqttMessage> SendDiscovery()
+        public override List<MqttMessage> PrepareDiscoveryMessages()
         {
             if (!IsEnabled) return null;
 
@@ -48,7 +48,7 @@ namespace MqttClient.Workers
             return result;
         }
 
-        public override List<MqttMessage> UpdateStatus()
+        public override List<MqttMessage> PrepareUpdateStatusMessages()
         {
             if (!IsEnabled) return null;
 

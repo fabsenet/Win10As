@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace MqttClient
+namespace WinMqtt
 {
     public static class ToastMessage
     {

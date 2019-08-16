@@ -5,7 +5,7 @@ using System.Drawing;
 using AForge.Video.DirectShow;
 using Emgu.CV;
 
-namespace MqttClient.HardwareSensors
+namespace WinMqtt.HardwareSensors
 {
     public static class Camera
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace MqttClient.HardwareSensors
+namespace WinMqtt.HardwareSensors
 {
     internal struct Lastinputinfo
     {
@@ -25,7 +25,7 @@ namespace MqttClient.HardwareSensors
         public static TimeSpan GetIdleTime()
         {
             Lastinputinfo lastInPut = new Lastinputinfo();
-            lastInPut.CbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(lastInPut);
+            lastInPut.CbSize = (uint)Marshal.SizeOf(lastInPut);
             NativeMethods.GetLastInputInfo(ref lastInPut);
 
             return TimeSpan.FromMilliseconds((uint) Environment.TickCount - lastInPut.DwTime);

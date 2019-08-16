@@ -2,33 +2,20 @@
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
-using MqttClient.Mqtt;
+using WinMqtt.Mqtt;
 
-namespace MqttClient.Forms
+namespace WinMqtt.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly IMqttPublish _mqttPublish;
-        private readonly IMqtt _mqtt;
-
-        public MainForm(IMqtt mqtt, IMqttPublish mqttPublish)
+        public MainForm()
         {
             Utils.MainForm = this;
 
-            _mqtt = mqtt;
-            _mqttPublish = mqttPublish;
-
-            try
-            {
-                InitializeComponent();
-                Version version = Assembly.GetExecutingAssembly().GetName().Version;
-                toolStripStatusLabel2.Text = "";
-                SetupNotify();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            InitializeComponent();
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            toolStripStatusLabel2.Text = "";
+            SetupNotify();
         }
 
         private void SetupNotify()
@@ -43,19 +30,8 @@ namespace MqttClient.Forms
             notifyIcon1.ShowBalloonTip(NotifyIconBalloonTipTimer);
         }
 
-        private void SetupTimer()
-        {
-            timer1.Interval = decimal.ToInt32(Utils.Settings.MqttTimerInterval) * 1000;
-            timer1.Start();
-        }
-
         delegate void SetTextCallback(string text);
-
-        private void Timer1_Tick(object sender, EventArgs e)
-        {
-            _mqttPublish.SendWorkerUpdates();
-        }
-
+        
         public static void HandleUnhandledException(Exception e)
         {
             if (MessageBox.Show("An unexpected error has occurred. details:" + e.Message + "innerException:" + e.InnerException + "Continue?",
@@ -87,14 +63,12 @@ namespace MqttClient.Forms
 
         public void ReloadApp()
         {
-            ReconnectMqtt();
-            SetupTimer();
-        }
+            var wasConnected = MqttConnection.IsConnected;
+            MqttConnection.Connect();
 
-        public void ReconnectMqtt()
-        {
-            _mqtt.Connect(Utils.Settings.MqttServer, decimal.ToInt32(Utils.Settings.MqttPort), Utils.Settings.MqttUsername, Utils.Settings.MqttPassword);
-            _mqttPublish.SendDiscoveryInfo();
+            // Reinitialize workers only if client was connected to the server before
+            if (wasConnected)
+                MqttConnection.InitializeWorkers();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -140,8 +114,8 @@ namespace MqttClient.Forms
             {
                 if (Utils.Settings.MqttServer.Length > 3)
                 {
-                    ReconnectMqtt();
-                    if (_mqtt.IsConnected)
+                    MqttConnection.Connect();
+                    if (MqttConnection.IsConnected)
                         toolStripStatusLabel1.Text = "connected to " + Utils.Settings.MqttServer;
                     else
                         toolStripStatusLabel1.Text = "not connected";
@@ -157,13 +131,11 @@ namespace MqttClient.Forms
             {
                 throw;
             }
-
-            SetupTimer();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _mqtt.Disconnect();
+            MqttConnection.Disconnect();
         }
     }
 }

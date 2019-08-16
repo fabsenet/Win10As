@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MqttClient.Properties {
+namespace WinMqtt.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -397,7 +397,7 @@ namespace MqttClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public decimal WorkerVolumeControlInterval {
             get {
                 return ((decimal)(this["WorkerVolumeControlInterval"]));
@@ -409,7 +409,7 @@ namespace MqttClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public decimal WorkerPerformanceInfoInterval {
             get {
                 return ((decimal)(this["WorkerPerformanceInfoInterval"]));
@@ -433,7 +433,7 @@ namespace MqttClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public decimal WorkerDiskInfoInterval {
             get {
                 return ((decimal)(this["WorkerDiskInfoInterval"]));

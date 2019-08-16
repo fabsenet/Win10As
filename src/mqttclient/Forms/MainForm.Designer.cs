@@ -1,4 +1,4 @@
-﻿namespace MqttClient.Forms
+﻿namespace WinMqtt.Forms
 {
     partial class MainForm
     {
@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lbLogs = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,10 +41,6 @@
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // lbLogs
             // 
@@ -137,7 +132,6 @@
 
         #endregion
         private System.ServiceProcess.ServiceController serviceController1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;

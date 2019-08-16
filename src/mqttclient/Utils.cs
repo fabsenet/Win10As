@@ -1,11 +1,11 @@
-﻿using MqttClient.Forms;
-using MqttClient.Workers;
+﻿using WinMqtt.Forms;
+using WinMqtt.Workers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace MqttClient
+namespace WinMqtt
 {
     public static class Utils
     {

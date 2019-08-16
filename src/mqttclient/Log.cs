@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MqttClient
+namespace WinMqtt
 {
     public static class Log
     {

@@ -11,8 +11,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{61184F33-8C53-4A4F-83FB-3EAD95088218}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MqttClient</RootNamespace>
-    <AssemblyName>MqttClient</AssemblyName>
+    <RootNamespace>WinMqtt</RootNamespace>
+    <AssemblyName>WinMqtt</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -86,12 +86,10 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>MqttClient.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
     </Reference>
@@ -165,13 +163,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerConfig.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="Mqtt\IMqtt.cs" />
-    <Compile Include="Mqtt\IMqttPublish.cs" />
     <Compile Include="Mqtt\Mqtt.cs" />
     <Compile Include="Mqtt\MqttMessage.cs" />
-    <Compile Include="Mqtt\MqttPublish.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

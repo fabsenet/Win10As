@@ -2,7 +2,7 @@
 using System.Speech.Synthesis;
 using System.Globalization;
 
-namespace MqttClient.HardwareSensors
+namespace WinMqtt.HardwareSensors
 {
     public static class Speaker
     {

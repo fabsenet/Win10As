@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace MqttClient
+namespace WinMqtt
 {
     public static class Process
     {

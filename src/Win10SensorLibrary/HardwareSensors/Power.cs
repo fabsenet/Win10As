@@ -1,4 +1,4 @@
-﻿namespace MqttClient.HardwareSensors
+﻿namespace WinMqtt.HardwareSensors
 {
     //public class Power
     //{

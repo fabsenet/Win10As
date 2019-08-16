@@ -1,12 +1,10 @@
-﻿using Autofac;
-using MqttClient.Forms;
+﻿using WinMqtt.Forms;
 using System;
-using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 
 
-namespace MqttClient
+namespace WinMqtt
 {
     static class Program
     {
@@ -16,14 +14,9 @@ namespace MqttClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var container = ContainerConfig.Configure();
-
-            using (var scope = container.BeginLifetimeScope())
-            {
-                var form1 = scope.Resolve<MainForm>();
-                Application.ThreadException += new ThreadExceptionEventHandler(form1.UnhandledThreadExceptionHandler);
-                Application.Run(form1);
-            }
+            var form = new MainForm();
+            Application.ThreadException += new ThreadExceptionEventHandler(form.UnhandledThreadExceptionHandler);
+            Application.Run(form);
         }
     }
 }

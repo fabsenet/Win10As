@@ -1,12 +1,10 @@
-﻿using MqttClient.Mqtt;
+﻿using WinMqtt.Mqtt;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
-namespace MqttClient.Workers
+namespace WinMqtt.Workers
 {
     class Disks : BaseWorker
     {
@@ -17,7 +15,7 @@ namespace MqttClient.Workers
         protected override bool IsEnabled => Utils.Settings.WorkerDiskInfoEnabled;
         protected override decimal UpdateInterval => Utils.Settings.WorkerDiskInfoInterval;
 
-        public override List<MqttMessage> SendDiscovery()
+        public override List<MqttMessage> PrepareDiscoveryMessages()
         {
             if (!IsEnabled) return null;
 
@@ -58,7 +56,7 @@ namespace MqttClient.Workers
         }
 
         const long BYTES_TO_GBYTES = 1024 * 1024 * 1024;
-        public override List<MqttMessage> UpdateStatus()
+        public override List<MqttMessage> PrepareUpdateStatusMessages()
         {
             if (!IsEnabled) return null;
 

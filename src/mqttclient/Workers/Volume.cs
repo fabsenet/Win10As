@@ -1,10 +1,9 @@
-﻿using MqttClient.Mqtt;
+﻿using WinMqtt.Mqtt;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Win10SensorLibrary.HardwareSensors;
 
-namespace MqttClient.Workers
+namespace WinMqtt.Workers
 {
     class Volume : BaseWorker
     {
@@ -15,7 +14,7 @@ namespace MqttClient.Workers
 
         private readonly string[] ATTRIBUTES = new[] { "level", "mute" };
 
-        public override List<MqttMessage> SendDiscovery()
+        public override List<MqttMessage> PrepareDiscoveryMessages()
         {
             if (!IsEnabled) return null;
 
@@ -46,7 +45,7 @@ namespace MqttClient.Workers
         }
 
 
-        public override List<MqttMessage> UpdateStatus()
+        public override List<MqttMessage> PrepareUpdateStatusMessages()
         {
             if (!IsEnabled) return null;
 

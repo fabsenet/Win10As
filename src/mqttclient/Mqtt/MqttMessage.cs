@@ -1,7 +1,9 @@
-﻿using MqttClient.Workers;
+﻿using WinMqtt.Workers;
 using System.Collections.Generic;
+using System.IO;
+using System;
 
-namespace MqttClient.Mqtt
+namespace WinMqtt.Mqtt
 {
     public class MqttMessage
     {
@@ -24,6 +26,17 @@ namespace MqttClient.Mqtt
             Topic = $"{Utils.Settings.MqttTopic}/{name}/config";
             if (Utils.Settings.MqttDiscoveryEnabled && Utils.Settings.MqttDiscoveryPrefix.Length > 0)
                 Topic = $"{Utils.Settings.MqttDiscoveryPrefix}/{sensorType.Name()}/{Topic}";
+        }
+    }
+
+    public class MqttImageMessage : MqttMessage
+    {
+        public MqttImageMessage(string topic, string filePath, bool retain = true) : base(topic, null, retain)
+        {
+            if (!File.Exists(filePath))
+                throw new Exception($"File {filePath} does not exist!");
+
+            Payload = File.ReadAllBytes(filePath);
         }
     }
 }
