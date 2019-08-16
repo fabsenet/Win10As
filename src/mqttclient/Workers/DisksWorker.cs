@@ -31,15 +31,15 @@ namespace WinMqtt.Workers
                     switch (attr)
                     {
                         case "free":
-                            payload.Add("name", $"Disk {diskLetter.ToUpper()} - free");
+                            payload.Add("name", $"{FriendlyName()} - Disk {diskLetter.ToUpper()} - free");
                             payload.Add("unit_of_measurement", "GB");
                             break;
                         case "free_pct":
-                            payload.Add("name", $"Disk {diskLetter.ToUpper()} - free pct");
+                            payload.Add("name", $"{FriendlyName()} - Disk {diskLetter.ToUpper()} - free pct");
                             payload.Add("unit_of_measurement", "%");
                             break;
                         case "total":
-                            payload.Add("name", $"Disk {diskLetter.ToUpper()} - total");
+                            payload.Add("name", $"{FriendlyName()} - Disk {diskLetter.ToUpper()} - total");
                             payload.Add("unit_of_measurement", "GB");
                             break;
                     }

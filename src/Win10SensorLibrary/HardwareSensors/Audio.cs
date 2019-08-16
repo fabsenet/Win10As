@@ -17,9 +17,9 @@ namespace Win10SensorLibrary.HardwareSensors
         {
             return defaultPlaybackDevice.IsMuted;
         }
-        public static void Volume(int level)
+        public static void Volume(double level)
         {
-            defaultPlaybackDevice.Volume = Convert.ToDouble(level);
+            defaultPlaybackDevice.Volume = level;
         }
         public static double GetVolume()
         {

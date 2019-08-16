@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 
 namespace WinMqtt
 {
@@ -33,6 +34,38 @@ namespace WinMqtt
             }
 
             return "UNSUPPORTED";
+        }
+
+        public static T Convert<T>(this object value)
+        {
+            if (value is T) return (T)value;
+            if (value == null) return default;
+
+            var type = typeof(T);
+
+            if (
+                type == typeof(float) || 
+                type == typeof(double) || 
+                type == typeof(decimal)
+            )
+            {
+                if (Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+                    value = ($"{value}").Replace(".", ",");
+                else if (Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
+                    value = ($"{value}").Replace(",", ".");
+            }
+            else if (
+                type == typeof(short) ||
+                type == typeof(ushort) ||
+                type == typeof(int) ||
+                type == typeof(uint) ||
+                type == typeof(long) ||
+                type == typeof(ulong)
+            )
+            {
+                value = value.Convert<float>();
+            }
+            return (T)System.Convert.ChangeType(value, type);
         }
     }
 

@@ -28,13 +28,13 @@ namespace WinMqtt.Workers
                 if (attr == "cpu")
                 {
                     // payload.Add("icon", "mdi:cpu");
-                    payload.Add("name", $"CPU usage");
+                    payload.Add("name", $"{FriendlyName()} - CPU usage");
                     payload.Add("unit_of_measurement", "%");
                 }
                 else if (attr == "ram")
                 {
                     payload.Add("icon", "mdi:memory");
-                    payload.Add("name", $"Free RAM");
+                    payload.Add("name", $"{FriendlyName()} - Free RAM");
                     payload.Add("unit_of_measurement", "MB");
                 }
 

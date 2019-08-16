@@ -3,7 +3,6 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 
-
 namespace WinMqtt
 {
     static class Program

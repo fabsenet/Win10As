@@ -12,7 +12,7 @@ namespace WinMqtt.Workers
         protected override bool IsEnabled => Utils.Settings.WorkerVolumeControlEnabled;
         protected override decimal UpdateInterval => Utils.Settings.WorkerVolumeControlInterval;
 
-        private readonly string[] ATTRIBUTES = new[] { "level", "mute" };
+        private readonly string[] ATTRIBUTES = new[] { "level", "level_01", "mute" };
 
         public override List<MqttMessage> PrepareDiscoveryMessages()
         {
@@ -24,19 +24,29 @@ namespace WinMqtt.Workers
             {
                 var payload = PrepareConfigPayload();
                 payload.Add("unique_id", SensorUniqueId(attr));
-                payload.Add("name", $"{GetType().Name} - {attr.ToUppercaseFirst()}");
+                payload.Add("name", $"{FriendlyName()} - {WorkerFriendlyType} - {attr.ToUppercaseFirst()}");
                 payload.Add("state_topic", StateTopic(attr));
 
                 if (attr == "level")
                 {
+                    payload.Add("unit_of_measurement", "%");
+                    payload.Add("icon", "mdi:volume-medium");
+                }
+                else if (attr == "level_01")
+                {
+                    // Used for Media Player - there is no option to pass volume_level in universal platform as a template.
+                    payload["state_topic"] = StateTopic("level");
+                    payload.Add("value_template", "{{ (value|float) / 100 }}");
+                    payload.Add("unit_of_measurement", "%");
                     payload.Add("icon", "mdi:volume-medium");
                 }
                 else if (attr == "mute")
                 {
+                    payload.Add("command_topic", CommandTopic(attr));
                     payload.Add("icon", "mdi:volume-off");
                 }
 
-                var sensorType = attr == "level" ? SensorType.Sensor : SensorType.BinarySensor;
+                var sensorType = attr == "mute" ? SensorType.Switch : SensorType.Sensor;
                 var mqttMsg = new MqttConfigMessage(sensorType, $"{WorkerType}_{attr}", payload);
                 result.Add(mqttMsg);
             }
@@ -51,8 +61,8 @@ namespace WinMqtt.Workers
 
             var result = new List<MqttMessage>();
 
-            result.Add(new MqttMessage(StateTopic("level"), Audio.GetVolume() + "", true));
-            result.Add(new MqttMessage(StateTopic("mute"), Audio.IsMuted() ? "ON" : "OFF", true));
+            result.Add(AudioVolumeMqttMessage());
+            result.Add(AudioMuteMqttMessage());
 
             return result;
         }
@@ -63,11 +73,20 @@ namespace WinMqtt.Workers
 
             switch (attribute)
             {
+                case "up":
+                    Audio.Volume(Audio.GetVolume() + 1);
+                    MqttConnection.Publish(AudioVolumeMqttMessage());
+                    break;
+                case "down":
+                    Audio.Volume(Audio.GetVolume() - 1);
+                    MqttConnection.Publish(AudioVolumeMqttMessage());
+                    break;
                 case "level":
-                    Audio.Volume(Convert.ToInt32(payload));
+                    Audio.Volume(payload.Convert<int>());
+                    MqttConnection.Publish(AudioVolumeMqttMessage());
                     break;
                 case "mute":
-                    switch (payload)
+                    switch (payload.ToLower())
                     {
                         case "1": case "on":
                             Audio.Mute(true);
@@ -76,10 +95,18 @@ namespace WinMqtt.Workers
                             Audio.Mute(false);
                             break;
                     }
+                    MqttConnection.Publish(AudioMuteMqttMessage());
+                    break;
+                case "mute_toggle":
+                    Audio.Mute(!Audio.IsMuted());
+                    MqttConnection.Publish(AudioMuteMqttMessage());
                     break;
                 default:
                     break;
             }
         }
+
+        private MqttMessage AudioVolumeMqttMessage() => new MqttMessage(StateTopic("level"), Convert.ToInt32(Audio.GetVolume()), true);
+        private MqttMessage AudioMuteMqttMessage() => new MqttMessage(StateTopic("mute"), Audio.IsMuted() ? "ON" : "OFF", true);
     }
 }

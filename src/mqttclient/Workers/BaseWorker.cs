@@ -13,13 +13,9 @@ namespace WinMqtt.Workers
         #region Helpers
         protected virtual Dictionary<string, object> PrepareConfigPayload(params string[] sensorArgs)
         {
-            var friendlyName = Utils.Settings.MqttDiscoveryFriendlyName;
-            if ((friendlyName + "").Trim() == "")
-                friendlyName = Utils.Settings.MqttTopic;
-
             var device = new Dictionary<string, object>
             {
-                { "name", friendlyName },
+                { "name", FriendlyName() },
                 { "identifiers", new List<string> { UniqueId() } },
                 { "sw_version", "0.0.1 Win MQTT" }
             };
@@ -31,11 +27,21 @@ namespace WinMqtt.Workers
 
             return payload;
         }
+        protected static string FriendlyName()
+        {
+            var friendlyName = Utils.Settings.MqttDiscoveryFriendlyName;
+            if ((friendlyName + "").Trim() == "")
+                friendlyName = Utils.Settings.MqttTopic;
+
+            return friendlyName;
+        }
+        public string CommandTopic(params string[] attributes) => string.Join("/", Utils.Settings.MqttTopic, "cmd", WorkerType, string.Join("/", attributes));
         public string StateTopic(params string[] attributes) => string.Join("/", Utils.Settings.MqttTopic, WorkerType, string.Join("/", attributes));
         public string UniqueId() => string.Join("/", "win-mqtt", Utils.Settings.MqttTopic);
         public string SensorUniqueId(params string[] attributes) => string.Join("/", UniqueId(), WorkerType, string.Join("/", attributes));
         public string Name(string attribute = "") => string.Join("_", Utils.Settings.MqttTopic, WorkerType, attribute);
-        protected string WorkerType => GetType().Name.ToLower();
+        public string WorkerFriendlyType => GetType().Name.Replace("Worker", "");
+        public string WorkerType => WorkerFriendlyType.ToLower();
         #endregion
 
         #region MQTT messages
