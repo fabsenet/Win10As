@@ -71,14 +71,17 @@ namespace WinMqtt.Workers
         {
             if (!IsEnabled) return;
 
+            var step = 1;
             switch (attribute)
             {
                 case "up":
-                    Audio.Volume(Audio.GetVolume() + 1);
+                    step = $"{payload}" != "" ? payload.Convert<int>() : 1;
+                    Audio.Volume(Audio.GetVolume() + step);
                     MqttConnection.Publish(AudioVolumeMqttMessage());
                     break;
                 case "down":
-                    Audio.Volume(Audio.GetVolume() - 1);
+                    step = $"{payload}" != "" ? payload.Convert<int>() : 1;
+                    Audio.Volume(Audio.GetVolume() - step);
                     MqttConnection.Publish(AudioVolumeMqttMessage());
                     break;
                 case "level":
