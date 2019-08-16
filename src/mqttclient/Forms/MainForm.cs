@@ -31,7 +31,7 @@ namespace WinMqtt.Forms
         }
 
         delegate void SetTextCallback(string text);
-        
+
         public static void HandleUnhandledException(Exception e)
         {
             if (MessageBox.Show("An unexpected error has occurred. details:" + e.Message + "innerException:" + e.InnerException + "Continue?",

@@ -57,13 +57,24 @@ namespace WinMqtt.Workers
                 MqttConnection.Publish(msg);
         }
 
-        public abstract void HandleCommand(string attribute, string payload); 
+        public abstract void HandleCommand(string attribute, string payload);
         #endregion
 
         #region Timers
         private Timer _updateTimer = null;
         public void SetUpdateTimers()
         {
+            if (!IsEnabled)
+            {
+                if (_updateTimer != null)
+                {
+                    _updateTimer.Stop();
+                    _updateTimer.Elapsed -= OnTimerElapsed;
+                    _updateTimer.Dispose();
+                }
+                return;
+            }
+
             if (_updateTimer == null)
             {
                 _updateTimer = new Timer();
@@ -106,7 +117,7 @@ namespace WinMqtt.Workers
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        } 
+        }
         #endregion
     }
 
