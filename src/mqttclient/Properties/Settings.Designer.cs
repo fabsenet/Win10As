@@ -442,5 +442,17 @@ namespace WinMqtt.Properties {
                 this["WorkerDiskInfoInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WorkerMediaPlayerEnabled {
+            get {
+                return ((bool)(this["WorkerMediaPlayerEnabled"]));
+            }
+            set {
+                this["WorkerMediaPlayerEnabled"] = value;
+            }
+        }
     }
 }

@@ -106,7 +106,9 @@
             this.nScreenshotInterval = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.chkScreenshot = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cbWorkerMediaPlayer = new System.Windows.Forms.CheckBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             this.boxHomeAssistantDiscovery.SuspendLayout();
@@ -134,7 +136,6 @@
             this.boxSlideshow.SuspendLayout();
             this.boxScreenshot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nScreenshotInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -471,7 +472,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.Controls.Add(this.numericUpDown1, 2, 4);
+            this.tableLayoutPanel3.Controls.Add(this.cbWorkerMediaPlayer, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label18, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.cbWorkersPerformance, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.label13, 1, 0);
@@ -484,16 +486,17 @@
             this.tableLayoutPanel3.Controls.Add(this.label17, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.cbWorkerDisks, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.nWorkerDisksInterval, 2, 3);
+            this.tableLayoutPanel3.Controls.Add(this.label19, 2, 4);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowCount = 6;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(368, 316);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
@@ -1118,20 +1121,39 @@
             this.chkScreenshot.Text = "Enable";
             this.chkScreenshot.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // label18
             // 
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "MqttPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDown1.Location = new System.Drawing.Point(247, 94);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(118, 20);
-            this.numericUpDown1.TabIndex = 32;
-            this.numericUpDown1.Value = global::WinMqtt.Properties.Settings.Default.MqttPort;
+            this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(3, 91);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(116, 20);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Media player";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbWorkerMediaPlayer
+            // 
+            this.cbWorkerMediaPlayer.AutoSize = true;
+            this.cbWorkerMediaPlayer.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkerMediaPlayer.Checked = global::WinMqtt.Properties.Settings.Default.WorkerMediaPlayerEnabled;
+            this.cbWorkerMediaPlayer.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerMediaPlayerEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkerMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkerMediaPlayer.Location = new System.Drawing.Point(125, 94);
+            this.cbWorkerMediaPlayer.Name = "cbWorkerMediaPlayer";
+            this.cbWorkerMediaPlayer.Size = new System.Drawing.Size(116, 14);
+            this.cbWorkerMediaPlayer.TabIndex = 11;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label19.Location = new System.Drawing.Point(247, 91);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(118, 20);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "-- not available --";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // OptionsForm
             // 
@@ -1188,7 +1210,6 @@
             this.boxScreenshot.ResumeLayout(false);
             this.boxScreenshot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nScreenshotInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1272,6 +1293,8 @@
         private System.Windows.Forms.CheckBox cbWorkersPerformance;
         private System.Windows.Forms.CheckBox cbWorkersVolume;
         private System.Windows.Forms.CheckBox cbWorkerDisks;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.CheckBox cbWorkerMediaPlayer;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }

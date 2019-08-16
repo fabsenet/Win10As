@@ -64,7 +64,7 @@ namespace WinMqtt.Workers
         private Timer _updateTimer = null;
         public void SetUpdateTimers()
         {
-            if (!IsEnabled)
+            if (!IsEnabled || UpdateInterval <= 0)
             {
                 if (_updateTimer != null)
                 {

@@ -5,9 +5,9 @@ using Win10SensorLibrary.HardwareSensors;
 
 namespace WinMqtt.Workers
 {
-    class Volume : BaseWorker
+    class VolumeWorker : BaseWorker
     {
-        public Volume() : base() { }
+        public VolumeWorker() : base() { }
 
         protected override bool IsEnabled => Utils.Settings.WorkerVolumeControlEnabled;
         protected override decimal UpdateInterval => Utils.Settings.WorkerVolumeControlInterval;

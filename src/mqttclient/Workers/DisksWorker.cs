@@ -6,10 +6,8 @@ using System.Linq;
 
 namespace WinMqtt.Workers
 {
-    class Disks : BaseWorker
+    class DisksWorker : BaseWorker
     {
-        public Disks() : base() { }
-
         private readonly string[] ATTRIBUTES = new[] { "free", "free_pct", "total" };
 
         protected override bool IsEnabled => Utils.Settings.WorkerDiskInfoEnabled;

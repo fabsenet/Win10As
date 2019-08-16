@@ -27,7 +27,7 @@ namespace WinMqtt.Mqtt
 
                 var workers = ReflectiveEnumerator.GetEnumerableOfType<BaseWorker>();
                 foreach (var worker in workers)
-                    _workers.Add(worker.GetType().Name.ToLower(), worker);
+                    _workers.Add(worker.GetType().Name.Replace("Worker", "").ToLower(), worker);
 
                 return _workers;
             }

@@ -183,9 +183,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToastMessage.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="Workers\Disks.cs" />
-    <Compile Include="Workers\Performance.cs" />
-    <Compile Include="Workers\Volume.cs" />
+    <Compile Include="Workers\DisksWorker.cs" />
+    <Compile Include="Workers\PerformanceWorker.cs" />
+    <Compile Include="Workers\MediaPlayerWorker.cs" />
+    <Compile Include="Workers\VolumeWorker.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

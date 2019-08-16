@@ -6,10 +6,8 @@ using System.Threading;
 
 namespace WinMqtt.Workers
 {
-    class Performance : BaseWorker
+    class PerformanceWorker : BaseWorker
     {
-        public Performance() : base() { }
-
         private readonly string[] ATTRIBUTES = new[] { "cpu", "ram" };
 
         protected override bool IsEnabled => Utils.Settings.WorkerPerformanceInfoEnabled;
