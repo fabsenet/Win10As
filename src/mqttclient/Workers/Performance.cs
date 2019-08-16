@@ -12,11 +12,12 @@ namespace MqttClient.Workers
 
         private readonly string[] ATTRIBUTES = new[] { "cpu", "ram" };
 
+        protected override bool IsEnabled => Utils.Settings.WorkerPerformanceInfoEnabled;
+        protected override decimal UpdateInterval => Utils.Settings.WorkerPerformanceInfoInterval;
 
         public override List<MqttMessage> SendDiscovery()
         {
-            if (!Utils.Settings.PerformanceInfoEnabled)
-                return null;
+            if (!IsEnabled) return null;
 
             var result = new List<MqttMessage>();
 
@@ -40,7 +41,7 @@ namespace MqttClient.Workers
                 }
 
                 var sensorType = SensorType.Sensor;
-                var mqttMsg = new MqttConfigMessage(sensorType, $"{GetWorkerType()}_{attr}", payload);
+                var mqttMsg = new MqttConfigMessage(sensorType, $"{WorkerType}_{attr}", payload);
                 result.Add(mqttMsg);
             }
 
@@ -49,8 +50,7 @@ namespace MqttClient.Workers
 
         public override List<MqttMessage> UpdateStatus()
         {
-            if (!Utils.Settings.PerformanceInfoEnabled)
-                return null;
+            if (!IsEnabled) return null;
 
             var result = new List<MqttMessage>();
 
@@ -60,12 +60,18 @@ namespace MqttClient.Workers
             return result;
         }
 
+        public override void HandleCommand(string attribute, string payload)
+        {
+            return;
+        }
+
         private float GetFreeMemory()
         {
             var ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             return ramCounter.NextValue();
         }
 
+        // If having errors - try this: https://stackoverflow.com/a/24404034
         private decimal GetCpuProcessorTime()
         {
             var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
@@ -74,11 +80,6 @@ namespace MqttClient.Workers
             Thread.Sleep(1000);
 
             return Math.Round(Convert.ToDecimal(cpuCounter.NextValue() + ""), 2);
-        }
-
-        public override void HandleCommand(string attribute, string payload)
-        {
-            // Nothing to handle
         }
     }
 }

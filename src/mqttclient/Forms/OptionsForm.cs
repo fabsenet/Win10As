@@ -5,16 +5,13 @@ using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
 using Win10SensorLibrary.HardwareSensors;
 
-namespace MqttClient
+namespace MqttClient.Forms
 {
     public partial class OptionsForm : Form
     {
-        public string TriggerFile { get; set; }
         public OptionsForm()
         {
             InitializeComponent();
-
-            TriggerFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "triggers.json");
 
             var topic = Utils.Settings.MqttTopic + "";
             if (topic.Length == 0)
@@ -45,51 +42,19 @@ namespace MqttClient
         {
             Utils.Settings.Save();
         }
+
         private void CmdClose_Click(object sender, EventArgs e)
         {
             Close();
         }
+
         private void CmdSave_Click(object sender, EventArgs e)
         {
-            try
-            {
-                try
-                {
-                    SaveSettings();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error durring savesettings error:" + ex.Message);
-                    throw;
-                }
-
-                try
-                {
-                    Utils.MainForm.ReloadApp();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error durring ReloadApp error:" + ex.Message);
-                    throw;
-                }
-                try
-                {
-                    Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error durring Close error:" + ex.Message);
-
-                    throw;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("error" + ex.Message + " details: " + ex.InnerException);
-                throw;
-            }
-
+            SaveSettings();
+            Utils.MainForm.ReloadApp();
+            Close();
         }
+
         private void CmdTestSpeaker_Click(object sender, EventArgs e)
         {
             if (cmbSpeaker.SelectedItem.ToString().Length > 0)
@@ -97,6 +62,7 @@ namespace MqttClient
                 HardwareSensors.Speaker.Speak("testing", cmbSpeaker.SelectedItem.ToString());
             }
         }
+
         private void ChkStartUp_CheckedChanged(object sender, EventArgs e)
         {
             {
@@ -110,14 +76,17 @@ namespace MqttClient
                 Utils.Settings["RunAtStart"] = chkStartUp.Checked;
             }
         }
+
         private void LoadAudioDevices()
         {
             cmbAudioOutput.DataSource = Audio.GetAudioDevices();
         }
+
         private void LoadCameraDevices()
         {
             cmbWebcam.DataSource = HardwareSensors.Camera.GetDevices();
         }
+
         private void Button2_Click(object sender, EventArgs e)
         {
             if (cmbWebcam.SelectedValue.ToString().Length > 0)
@@ -144,6 +113,7 @@ namespace MqttClient
 
             }
         }
+
         private void ChkEnableWebCamPublish_CheckedChanged(object sender, EventArgs e)
         {
             if (ChkEnableWebCamPublish.Checked)
@@ -151,6 +121,7 @@ namespace MqttClient
             else
                 cmbWebcam.DataSource = null;
         }
+
         private void ChkTtsEnabled_CheckedChanged(object sender, EventArgs e)
         {
             if (chkTtsEnabled.Checked)
@@ -159,6 +130,7 @@ namespace MqttClient
                 cmbSpeaker.SelectedItem = Utils.Settings["TTSSpeaker"];
             }
         }
+
         private void Button1_Click_1(object sender, EventArgs e)
         {
             try

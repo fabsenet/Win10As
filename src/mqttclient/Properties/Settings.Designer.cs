@@ -121,18 +121,6 @@ namespace MqttClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SensorDiskEnabled {
-            get {
-                return ((bool)(this["SensorDiskEnabled"]));
-            }
-            set {
-                this["SensorDiskEnabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1883")]
         public decimal MqttPort {
             get {
@@ -374,12 +362,12 @@ namespace MqttClient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool VolumeControlEnabled {
+        public bool WorkerVolumeControlEnabled {
             get {
-                return ((bool)(this["VolumeControlEnabled"]));
+                return ((bool)(this["WorkerVolumeControlEnabled"]));
             }
             set {
-                this["VolumeControlEnabled"] = value;
+                this["WorkerVolumeControlEnabled"] = value;
             }
         }
         
@@ -398,12 +386,60 @@ namespace MqttClient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool PerformanceInfoEnabled {
+        public bool WorkerPerformanceInfoEnabled {
             get {
-                return ((bool)(this["PerformanceInfoEnabled"]));
+                return ((bool)(this["WorkerPerformanceInfoEnabled"]));
             }
             set {
-                this["PerformanceInfoEnabled"] = value;
+                this["WorkerPerformanceInfoEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public decimal WorkerVolumeControlInterval {
+            get {
+                return ((decimal)(this["WorkerVolumeControlInterval"]));
+            }
+            set {
+                this["WorkerVolumeControlInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public decimal WorkerPerformanceInfoInterval {
+            get {
+                return ((decimal)(this["WorkerPerformanceInfoInterval"]));
+            }
+            set {
+                this["WorkerPerformanceInfoInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WorkerDiskInfoEnabled {
+            get {
+                return ((bool)(this["WorkerDiskInfoEnabled"]));
+            }
+            set {
+                this["WorkerDiskInfoEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public decimal WorkerDiskInfoInterval {
+            get {
+                return ((decimal)(this["WorkerDiskInfoInterval"]));
+            }
+            set {
+                this["WorkerDiskInfoInterval"] = value;
             }
         }
     }

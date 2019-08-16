@@ -26,9 +26,6 @@
     <Setting Name="SensorBatteryEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="SensorDiskEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="MqttPort" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1883</Value>
     </Setting>
@@ -89,14 +86,26 @@
     <Setting Name="MqttDiscoveryPrefix" Type="System.String" Scope="User">
       <Value Profile="(Default)">homeassistant</Value>
     </Setting>
-    <Setting Name="VolumeControlEnabled" Type="System.Boolean" Scope="User">
+    <Setting Name="WorkerVolumeControlEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MqttDiscoveryFriendlyName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PerformanceInfoEnabled" Type="System.Boolean" Scope="User">
+    <Setting Name="WorkerPerformanceInfoEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WorkerVolumeControlInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
+    <Setting Name="WorkerPerformanceInfoInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
+    <Setting Name="WorkerDiskInfoEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WorkerDiskInfoInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

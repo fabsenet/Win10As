@@ -4,7 +4,7 @@ using System.Threading;
 using System.Reflection;
 using MqttClient.Mqtt;
 
-namespace MqttClient
+namespace MqttClient.Forms
 {
     public partial class MainForm : Form
     {

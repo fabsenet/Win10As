@@ -10,13 +10,14 @@ namespace MqttClient.Workers
     {
         public Volume() : base() { }
 
-        private readonly string[] ATTRIBUTES = new[] { "level", "mute" };
+        protected override bool IsEnabled => Utils.Settings.WorkerVolumeControlEnabled;
+        protected override decimal UpdateInterval => Utils.Settings.WorkerVolumeControlInterval;
 
+        private readonly string[] ATTRIBUTES = new[] { "level", "mute" };
 
         public override List<MqttMessage> SendDiscovery()
         {
-            if (!Utils.Settings.VolumeControlEnabled)
-                return null;
+            if (!IsEnabled) return null;
 
             var result = new List<MqttMessage>();
 
@@ -37,7 +38,7 @@ namespace MqttClient.Workers
                 }
 
                 var sensorType = attr == "level" ? SensorType.Sensor : SensorType.BinarySensor;
-                var mqttMsg = new MqttConfigMessage(sensorType, $"{GetWorkerType()}_{attr}", payload);
+                var mqttMsg = new MqttConfigMessage(sensorType, $"{WorkerType}_{attr}", payload);
                 result.Add(mqttMsg);
             }
 
@@ -47,8 +48,7 @@ namespace MqttClient.Workers
 
         public override List<MqttMessage> UpdateStatus()
         {
-            if (!Utils.Settings.VolumeControlEnabled)
-                return null;
+            if (!IsEnabled) return null;
 
             var result = new List<MqttMessage>();
 
@@ -60,17 +60,23 @@ namespace MqttClient.Workers
 
         public override void HandleCommand(string attribute, string payload)
         {
+            if (!IsEnabled) return;
+
             switch (attribute)
             {
                 case "level":
                     Audio.Volume(Convert.ToInt32(payload));
                     break;
                 case "mute":
-                    var setMuteOptions = new[] { "1", "on" };
-
-                    var mute = setMuteOptions.Contains(payload.ToLower());
-
-                    Audio.Mute(mute);
+                    switch (payload)
+                    {
+                        case "1": case "on":
+                            Audio.Mute(true);
+                            break;
+                        case "0": case "off":
+                            Audio.Mute(false);
+                            break;
+                    }
                     break;
                 default:
                     break;

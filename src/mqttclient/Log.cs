@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace MqttClient
 {
@@ -8,9 +9,12 @@ namespace MqttClient
         {
             var mainForm = Utils.MainForm;
 
-            mainForm.Invoke((MethodInvoker)(() => mainForm.lbLogs.Items.Insert(0, message)));
-            if (mainForm.lbLogs.Items.Count > 20)
-                mainForm.Invoke((MethodInvoker)(() => mainForm.lbLogs.Items.RemoveAt(20)));
+            mainForm.Invoke((MethodInvoker)(() =>
+            {
+                mainForm.lbLogs.Items.Insert(0, $"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] {message}");
+                if (mainForm.lbLogs.Items.Count > 100)
+                    mainForm.lbLogs.Items.RemoveAt(100);
+            }));
         }
     }
 }

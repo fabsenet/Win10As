@@ -1,4 +1,4 @@
-﻿namespace MqttClient
+﻿namespace MqttClient.Forms
 {
     partial class OptionsForm
     {
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MqttClient.Properties.Settings settings2 = new MqttClient.Properties.Settings();
             this.CmdSave = new System.Windows.Forms.Button();
             this.CmdClose = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -58,11 +57,7 @@
             this.tabSensors = new System.Windows.Forms.TabPage();
             this.boxSensors = new System.Windows.Forms.GroupBox();
             this.ChkComputerUsed = new System.Windows.Forms.CheckBox();
-            this.ChkDiskSensor = new System.Windows.Forms.CheckBox();
             this.ChkBatterySensor = new System.Windows.Forms.CheckBox();
-            this.boxWorkers = new System.Windows.Forms.GroupBox();
-            this.cbPerformance = new System.Windows.Forms.CheckBox();
-            this.cbVolumeWorker = new System.Windows.Forms.CheckBox();
             this.tabPresets = new System.Windows.Forms.TabPage();
             this.boxPresets = new System.Windows.Forms.GroupBox();
             this.ChkProcesses = new System.Windows.Forms.CheckBox();
@@ -99,6 +94,21 @@
             this.label5 = new System.Windows.Forms.Label();
             this.chkScreenshot = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tabWorkers = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.boxWorkers = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nWorkerDisksInterval = new System.Windows.Forms.NumericUpDown();
+            this.nWorkerPerformanceInterval = new System.Windows.Forms.NumericUpDown();
+            this.nWorkerVolumeInterval = new System.Windows.Forms.NumericUpDown();
+            this.cbWorkerDisks = new System.Windows.Forms.CheckBox();
+            this.cbWorkersPerformance = new System.Windows.Forms.CheckBox();
+            this.cbWorkersVolume = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             this.boxHomeAssistantDiscovery.SuspendLayout();
@@ -109,7 +119,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nMqttPort)).BeginInit();
             this.tabSensors.SuspendLayout();
             this.boxSensors.SuspendLayout();
-            this.boxWorkers.SuspendLayout();
             this.tabPresets.SuspendLayout();
             this.boxPresets.SuspendLayout();
             this.tabSound.SuspendLayout();
@@ -122,6 +131,12 @@
             this.boxScreenshot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nScreenshotInterval)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabWorkers.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.boxWorkers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerDisksInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerPerformanceInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerVolumeInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // CmdSave
@@ -149,6 +164,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabConnection);
+            this.tabControl1.Controls.Add(this.tabWorkers);
             this.tabControl1.Controls.Add(this.tabSensors);
             this.tabControl1.Controls.Add(this.tabPresets);
             this.tabControl1.Controls.Add(this.tabSound);
@@ -167,7 +183,6 @@
             this.tabConnection.Controls.Add(this.boxMqttClient);
             this.tabConnection.Location = new System.Drawing.Point(4, 22);
             this.tabConnection.Name = "tabConnection";
-            this.tabConnection.Padding = new System.Windows.Forms.Padding(3);
             this.tabConnection.Size = new System.Drawing.Size(378, 370);
             this.tabConnection.TabIndex = 0;
             this.tabConnection.Text = "Connection";
@@ -178,9 +193,9 @@
             this.boxHomeAssistantDiscovery.AutoSize = true;
             this.boxHomeAssistantDiscovery.Controls.Add(this.tableLayoutPanel2);
             this.boxHomeAssistantDiscovery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boxHomeAssistantDiscovery.Location = new System.Drawing.Point(3, 232);
+            this.boxHomeAssistantDiscovery.Location = new System.Drawing.Point(0, 229);
             this.boxHomeAssistantDiscovery.Name = "boxHomeAssistantDiscovery";
-            this.boxHomeAssistantDiscovery.Size = new System.Drawing.Size(372, 135);
+            this.boxHomeAssistantDiscovery.Size = new System.Drawing.Size(378, 141);
             this.boxHomeAssistantDiscovery.TabIndex = 31;
             this.boxHomeAssistantDiscovery.TabStop = false;
             this.boxHomeAssistantDiscovery.Text = "Home Assistant discovery";
@@ -228,12 +243,12 @@
             // 
             // tbDiscoveryPrefix
             // 
-            this.tbDiscoveryPrefix.DataBindings.Add(new System.Windows.Forms.Binding("Text", settings2, "MqttDiscoveryPrefix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbDiscoveryPrefix.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MqttClient.Properties.Settings.Default, "MqttDiscoveryPrefix", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbDiscoveryPrefix.Location = new System.Drawing.Point(91, 26);
             this.tbDiscoveryPrefix.Name = "tbDiscoveryPrefix";
             this.tbDiscoveryPrefix.Size = new System.Drawing.Size(189, 20);
             this.tbDiscoveryPrefix.TabIndex = 2;
-            this.tbDiscoveryPrefix.Text = settings2.MqttDiscoveryPrefix;
+            this.tbDiscoveryPrefix.Text = global::MqttClient.Properties.Settings.Default.MqttDiscoveryPrefix;
             // 
             // label6
             // 
@@ -248,9 +263,9 @@
             // 
             // cbDiscoveryEnabled
             // 
-            this.cbDiscoveryEnabled.Checked = Properties.Settings.Default.MqttDiscoveryEnabled;
+            this.cbDiscoveryEnabled.Checked = global::MqttClient.Properties.Settings.Default.MqttDiscoveryEnabled;
             this.tableLayoutPanel2.SetColumnSpan(this.cbDiscoveryEnabled, 2);
-            this.cbDiscoveryEnabled.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "MqttDiscoveryEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbDiscoveryEnabled.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "MqttDiscoveryEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbDiscoveryEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbDiscoveryEnabled.Location = new System.Drawing.Point(3, 3);
             this.cbDiscoveryEnabled.Name = "cbDiscoveryEnabled";
@@ -264,9 +279,9 @@
             this.boxMqttClient.AutoSize = true;
             this.boxMqttClient.Controls.Add(this.tableLayoutPanel1);
             this.boxMqttClient.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxMqttClient.Location = new System.Drawing.Point(3, 3);
+            this.boxMqttClient.Location = new System.Drawing.Point(0, 0);
             this.boxMqttClient.Name = "boxMqttClient";
-            this.boxMqttClient.Size = new System.Drawing.Size(372, 229);
+            this.boxMqttClient.Size = new System.Drawing.Size(378, 229);
             this.boxMqttClient.TabIndex = 35;
             this.boxMqttClient.TabStop = false;
             this.boxMqttClient.Text = "MQTT client options";
@@ -307,7 +322,7 @@
             // 
             // nMqttTimerInterval
             // 
-            this.nMqttTimerInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, "MqttTimerInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nMqttTimerInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MqttClient.Properties.Settings.Default, "MqttTimerInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nMqttTimerInterval.Location = new System.Drawing.Point(116, 107);
             this.nMqttTimerInterval.Maximum = new decimal(new int[] {
             86400000,
@@ -317,11 +332,11 @@
             this.nMqttTimerInterval.Name = "nMqttTimerInterval";
             this.nMqttTimerInterval.Size = new System.Drawing.Size(165, 20);
             this.nMqttTimerInterval.TabIndex = 32;
-            this.nMqttTimerInterval.Value = Properties.Settings.Default.MqttTimerInterval;
+            this.nMqttTimerInterval.Value = global::MqttClient.Properties.Settings.Default.MqttTimerInterval;
             // 
             // nMqttPort
             // 
-            this.nMqttPort.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, "MqttPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nMqttPort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MqttClient.Properties.Settings.Default, "MqttPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nMqttPort.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nMqttPort.Location = new System.Drawing.Point(116, 81);
             this.nMqttPort.Maximum = new decimal(new int[] {
@@ -332,7 +347,7 @@
             this.nMqttPort.Name = "nMqttPort";
             this.nMqttPort.Size = new System.Drawing.Size(165, 20);
             this.nMqttPort.TabIndex = 31;
-            this.nMqttPort.Value = Properties.Settings.Default.MqttPort;
+            this.nMqttPort.Value = global::MqttClient.Properties.Settings.Default.MqttPort;
             // 
             // label1
             // 
@@ -359,21 +374,21 @@
             // 
             // tbMqttServer
             // 
-            this.tbMqttServer.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, "MqttServer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbMqttServer.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MqttClient.Properties.Settings.Default, "MqttServer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbMqttServer.Location = new System.Drawing.Point(116, 3);
             this.tbMqttServer.Name = "tbMqttServer";
             this.tbMqttServer.Size = new System.Drawing.Size(165, 20);
             this.tbMqttServer.TabIndex = 1;
-            this.tbMqttServer.Text = Properties.Settings.Default.MqttServer;
+            this.tbMqttServer.Text = global::MqttClient.Properties.Settings.Default.MqttServer;
             // 
             // tbMqttTopic
             // 
-            this.tbMqttTopic.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, "MqttTopic", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbMqttTopic.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MqttClient.Properties.Settings.Default, "MqttTopic", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbMqttTopic.Location = new System.Drawing.Point(116, 133);
             this.tbMqttTopic.Name = "tbMqttTopic";
             this.tbMqttTopic.Size = new System.Drawing.Size(164, 20);
             this.tbMqttTopic.TabIndex = 6;
-            this.tbMqttTopic.Text = Properties.Settings.Default.MqttTopic;
+            this.tbMqttTopic.Text = global::MqttClient.Properties.Settings.Default.MqttTopic;
             // 
             // label4
             // 
@@ -421,12 +436,12 @@
             // 
             // tbMqttUsername
             // 
-            this.tbMqttUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, "MqttUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbMqttUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MqttClient.Properties.Settings.Default, "MqttUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbMqttUsername.Location = new System.Drawing.Point(116, 29);
             this.tbMqttUsername.Name = "tbMqttUsername";
             this.tbMqttUsername.Size = new System.Drawing.Size(165, 20);
             this.tbMqttUsername.TabIndex = 2;
-            this.tbMqttUsername.Text = Properties.Settings.Default.MqttUsername;
+            this.tbMqttUsername.Text = global::MqttClient.Properties.Settings.Default.MqttUsername;
             // 
             // label3
             // 
@@ -441,21 +456,19 @@
             // 
             // tbMqttPassword
             // 
-            this.tbMqttPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, "MqttPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbMqttPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MqttClient.Properties.Settings.Default, "MqttPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbMqttPassword.Location = new System.Drawing.Point(116, 55);
             this.tbMqttPassword.Name = "tbMqttPassword";
             this.tbMqttPassword.PasswordChar = '*';
             this.tbMqttPassword.Size = new System.Drawing.Size(164, 20);
             this.tbMqttPassword.TabIndex = 3;
-            this.tbMqttPassword.Text = Properties.Settings.Default.MqttPassword;
+            this.tbMqttPassword.Text = global::MqttClient.Properties.Settings.Default.MqttPassword;
             // 
             // tabSensors
             // 
             this.tabSensors.Controls.Add(this.boxSensors);
-            this.tabSensors.Controls.Add(this.boxWorkers);
             this.tabSensors.Location = new System.Drawing.Point(4, 22);
             this.tabSensors.Name = "tabSensors";
-            this.tabSensors.Padding = new System.Windows.Forms.Padding(3);
             this.tabSensors.Size = new System.Drawing.Size(378, 370);
             this.tabSensors.TabIndex = 1;
             this.tabSensors.Text = "Sensors";
@@ -465,12 +478,11 @@
             // 
             this.boxSensors.AutoSize = true;
             this.boxSensors.Controls.Add(this.ChkComputerUsed);
-            this.boxSensors.Controls.Add(this.ChkDiskSensor);
             this.boxSensors.Controls.Add(this.ChkBatterySensor);
             this.boxSensors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boxSensors.Location = new System.Drawing.Point(3, 62);
+            this.boxSensors.Location = new System.Drawing.Point(0, 0);
             this.boxSensors.Name = "boxSensors";
-            this.boxSensors.Size = new System.Drawing.Size(372, 305);
+            this.boxSensors.Size = new System.Drawing.Size(378, 370);
             this.boxSensors.TabIndex = 41;
             this.boxSensors.TabStop = false;
             this.boxSensors.Text = "Sensors (obsolete)";
@@ -478,53 +490,8 @@
             // ChkComputerUsed
             // 
             this.ChkComputerUsed.AutoSize = true;
-            settings2.ApplicationMinimizeToTray = false;
-            settings2.ApplicationRunAtStart = false;
-            settings2.CmdHibernateEnabled = false;
-            settings2.CmdMonitorEnabled = false;
-            settings2.CmdProcessEnabled = false;
-            settings2.CmdRebootEnabled = false;
-            settings2.CmdShutdownEnabled = false;
-            settings2.CmdSuspendEnabled = false;
-            settings2.CmdToastEnabled = false;
-            settings2.CmdTTSEnabled = false;
-            settings2.MqttDiscoveryEnabled = false;
-            settings2.MqttDiscoveryFriendlyName = "";
-            settings2.MqttDiscoveryPrefix = "homeassistant";
-            settings2.MqttPassword = "";
-            settings2.MqttPort = new decimal(new int[] {
-            1883,
-            0,
-            0,
-            0});
-            settings2.MqttServer = "";
-            settings2.MqttTimerInterval = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            settings2.MqttTopic = "";
-            settings2.MqttUsername = "";
-            settings2.PerformanceInfoEnabled = false;
-            settings2.ScreenshotEnable = false;
-            settings2.ScreenshotInterval = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            settings2.SensorBatteryEnabled = false;
-            settings2.SensorDiskEnabled = false;
-            settings2.SensorIsComputerUsedEnabled = false;
-            settings2.SettingsKey = "";
-            settings2.SlideshowEnabled = false;
-            settings2.SlideshowFolder = "";
-            settings2.TTSEnabled = false;
-            settings2.TTSSpeaker = "";
-            settings2.VolumeControlEnabled = false;
-            settings2.WebCamPublishDestination = "";
-            settings2.WebCamPublishEnabled = false;
-            this.ChkComputerUsed.Checked = settings2.SensorIsComputerUsedEnabled;
-            this.ChkComputerUsed.DataBindings.Add(new System.Windows.Forms.Binding("Checked", settings2, "SensorIsComputerUsedEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ChkComputerUsed.Checked = global::MqttClient.Properties.Settings.Default.SensorIsComputerUsedEnabled;
+            this.ChkComputerUsed.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "SensorIsComputerUsedEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ChkComputerUsed.Location = new System.Drawing.Point(10, 46);
             this.ChkComputerUsed.Name = "ChkComputerUsed";
             this.ChkComputerUsed.Size = new System.Drawing.Size(107, 17);
@@ -532,23 +499,11 @@
             this.ChkComputerUsed.Text = "Is computer used";
             this.ChkComputerUsed.UseVisualStyleBackColor = true;
             // 
-            // ChkDiskSensor
-            // 
-            this.ChkDiskSensor.AutoSize = true;
-            this.ChkDiskSensor.Checked = Properties.Settings.Default.SensorDiskEnabled;
-            this.ChkDiskSensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "SensorDiskEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkDiskSensor.Location = new System.Drawing.Point(95, 23);
-            this.ChkDiskSensor.Name = "ChkDiskSensor";
-            this.ChkDiskSensor.Size = new System.Drawing.Size(52, 17);
-            this.ChkDiskSensor.TabIndex = 1;
-            this.ChkDiskSensor.Text = "Disks";
-            this.ChkDiskSensor.UseVisualStyleBackColor = true;
-            // 
             // ChkBatterySensor
             // 
             this.ChkBatterySensor.AutoSize = true;
-            this.ChkBatterySensor.Checked = Properties.Settings.Default.SensorBatteryEnabled;
-            this.ChkBatterySensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "SensorBatteryEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ChkBatterySensor.Checked = global::MqttClient.Properties.Settings.Default.SensorBatteryEnabled;
+            this.ChkBatterySensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "SensorBatteryEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ChkBatterySensor.Location = new System.Drawing.Point(10, 23);
             this.ChkBatterySensor.Name = "ChkBatterySensor";
             this.ChkBatterySensor.Size = new System.Drawing.Size(59, 17);
@@ -556,49 +511,11 @@
             this.ChkBatterySensor.Text = "Battery";
             this.ChkBatterySensor.UseVisualStyleBackColor = true;
             // 
-            // boxWorkers
-            // 
-            this.boxWorkers.AutoSize = true;
-            this.boxWorkers.Controls.Add(this.cbPerformance);
-            this.boxWorkers.Controls.Add(this.cbVolumeWorker);
-            this.boxWorkers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxWorkers.Location = new System.Drawing.Point(3, 3);
-            this.boxWorkers.Name = "boxWorkers";
-            this.boxWorkers.Size = new System.Drawing.Size(372, 59);
-            this.boxWorkers.TabIndex = 42;
-            this.boxWorkers.TabStop = false;
-            this.boxWorkers.Text = "Workers";
-            // 
-            // cbPerformance
-            // 
-            this.cbPerformance.AutoSize = true;
-            this.cbPerformance.Checked = global::MqttClient.Properties.Settings.Default.PerformanceInfoEnabled;
-            this.cbPerformance.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "PerformanceInfoEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbPerformance.Location = new System.Drawing.Point(95, 23);
-            this.cbPerformance.Name = "cbPerformance";
-            this.cbPerformance.Size = new System.Drawing.Size(86, 17);
-            this.cbPerformance.TabIndex = 1;
-            this.cbPerformance.Text = "Performance";
-            this.cbPerformance.UseVisualStyleBackColor = true;
-            // 
-            // cbVolumeWorker
-            // 
-            this.cbVolumeWorker.AutoSize = true;
-            this.cbVolumeWorker.Checked = global::MqttClient.Properties.Settings.Default.VolumeControlEnabled;
-            this.cbVolumeWorker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "VolumeControlEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbVolumeWorker.Location = new System.Drawing.Point(10, 23);
-            this.cbVolumeWorker.Name = "cbVolumeWorker";
-            this.cbVolumeWorker.Size = new System.Drawing.Size(61, 17);
-            this.cbVolumeWorker.TabIndex = 0;
-            this.cbVolumeWorker.Text = "Volume";
-            this.cbVolumeWorker.UseVisualStyleBackColor = true;
-            // 
             // tabPresets
             // 
             this.tabPresets.Controls.Add(this.boxPresets);
             this.tabPresets.Location = new System.Drawing.Point(4, 22);
             this.tabPresets.Name = "tabPresets";
-            this.tabPresets.Padding = new System.Windows.Forms.Padding(3);
             this.tabPresets.Size = new System.Drawing.Size(378, 370);
             this.tabPresets.TabIndex = 2;
             this.tabPresets.Text = "Presets";
@@ -615,9 +532,9 @@
             this.boxPresets.Controls.Add(this.chkShutdown);
             this.boxPresets.Controls.Add(this.chkSuspend);
             this.boxPresets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boxPresets.Location = new System.Drawing.Point(3, 3);
+            this.boxPresets.Location = new System.Drawing.Point(0, 0);
             this.boxPresets.Name = "boxPresets";
-            this.boxPresets.Size = new System.Drawing.Size(372, 364);
+            this.boxPresets.Size = new System.Drawing.Size(378, 370);
             this.boxPresets.TabIndex = 36;
             this.boxPresets.TabStop = false;
             this.boxPresets.Text = "Enable Presets";
@@ -625,8 +542,8 @@
             // ChkProcesses
             // 
             this.ChkProcesses.AutoSize = true;
-            this.ChkProcesses.Checked = Properties.Settings.Default.CmdProcessEnabled;
-            this.ChkProcesses.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdProcessEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ChkProcesses.Checked = global::MqttClient.Properties.Settings.Default.CmdProcessEnabled;
+            this.ChkProcesses.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdProcessEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ChkProcesses.Location = new System.Drawing.Point(201, 43);
             this.ChkProcesses.Name = "ChkProcesses";
             this.ChkProcesses.Size = new System.Drawing.Size(75, 17);
@@ -638,8 +555,8 @@
             // ChkMonitor
             // 
             this.ChkMonitor.AutoSize = true;
-            this.ChkMonitor.Checked = Properties.Settings.Default.CmdMonitorEnabled;
-            this.ChkMonitor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdMonitorEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ChkMonitor.Checked = global::MqttClient.Properties.Settings.Default.CmdMonitorEnabled;
+            this.ChkMonitor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdMonitorEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ChkMonitor.Location = new System.Drawing.Point(201, 20);
             this.ChkMonitor.Name = "ChkMonitor";
             this.ChkMonitor.Size = new System.Drawing.Size(61, 17);
@@ -651,8 +568,8 @@
             // chktoast
             // 
             this.chktoast.AutoSize = true;
-            this.chktoast.Checked = Properties.Settings.Default.CmdToastEnabled;
-            this.chktoast.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdToastEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chktoast.Checked = global::MqttClient.Properties.Settings.Default.CmdToastEnabled;
+            this.chktoast.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdToastEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chktoast.Location = new System.Drawing.Point(134, 20);
             this.chktoast.Name = "chktoast";
             this.chktoast.Size = new System.Drawing.Size(53, 17);
@@ -664,8 +581,8 @@
             // chkTTS
             // 
             this.chkTTS.AutoSize = true;
-            this.chkTTS.Checked = Properties.Settings.Default.CmdTTSEnabled;
-            this.chkTTS.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdTTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkTTS.Checked = global::MqttClient.Properties.Settings.Default.CmdTTSEnabled;
+            this.chkTTS.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdTTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkTTS.Location = new System.Drawing.Point(134, 43);
             this.chkTTS.Name = "chkTTS";
             this.chkTTS.Size = new System.Drawing.Size(47, 17);
@@ -677,8 +594,8 @@
             // chkReboot
             // 
             this.chkReboot.AutoSize = true;
-            this.chkReboot.Checked = Properties.Settings.Default.CmdRebootEnabled;
-            this.chkReboot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdRebootEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkReboot.Checked = global::MqttClient.Properties.Settings.Default.CmdRebootEnabled;
+            this.chkReboot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdRebootEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkReboot.Location = new System.Drawing.Point(134, 66);
             this.chkReboot.Name = "chkReboot";
             this.chkReboot.Size = new System.Drawing.Size(61, 17);
@@ -690,8 +607,8 @@
             // chkHibernate
             // 
             this.chkHibernate.AutoSize = true;
-            this.chkHibernate.Checked = Properties.Settings.Default.CmdHibernateEnabled;
-            this.chkHibernate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdHibernateEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkHibernate.Checked = global::MqttClient.Properties.Settings.Default.CmdHibernateEnabled;
+            this.chkHibernate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdHibernateEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkHibernate.Location = new System.Drawing.Point(134, 89);
             this.chkHibernate.Name = "chkHibernate";
             this.chkHibernate.Size = new System.Drawing.Size(72, 17);
@@ -703,8 +620,8 @@
             // chkShutdown
             // 
             this.chkShutdown.AutoSize = true;
-            this.chkShutdown.Checked = Properties.Settings.Default.CmdShutdownEnabled;
-            this.chkShutdown.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdShutdownEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkShutdown.Checked = global::MqttClient.Properties.Settings.Default.CmdShutdownEnabled;
+            this.chkShutdown.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdShutdownEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkShutdown.Location = new System.Drawing.Point(24, 88);
             this.chkShutdown.Name = "chkShutdown";
             this.chkShutdown.Size = new System.Drawing.Size(74, 17);
@@ -716,8 +633,8 @@
             // chkSuspend
             // 
             this.chkSuspend.AutoSize = true;
-            this.chkSuspend.Checked = Properties.Settings.Default.CmdSuspendEnabled;
-            this.chkSuspend.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "CmdSuspendEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSuspend.Checked = global::MqttClient.Properties.Settings.Default.CmdSuspendEnabled;
+            this.chkSuspend.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "CmdSuspendEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkSuspend.Location = new System.Drawing.Point(24, 66);
             this.chkSuspend.Name = "chkSuspend";
             this.chkSuspend.Size = new System.Drawing.Size(68, 17);
@@ -755,8 +672,8 @@
             // chkTtsEnabled
             // 
             this.chkTtsEnabled.AutoSize = true;
-            this.chkTtsEnabled.Checked = Properties.Settings.Default.TTSEnabled;
-            this.chkTtsEnabled.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkTtsEnabled.Checked = global::MqttClient.Properties.Settings.Default.TTSEnabled;
+            this.chkTtsEnabled.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkTtsEnabled.Location = new System.Drawing.Point(8, 19);
             this.chkTtsEnabled.Name = "chkTtsEnabled";
             this.chkTtsEnabled.Size = new System.Drawing.Size(83, 17);
@@ -767,8 +684,8 @@
             // 
             // CmdTestSpeaker
             // 
-            this.CmdTestSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.CmdTestSpeaker.Enabled = Properties.Settings.Default.TTSEnabled;
+            this.CmdTestSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MqttClient.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.CmdTestSpeaker.Enabled = global::MqttClient.Properties.Settings.Default.TTSEnabled;
             this.CmdTestSpeaker.Location = new System.Drawing.Point(258, 40);
             this.CmdTestSpeaker.Name = "CmdTestSpeaker";
             this.CmdTestSpeaker.Size = new System.Drawing.Size(42, 24);
@@ -788,8 +705,8 @@
             // 
             // cmbSpeaker
             // 
-            this.cmbSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbSpeaker.Enabled = Properties.Settings.Default.TTSEnabled;
+            this.cmbSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MqttClient.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbSpeaker.Enabled = global::MqttClient.Properties.Settings.Default.TTSEnabled;
             this.cmbSpeaker.FormattingEnabled = true;
             this.cmbSpeaker.Location = new System.Drawing.Point(83, 42);
             this.cmbSpeaker.Name = "cmbSpeaker";
@@ -830,8 +747,8 @@
             // chkMinimizeToTray
             // 
             this.chkMinimizeToTray.AutoSize = true;
-            this.chkMinimizeToTray.Checked = Properties.Settings.Default.ApplicationMinimizeToTray;
-            this.chkMinimizeToTray.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "ApplicationMinimizeToTray", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkMinimizeToTray.Checked = global::MqttClient.Properties.Settings.Default.ApplicationMinimizeToTray;
+            this.chkMinimizeToTray.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "ApplicationMinimizeToTray", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkMinimizeToTray.Location = new System.Drawing.Point(6, 24);
             this.chkMinimizeToTray.Name = "chkMinimizeToTray";
             this.chkMinimizeToTray.Size = new System.Drawing.Size(98, 17);
@@ -842,8 +759,8 @@
             // chkStartUp
             // 
             this.chkStartUp.AutoSize = true;
-            this.chkStartUp.Checked = Properties.Settings.Default.ApplicationRunAtStart;
-            this.chkStartUp.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "ApplicationRunAtStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkStartUp.Checked = global::MqttClient.Properties.Settings.Default.ApplicationRunAtStart;
+            this.chkStartUp.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "ApplicationRunAtStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkStartUp.Location = new System.Drawing.Point(6, 3);
             this.chkStartUp.Name = "chkStartUp";
             this.chkStartUp.Size = new System.Drawing.Size(81, 17);
@@ -881,8 +798,8 @@
             // ChkEnableWebCamPublish
             // 
             this.ChkEnableWebCamPublish.AutoSize = true;
-            this.ChkEnableWebCamPublish.Checked = Properties.Settings.Default.WebCamPublishEnabled;
-            this.ChkEnableWebCamPublish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ChkEnableWebCamPublish.Checked = global::MqttClient.Properties.Settings.Default.WebCamPublishEnabled;
+            this.ChkEnableWebCamPublish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ChkEnableWebCamPublish.Location = new System.Drawing.Point(15, 29);
             this.ChkEnableWebCamPublish.Name = "ChkEnableWebCamPublish";
             this.ChkEnableWebCamPublish.Size = new System.Drawing.Size(59, 17);
@@ -893,8 +810,8 @@
             // 
             // CmdWebCamTest
             // 
-            this.CmdWebCamTest.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.CmdWebCamTest.Enabled = Properties.Settings.Default.WebCamPublishEnabled;
+            this.CmdWebCamTest.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MqttClient.Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.CmdWebCamTest.Enabled = global::MqttClient.Properties.Settings.Default.WebCamPublishEnabled;
             this.CmdWebCamTest.Location = new System.Drawing.Point(286, 27);
             this.CmdWebCamTest.Name = "CmdWebCamTest";
             this.CmdWebCamTest.Size = new System.Drawing.Size(80, 24);
@@ -906,8 +823,8 @@
             // 
             // cmbWebcam
             // 
-            this.cmbWebcam.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbWebcam.Enabled = Properties.Settings.Default.WebCamPublishEnabled;
+            this.cmbWebcam.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::MqttClient.Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cmbWebcam.Enabled = global::MqttClient.Properties.Settings.Default.WebCamPublishEnabled;
             this.cmbWebcam.FormattingEnabled = true;
             this.cmbWebcam.Location = new System.Drawing.Point(88, 29);
             this.cmbWebcam.Name = "cmbWebcam";
@@ -951,8 +868,8 @@
             // ChkSlideshow
             // 
             this.ChkSlideshow.AutoSize = true;
-            this.ChkSlideshow.Checked = Properties.Settings.Default.SlideshowEnabled;
-            this.ChkSlideshow.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "SlideshowEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ChkSlideshow.Checked = global::MqttClient.Properties.Settings.Default.SlideshowEnabled;
+            this.ChkSlideshow.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "SlideshowEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ChkSlideshow.Location = new System.Drawing.Point(15, 19);
             this.ChkSlideshow.Name = "ChkSlideshow";
             this.ChkSlideshow.Size = new System.Drawing.Size(59, 17);
@@ -962,12 +879,12 @@
             // 
             // txtSlideshowFolder
             // 
-            this.txtSlideshowFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", Properties.Settings.Default, "SlideshowFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtSlideshowFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MqttClient.Properties.Settings.Default, "SlideshowFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtSlideshowFolder.Location = new System.Drawing.Point(91, 44);
             this.txtSlideshowFolder.Name = "txtSlideshowFolder";
             this.txtSlideshowFolder.Size = new System.Drawing.Size(189, 20);
             this.txtSlideshowFolder.TabIndex = 49;
-            this.txtSlideshowFolder.Text = Properties.Settings.Default.SlideshowFolder;
+            this.txtSlideshowFolder.Text = global::MqttClient.Properties.Settings.Default.SlideshowFolder;
             // 
             // boxScreenshot
             // 
@@ -985,7 +902,7 @@
             // 
             // nScreenshotInterval
             // 
-            this.nScreenshotInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", Properties.Settings.Default, "ScreenshotInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nScreenshotInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MqttClient.Properties.Settings.Default, "ScreenshotInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nScreenshotInterval.Location = new System.Drawing.Point(106, 44);
             this.nScreenshotInterval.Maximum = new decimal(new int[] {
             86400000,
@@ -995,7 +912,7 @@
             this.nScreenshotInterval.Name = "nScreenshotInterval";
             this.nScreenshotInterval.Size = new System.Drawing.Size(165, 20);
             this.nScreenshotInterval.TabIndex = 34;
-            this.nScreenshotInterval.Value = Properties.Settings.Default.ScreenshotInterval;
+            this.nScreenshotInterval.Value = global::MqttClient.Properties.Settings.Default.ScreenshotInterval;
             // 
             // label5
             // 
@@ -1009,8 +926,8 @@
             // chkScreenshot
             // 
             this.chkScreenshot.AutoSize = true;
-            this.chkScreenshot.Checked = Properties.Settings.Default.ScreenshotEnable;
-            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", Properties.Settings.Default, "ScreenshotEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkScreenshot.Checked = global::MqttClient.Properties.Settings.Default.ScreenshotEnable;
+            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "ScreenshotEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkScreenshot.Location = new System.Drawing.Point(18, 19);
             this.chkScreenshot.Name = "chkScreenshot";
             this.chkScreenshot.Size = new System.Drawing.Size(59, 17);
@@ -1027,6 +944,212 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(386, 43);
             this.panel1.TabIndex = 54;
+            // 
+            // tabWorkers
+            // 
+            this.tabWorkers.Controls.Add(this.boxWorkers);
+            this.tabWorkers.Location = new System.Drawing.Point(4, 22);
+            this.tabWorkers.Name = "tabWorkers";
+            this.tabWorkers.Size = new System.Drawing.Size(378, 370);
+            this.tabWorkers.TabIndex = 7;
+            this.tabWorkers.Text = "Workers";
+            this.tabWorkers.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.AutoSize = true;
+            this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cbWorkersPerformance, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label13, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cbWorkersVolume, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label14, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label15, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label16, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.nWorkerVolumeInterval, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.nWorkerPerformanceInterval, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label17, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.cbWorkerDisks, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.nWorkerDisksInterval, 2, 3);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(372, 351);
+            this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // boxWorkers
+            // 
+            this.boxWorkers.AutoSize = true;
+            this.boxWorkers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.boxWorkers.Controls.Add(this.tableLayoutPanel3);
+            this.boxWorkers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.boxWorkers.Location = new System.Drawing.Point(0, 0);
+            this.boxWorkers.Name = "boxWorkers";
+            this.boxWorkers.Size = new System.Drawing.Size(378, 370);
+            this.boxWorkers.TabIndex = 43;
+            this.boxWorkers.TabStop = false;
+            this.boxWorkers.Text = "Workers";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label14.Location = new System.Drawing.Point(250, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(119, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Update every (s)";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Location = new System.Drawing.Point(126, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(118, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Enabled";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label16.Location = new System.Drawing.Point(3, 39);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(117, 26);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "Performance";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(117, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Worker";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Location = new System.Drawing.Point(3, 65);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(117, 26);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Disks";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label15.Location = new System.Drawing.Point(3, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(117, 26);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Volume";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // nWorkerDisksInterval
+            // 
+            this.nWorkerDisksInterval.AutoSize = true;
+            this.nWorkerDisksInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MqttClient.Properties.Settings.Default, "WorkerDiskInfoInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nWorkerDisksInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nWorkerDisksInterval.Location = new System.Drawing.Point(250, 68);
+            this.nWorkerDisksInterval.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.nWorkerDisksInterval.Name = "nWorkerDisksInterval";
+            this.nWorkerDisksInterval.Size = new System.Drawing.Size(119, 20);
+            this.nWorkerDisksInterval.TabIndex = 9;
+            this.nWorkerDisksInterval.Value = global::MqttClient.Properties.Settings.Default.WorkerDiskInfoInterval;
+            // 
+            // nWorkerPerformanceInterval
+            // 
+            this.nWorkerPerformanceInterval.AutoSize = true;
+            this.nWorkerPerformanceInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MqttClient.Properties.Settings.Default, "WorkerPerformanceInfoInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nWorkerPerformanceInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nWorkerPerformanceInterval.Location = new System.Drawing.Point(250, 42);
+            this.nWorkerPerformanceInterval.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.nWorkerPerformanceInterval.Name = "nWorkerPerformanceInterval";
+            this.nWorkerPerformanceInterval.Size = new System.Drawing.Size(119, 20);
+            this.nWorkerPerformanceInterval.TabIndex = 6;
+            this.nWorkerPerformanceInterval.Value = global::MqttClient.Properties.Settings.Default.WorkerPerformanceInfoInterval;
+            // 
+            // nWorkerVolumeInterval
+            // 
+            this.nWorkerVolumeInterval.AutoSize = true;
+            this.nWorkerVolumeInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::MqttClient.Properties.Settings.Default, "WorkerVolumeControlInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nWorkerVolumeInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nWorkerVolumeInterval.Location = new System.Drawing.Point(250, 16);
+            this.nWorkerVolumeInterval.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.nWorkerVolumeInterval.Name = "nWorkerVolumeInterval";
+            this.nWorkerVolumeInterval.Size = new System.Drawing.Size(119, 20);
+            this.nWorkerVolumeInterval.TabIndex = 5;
+            this.nWorkerVolumeInterval.Value = global::MqttClient.Properties.Settings.Default.WorkerVolumeControlInterval;
+            // 
+            // cbWorkerDisks
+            // 
+            this.cbWorkerDisks.AutoSize = true;
+            this.cbWorkerDisks.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkerDisks.Checked = global::MqttClient.Properties.Settings.Default.WorkerDiskInfoEnabled;
+            this.cbWorkerDisks.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "WorkerDiskInfoEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkerDisks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkerDisks.Location = new System.Drawing.Point(126, 68);
+            this.cbWorkerDisks.Name = "cbWorkerDisks";
+            this.cbWorkerDisks.Size = new System.Drawing.Size(118, 20);
+            this.cbWorkerDisks.TabIndex = 8;
+            // 
+            // cbWorkersPerformance
+            // 
+            this.cbWorkersPerformance.AutoSize = true;
+            this.cbWorkersPerformance.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkersPerformance.Checked = global::MqttClient.Properties.Settings.Default.WorkerPerformanceInfoEnabled;
+            this.cbWorkersPerformance.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "WorkerPerformanceInfoEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkersPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkersPerformance.Location = new System.Drawing.Point(126, 42);
+            this.cbWorkersPerformance.Name = "cbWorkersPerformance";
+            this.cbWorkersPerformance.Size = new System.Drawing.Size(118, 20);
+            this.cbWorkersPerformance.TabIndex = 1;
+            // 
+            // cbWorkersVolume
+            // 
+            this.cbWorkersVolume.AutoSize = true;
+            this.cbWorkersVolume.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkersVolume.Checked = global::MqttClient.Properties.Settings.Default.WorkerVolumeControlEnabled;
+            this.cbWorkersVolume.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MqttClient.Properties.Settings.Default, "WorkerVolumeControlEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkersVolume.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkersVolume.Location = new System.Drawing.Point(126, 16);
+            this.cbWorkersVolume.Name = "cbWorkersVolume";
+            this.cbWorkersVolume.Size = new System.Drawing.Size(118, 20);
+            this.cbWorkersVolume.TabIndex = 0;
             // 
             // OptionsForm
             // 
@@ -1055,8 +1178,6 @@
             this.tabSensors.PerformLayout();
             this.boxSensors.ResumeLayout(false);
             this.boxSensors.PerformLayout();
-            this.boxWorkers.ResumeLayout(false);
-            this.boxWorkers.PerformLayout();
             this.tabPresets.ResumeLayout(false);
             this.boxPresets.ResumeLayout(false);
             this.boxPresets.PerformLayout();
@@ -1077,6 +1198,15 @@
             this.boxScreenshot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nScreenshotInterval)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabWorkers.ResumeLayout(false);
+            this.tabWorkers.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.boxWorkers.ResumeLayout(false);
+            this.boxWorkers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerDisksInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerPerformanceInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerVolumeInterval)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1099,7 +1229,6 @@
         private System.Windows.Forms.TextBox tbMqttServer;
         private System.Windows.Forms.TabPage tabSensors;
         private System.Windows.Forms.CheckBox ChkComputerUsed;
-        private System.Windows.Forms.CheckBox ChkDiskSensor;
         private System.Windows.Forms.CheckBox ChkBatterySensor;
         private System.Windows.Forms.TabPage tabPresets;
         private System.Windows.Forms.CheckBox ChkProcesses;
@@ -1149,8 +1278,20 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabPage tabWorkers;
         private System.Windows.Forms.GroupBox boxWorkers;
-        private System.Windows.Forms.CheckBox cbVolumeWorker;
-        private System.Windows.Forms.CheckBox cbPerformance;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown nWorkerVolumeInterval;
+        private System.Windows.Forms.NumericUpDown nWorkerPerformanceInterval;
+        private System.Windows.Forms.NumericUpDown nWorkerDisksInterval;
+        private System.Windows.Forms.CheckBox cbWorkersPerformance;
+        private System.Windows.Forms.CheckBox cbWorkersVolume;
+        private System.Windows.Forms.CheckBox cbWorkerDisks;
     }
 }

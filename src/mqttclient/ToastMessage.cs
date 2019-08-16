@@ -9,36 +9,39 @@ namespace MqttClient
     {
         public static void ShowText(IList<string> lines)
         {
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
+            var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
 
-            XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
+            var stringElements = toastXml.GetElementsByTagName("text");
             for (int i = 0; i < stringElements.Length; i++)
                 stringElements[i].AppendChild(toastXml.CreateTextNode(lines[i]));
 
-            ToastNotification toast = new ToastNotification(toastXml);
+            var toast = new ToastNotification(toastXml);
             toast.Activated += ToastActivated;
             toast.Dismissed += ToastDismissed;
             toast.Failed += ToastFailed;
+
             ToastNotificationManager.CreateToastNotifier(Utils.AppId).Show(toast);
         }
+
         public static void ShowImage(IList<string> lines, string imageUrl)
         {
             var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
 
-            XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
+            var stringElements = toastXml.GetElementsByTagName("text");
             for (int i = 0; i < stringElements.Length; i++)
                 stringElements[i].AppendChild(toastXml.CreateTextNode(lines[i]));
 
-            string imagePath = "file:///" + imageUrl;
+            var imagePath = "file:///" + imageUrl;
 
-            XmlNodeList toastImageAttributes = toastXml.GetElementsByTagName("image");
+            var toastImageAttributes = toastXml.GetElementsByTagName("image");
             ((XmlElement)toastImageAttributes[0]).SetAttribute("src", imagePath);
             ((XmlElement)toastImageAttributes[0]).SetAttribute("alt", "alt text");
 
-            ToastNotification toast = new ToastNotification(toastXml);
+            var toast = new ToastNotification(toastXml);
             toast.Activated += ToastActivated;
             toast.Dismissed += ToastDismissed;
             toast.Failed += ToastFailed;
+
             ToastNotificationManager.CreateToastNotifier(Utils.AppId).Show(toast);
         }
 

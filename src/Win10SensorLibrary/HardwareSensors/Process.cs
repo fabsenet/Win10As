@@ -10,15 +10,9 @@ namespace MqttClient
             try
             {
                 bool isRunning = System.Diagnostics.Process.GetProcessesByName(exename)
-                                        .FirstOrDefault(p => p.MainModule.FileName.StartsWith(location)) != default(System.Diagnostics.Process);
-                if (isRunning)
-                {
-                    return "1";
-                }
-                else
-                {
-                    return "0";
-                }
+                    .FirstOrDefault(p => p.MainModule.FileName.StartsWith(location)) != default(System.Diagnostics.Process);
+
+                return isRunning ? "1" : "0";
             }
             catch (Exception)
             {

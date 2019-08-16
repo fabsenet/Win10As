@@ -17,6 +17,7 @@ namespace MqttClient.Mqtt
         private readonly IMqtt _mqtt;
         private readonly string GLocalScreetshotFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "primonitor.jpg");
         private readonly string GLocalWebcamFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "webcam.png");
+
         public MqttPublish(IMqtt mqtt)
         {
             _mqtt = mqtt;
@@ -37,12 +38,15 @@ namespace MqttClient.Mqtt
                     {
                         var worker = kvp.Value;
                         var msgs = worker.SendDiscovery();
+                        if (msgs == null) return;
                         foreach (var msg in msgs)
                             _mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
                     }));
                 }
                 return;
             }
+
+            await Task.WhenAll(task).ConfigureAwait(false);
         }
 
         public async void SendWorkerUpdates()
@@ -59,6 +63,7 @@ namespace MqttClient.Mqtt
                     task.Add(Task.Run(() => {
                         var worker = kvp.Value;
                         var msgs = worker.UpdateStatus();
+                        if (msgs == null) return;
                         foreach (var msg in msgs)
                             _mqtt.Publish(msg.Topic, msg.Payload + "", msg.Retain);
                     }));
@@ -81,10 +86,6 @@ namespace MqttClient.Mqtt
                 {
                     task.Add(Task.Run(() => PublishBattery()));
                 }
-                if (Utils.Settings.SensorDiskEnabled)
-                {
-                    task.Add(Task.Run(() => PublishDiskStatus()));
-                }
                 if (Utils.Settings.WebCamPublishEnabled)
                 {
                     task.Add(Task.Run(() => PublishCamera()));
@@ -97,18 +98,11 @@ namespace MqttClient.Mqtt
             await Task.WhenAll(task).ConfigureAwait(false);
         }
 
-        private async void PublishStatus()
+        private void PublishStatus()
         {
-            if (UsingComputer.IsUsing())
-            {
-                _mqtt.Publish("binary_sensor/inUse", "on");
-            }
-            else
-            {
-                _mqtt.Publish("binary_sensor/inUse", "off");
-            }
-
+            _mqtt.Publish("binary_sensor/inUse", UsingComputer.IsUsing() ? "on" : "off");
         }
+
         private void PublishBattery()
         {
             //_mqtt.Publish("Power/BatteryChargeStatus", Power.BatteryChargeStatus());
@@ -117,91 +111,39 @@ namespace MqttClient.Mqtt
             //_mqtt.Publish("Power/BatteryLifeRemaining", Power.BatteryLifeRemaining());
             //_mqtt.Publish("Power/PowerLineStatus", Power.PowerLineStatus());
         }
-        private void PublishDiskStatus()
-        {
-            try
-            {
-                foreach (var drive in DriveInfo.GetDrives())
-                {
-                    double freeSpace = drive.TotalFreeSpace;
-                    double totalSpace = drive.TotalSize;
-                    double percentFree = (freeSpace / totalSpace) * 100;
-                    float num = (float)percentFree;
 
-                    string rawdrivename = drive.Name.Replace(":\\", "");
-
-                    _mqtt.Publish("drive/" + rawdrivename + "/totalsize", drive.TotalSize.ToString(CultureInfo.CurrentCulture));
-                    _mqtt.Publish("drive/" + rawdrivename + "/percentfree", Convert.ToString(Math.Round(Convert.ToDouble(percentFree.ToString(CultureInfo.CurrentCulture), CultureInfo.CurrentCulture), 0), CultureInfo.CurrentCulture));
-                    _mqtt.Publish("drive/" + rawdrivename + "/availablefreespace", drive.AvailableFreeSpace.ToString(CultureInfo.CurrentCulture));
-                }
-            }
-            catch (Exception)
-            {
-                // throw;
-            }
-
-        }
         private static bool NetworkUp()
         {
-
-            try
-            {
-                return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
+            return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
         }
+
         private void PublishScreenshot()
         {
-            try
+            if (NetworkUp())
             {
-                if (NetworkUp())
+                using (var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb))
                 {
-                    using (var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb))
+                    using (var gfxScreenshot = Graphics.FromImage(bmpScreenshot))
                     {
-                        using (var gfxScreenshot = Graphics.FromImage(bmpScreenshot))
-                        {
-                            gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                        gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
 
 
-                            bmpScreenshot.Save(GLocalScreetshotFile, ImageFormat.Png);
-                            _mqtt.PublishImage("screenshot", GLocalScreetshotFile);
+                        bmpScreenshot.Save(GLocalScreetshotFile, ImageFormat.Png);
+                        _mqtt.PublishImage("screenshot", GLocalScreetshotFile);
 
-                        }
                     }
                 }
             }
-            catch
-            {
-                throw;
-            }
         }
+
         private void PublishCamera()
         {
-            try
-            {
-                if (HardwareSensors.Camera.Save(GLocalWebcamFile))
-                {
-                    _mqtt.PublishImage("webcamera", GLocalWebcamFile);
-
-                }
-                else
-                {
-
-                    MessageBox.Show($"Failed to save image");
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+            if (HardwareSensors.Camera.Save(GLocalWebcamFile))
+                _mqtt.PublishImage("webcamera", GLocalWebcamFile);
+            else
+                MessageBox.Show($"Failed to save image");
         }
+
         private void MqttCameraSlide(string folder)
         {
             var rand = new Random();
