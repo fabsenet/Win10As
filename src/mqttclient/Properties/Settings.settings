@@ -17,11 +17,11 @@
     <Setting Name="MqttTimerInterval" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="ScreenshotEnable" Type="System.Boolean" Scope="User">
+    <Setting Name="WorkerScreenshotEnable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ScreenshotInterval" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">60</Value>
+    <Setting Name="WorkerScreenshotInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="SensorBatteryEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -35,22 +35,16 @@
     <Setting Name="TTSSpeaker" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SlideshowEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="SlideshowFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="ApplicationRunAtStart" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="SensorIsComputerUsedEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="WebCamPublishEnabled" Type="System.Boolean" Scope="User">
+    <Setting Name="WorkerCameraEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="WebCamPublishDestination" Type="System.String" Scope="User">
+    <Setting Name="WorkerCameraDevice" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TTSEnabled" Type="System.Boolean" Scope="User">
@@ -66,9 +60,6 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CmdHibernateEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="CmdTTSEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CmdToastEnabled" Type="System.Boolean" Scope="User">
@@ -109,6 +100,18 @@
     </Setting>
     <Setting Name="WorkerMediaPlayerEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WorkerCameraInterval" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="WorkerScreenshotSaveLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="WorkerCameraSaveLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="WorkerVolumeControlDevice" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

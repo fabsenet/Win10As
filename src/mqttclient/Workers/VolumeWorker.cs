@@ -1,7 +1,7 @@
 ﻿using WinMqtt.Mqtt;
 using System;
 using System.Collections.Generic;
-using Win10SensorLibrary.HardwareSensors;
+using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace WinMqtt.Workers
 {
@@ -14,10 +14,8 @@ namespace WinMqtt.Workers
 
         private readonly string[] ATTRIBUTES = new[] { "level", "level_01", "mute" };
 
-        public override List<MqttMessage> PrepareDiscoveryMessages()
+        protected override List<MqttMessage> PrepareDiscoveryMessages()
         {
-            if (!IsEnabled) return null;
-
             var result = new List<MqttMessage>();
 
             foreach (var attr in ATTRIBUTES)
@@ -54,11 +52,8 @@ namespace WinMqtt.Workers
             return result;
         }
 
-
-        public override List<MqttMessage> PrepareUpdateStatusMessages()
+        protected override List<MqttMessage> PrepareUpdateStatusMessages()
         {
-            if (!IsEnabled) return null;
-
             var result = new List<MqttMessage>();
 
             result.Add(AudioVolumeMqttMessage());
@@ -71,7 +66,7 @@ namespace WinMqtt.Workers
         {
             if (!IsEnabled) return;
 
-            var step = 1;
+            int step;
             switch (attribute)
             {
                 case "up":
@@ -109,7 +104,50 @@ namespace WinMqtt.Workers
             }
         }
 
-        private MqttMessage AudioVolumeMqttMessage() => new MqttMessage(StateTopic("level"), Convert.ToInt32(Audio.GetVolume()), true);
-        private MqttMessage AudioMuteMqttMessage() => new MqttMessage(StateTopic("mute"), Audio.IsMuted() ? "ON" : "OFF", true);
+        private MqttMessage AudioVolumeMqttMessage() => new MqttMessage(StateTopic("level"), Convert.ToInt32(Audio.GetVolume()));
+        private MqttMessage AudioMuteMqttMessage() => new MqttMessage(StateTopic("mute"), Audio.IsMuted() ? "ON" : "OFF");
+    }
+    
+    static class Audio
+    {
+        private static CoreAudioDevice _defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+        static Audio() => SetDevice(Utils.Settings.WorkerVolumeControlDevice);
+
+        public static void Mute(bool Enable) => _defaultPlaybackDevice.SetMuteAsync(Enable).Wait();
+        public static bool IsMuted() => _defaultPlaybackDevice.IsMuted;
+        public static void Volume(double level) => _defaultPlaybackDevice.SetVolumeAsync(level).Wait();
+        public static double GetVolume() => _defaultPlaybackDevice.Volume;
+
+        static public List<string> GetDevices()
+        {
+            var cac = new CoreAudioController();
+            List<string> tmp = new List<string>();
+
+            foreach (CoreAudioDevice de in cac.GetPlaybackDevices())
+                tmp.Add(de.FullName);
+
+            cac.Dispose();
+            return tmp;
+
+        }
+
+        public static void SetDevice(string deviceFullName = "")
+        {
+            var cac = new CoreAudioController();
+            if ($"{deviceFullName}" == "")
+            {
+                _defaultPlaybackDevice = cac.DefaultPlaybackDevice;
+                return;
+            }
+
+            foreach (var de in cac.GetPlaybackDevices())
+            {
+                if (de.FullName.ToLower() != deviceFullName.ToLower())
+                    continue;
+
+                _defaultPlaybackDevice = de;
+                break;
+            }
+        }
     }
 }

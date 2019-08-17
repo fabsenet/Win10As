@@ -42,7 +42,7 @@
             this.nMqttTimerInterval = new System.Windows.Forms.NumericUpDown();
             this.nMqttPort = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnTestMqttConnection = new System.Windows.Forms.Button();
             this.tbMqttServer = new System.Windows.Forms.TextBox();
             this.tbMqttTopic = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,8 +53,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbMqttPassword = new System.Windows.Forms.TextBox();
             this.tabWorkers = new System.Windows.Forms.TabPage();
-            this.boxWorkers = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbWorkerMediaPlayer = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.cbWorkersPerformance = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -67,48 +68,45 @@
             this.label17 = new System.Windows.Forms.Label();
             this.cbWorkerDisks = new System.Windows.Forms.CheckBox();
             this.nWorkerDisksInterval = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cbWorkerCamera = new System.Windows.Forms.CheckBox();
+            this.nWorkerCameraInterval = new System.Windows.Forms.NumericUpDown();
+            this.nWorkerScreenshotInterval = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cbWorkerScreenshot = new System.Windows.Forms.CheckBox();
             this.tabSensors = new System.Windows.Forms.TabPage();
-            this.boxSensors = new System.Windows.Forms.GroupBox();
             this.ChkComputerUsed = new System.Windows.Forms.CheckBox();
             this.ChkBatterySensor = new System.Windows.Forms.CheckBox();
             this.tabPresets = new System.Windows.Forms.TabPage();
-            this.boxPresets = new System.Windows.Forms.GroupBox();
             this.ChkProcesses = new System.Windows.Forms.CheckBox();
             this.ChkMonitor = new System.Windows.Forms.CheckBox();
+            this.chkSuspend = new System.Windows.Forms.CheckBox();
             this.chktoast = new System.Windows.Forms.CheckBox();
-            this.chkTTS = new System.Windows.Forms.CheckBox();
+            this.chkShutdown = new System.Windows.Forms.CheckBox();
             this.chkReboot = new System.Windows.Forms.CheckBox();
             this.chkHibernate = new System.Windows.Forms.CheckBox();
-            this.chkShutdown = new System.Windows.Forms.CheckBox();
-            this.chkSuspend = new System.Windows.Forms.CheckBox();
             this.tabSound = new System.Windows.Forms.TabPage();
+            this.boxAudioOutput = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cbbVolumeDevice = new System.Windows.Forms.ComboBox();
             this.boxTTS = new System.Windows.Forms.GroupBox();
-            this.chkTtsEnabled = new System.Windows.Forms.CheckBox();
-            this.CmdTestSpeaker = new System.Windows.Forms.Button();
+            this.cbTTSEnabled = new System.Windows.Forms.CheckBox();
+            this.btnTTSTest = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.cmbSpeaker = new System.Windows.Forms.ComboBox();
-            this.boxAudioDevices = new System.Windows.Forms.GroupBox();
-            this.cmbAudioOutput = new System.Windows.Forms.ComboBox();
-            this.tabApplicaiton = new System.Windows.Forms.TabPage();
-            this.chkMinimizeToTray = new System.Windows.Forms.CheckBox();
-            this.chkStartUp = new System.Windows.Forms.CheckBox();
-            this.tabCamera = new System.Windows.Forms.TabPage();
+            this.cbbTTSSpeaker = new System.Windows.Forms.ComboBox();
+            this.tabVideo = new System.Windows.Forms.TabPage();
             this.boxWebcam = new System.Windows.Forms.GroupBox();
-            this.ChkEnableWebCamPublish = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.CmdWebCamTest = new System.Windows.Forms.Button();
-            this.cmbWebcam = new System.Windows.Forms.ComboBox();
-            this.boxSlideshow = new System.Windows.Forms.GroupBox();
-            this.CmdSelectSlideShowPath = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.ChkSlideshow = new System.Windows.Forms.CheckBox();
-            this.txtSlideshowFolder = new System.Windows.Forms.TextBox();
+            this.cbbCameraDevice = new System.Windows.Forms.ComboBox();
             this.boxScreenshot = new System.Windows.Forms.GroupBox();
             this.nScreenshotInterval = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.chkScreenshot = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.cbWorkerMediaPlayer = new System.Windows.Forms.CheckBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.tabApplicaiton = new System.Windows.Forms.TabPage();
+            this.chkMinimizeToTray = new System.Windows.Forms.CheckBox();
+            this.chkStartUp = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabConnection.SuspendLayout();
             this.boxHomeAssistantDiscovery.SuspendLayout();
@@ -118,24 +116,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.nMqttTimerInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nMqttPort)).BeginInit();
             this.tabWorkers.SuspendLayout();
-            this.boxWorkers.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nWorkerVolumeInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nWorkerPerformanceInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nWorkerDisksInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerCameraInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerScreenshotInterval)).BeginInit();
             this.tabSensors.SuspendLayout();
-            this.boxSensors.SuspendLayout();
             this.tabPresets.SuspendLayout();
-            this.boxPresets.SuspendLayout();
             this.tabSound.SuspendLayout();
+            this.boxAudioOutput.SuspendLayout();
             this.boxTTS.SuspendLayout();
-            this.boxAudioDevices.SuspendLayout();
-            this.tabApplicaiton.SuspendLayout();
-            this.tabCamera.SuspendLayout();
+            this.tabVideo.SuspendLayout();
             this.boxWebcam.SuspendLayout();
-            this.boxSlideshow.SuspendLayout();
             this.boxScreenshot.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nScreenshotInterval)).BeginInit();
+            this.tabApplicaiton.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -145,8 +141,8 @@
             this.tabControl1.Controls.Add(this.tabSensors);
             this.tabControl1.Controls.Add(this.tabPresets);
             this.tabControl1.Controls.Add(this.tabSound);
+            this.tabControl1.Controls.Add(this.tabVideo);
             this.tabControl1.Controls.Add(this.tabApplicaiton);
-            this.tabControl1.Controls.Add(this.tabCamera);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -273,7 +269,7 @@
             this.tableLayoutPanel1.Controls.Add(this.nMqttTimerInterval, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.nMqttPort, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnTestMqttConnection, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.tbMqttServer, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbMqttTopic, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
@@ -337,17 +333,17 @@
             this.label1.Text = "Server";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // btnTestMqttConnection
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.button1, 2);
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(3, 159);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(278, 29);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "Test connection";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click_1);
+            this.tableLayoutPanel1.SetColumnSpan(this.btnTestMqttConnection, 2);
+            this.btnTestMqttConnection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTestMqttConnection.Location = new System.Drawing.Point(3, 159);
+            this.btnTestMqttConnection.Name = "btnTestMqttConnection";
+            this.btnTestMqttConnection.Size = new System.Drawing.Size(278, 29);
+            this.btnTestMqttConnection.TabIndex = 29;
+            this.btnTestMqttConnection.Text = "Test connection";
+            this.btnTestMqttConnection.UseVisualStyleBackColor = true;
+            this.btnTestMqttConnection.Click += new System.EventHandler(this.btnTestMqttConnection_Click);
             // 
             // tbMqttServer
             // 
@@ -443,26 +439,13 @@
             // 
             // tabWorkers
             // 
-            this.tabWorkers.Controls.Add(this.boxWorkers);
+            this.tabWorkers.Controls.Add(this.tableLayoutPanel3);
             this.tabWorkers.Location = new System.Drawing.Point(4, 22);
             this.tabWorkers.Name = "tabWorkers";
             this.tabWorkers.Size = new System.Drawing.Size(374, 335);
             this.tabWorkers.TabIndex = 7;
             this.tabWorkers.Text = "Workers";
             this.tabWorkers.UseVisualStyleBackColor = true;
-            // 
-            // boxWorkers
-            // 
-            this.boxWorkers.AutoSize = true;
-            this.boxWorkers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.boxWorkers.Controls.Add(this.tableLayoutPanel3);
-            this.boxWorkers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boxWorkers.Location = new System.Drawing.Point(0, 0);
-            this.boxWorkers.Name = "boxWorkers";
-            this.boxWorkers.Size = new System.Drawing.Size(374, 335);
-            this.boxWorkers.TabIndex = 43;
-            this.boxWorkers.TabStop = false;
-            this.boxWorkers.Text = "Workers";
             // 
             // tableLayoutPanel3
             // 
@@ -487,18 +470,49 @@
             this.tableLayoutPanel3.Controls.Add(this.cbWorkerDisks, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.nWorkerDisksInterval, 2, 3);
             this.tableLayoutPanel3.Controls.Add(this.label19, 2, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label12, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.cbWorkerCamera, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.nWorkerCameraInterval, 2, 5);
+            this.tableLayoutPanel3.Controls.Add(this.nWorkerScreenshotInterval, 2, 6);
+            this.tableLayoutPanel3.Controls.Add(this.label21, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.cbWorkerScreenshot, 1, 6);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 6;
+            this.tableLayoutPanel3.RowCount = 8;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(368, 316);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(374, 335);
             this.tableLayoutPanel3.TabIndex = 2;
+            // 
+            // cbWorkerMediaPlayer
+            // 
+            this.cbWorkerMediaPlayer.AutoSize = true;
+            this.cbWorkerMediaPlayer.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkerMediaPlayer.Checked = global::WinMqtt.Properties.Settings.Default.WorkerMediaPlayerEnabled;
+            this.cbWorkerMediaPlayer.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerMediaPlayerEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkerMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkerMediaPlayer.Location = new System.Drawing.Point(127, 94);
+            this.cbWorkerMediaPlayer.Name = "cbWorkerMediaPlayer";
+            this.cbWorkerMediaPlayer.Size = new System.Drawing.Size(118, 14);
+            this.cbWorkerMediaPlayer.TabIndex = 11;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(3, 91);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(118, 20);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Media player";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label9
             // 
@@ -506,7 +520,7 @@
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(116, 13);
+            this.label9.Size = new System.Drawing.Size(118, 13);
             this.label9.TabIndex = 0;
             this.label9.Text = "Worker";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -518,18 +532,18 @@
             this.cbWorkersPerformance.Checked = global::WinMqtt.Properties.Settings.Default.WorkerPerformanceInfoEnabled;
             this.cbWorkersPerformance.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerPerformanceInfoEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbWorkersPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbWorkersPerformance.Location = new System.Drawing.Point(125, 42);
+            this.cbWorkersPerformance.Location = new System.Drawing.Point(127, 42);
             this.cbWorkersPerformance.Name = "cbWorkersPerformance";
-            this.cbWorkersPerformance.Size = new System.Drawing.Size(116, 20);
+            this.cbWorkersPerformance.Size = new System.Drawing.Size(118, 20);
             this.cbWorkersPerformance.TabIndex = 1;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(125, 0);
+            this.label13.Location = new System.Drawing.Point(127, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(116, 13);
+            this.label13.Size = new System.Drawing.Size(118, 13);
             this.label13.TabIndex = 1;
             this.label13.Text = "Enabled";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -541,18 +555,18 @@
             this.cbWorkersVolume.Checked = global::WinMqtt.Properties.Settings.Default.WorkerVolumeControlEnabled;
             this.cbWorkersVolume.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerVolumeControlEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbWorkersVolume.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbWorkersVolume.Location = new System.Drawing.Point(125, 16);
+            this.cbWorkersVolume.Location = new System.Drawing.Point(127, 16);
             this.cbWorkersVolume.Name = "cbWorkersVolume";
-            this.cbWorkersVolume.Size = new System.Drawing.Size(116, 20);
+            this.cbWorkersVolume.Size = new System.Drawing.Size(118, 20);
             this.cbWorkersVolume.TabIndex = 0;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(247, 0);
+            this.label14.Location = new System.Drawing.Point(251, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(118, 13);
+            this.label14.Size = new System.Drawing.Size(120, 13);
             this.label14.TabIndex = 2;
             this.label14.Text = "Update every (s)";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -563,7 +577,7 @@
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Location = new System.Drawing.Point(3, 13);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(116, 26);
+            this.label15.Size = new System.Drawing.Size(118, 26);
             this.label15.TabIndex = 3;
             this.label15.Text = "Volume";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -574,7 +588,7 @@
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label16.Location = new System.Drawing.Point(3, 39);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(116, 26);
+            this.label16.Size = new System.Drawing.Size(118, 26);
             this.label16.TabIndex = 4;
             this.label16.Text = "Performance";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -584,14 +598,14 @@
             this.nWorkerVolumeInterval.AutoSize = true;
             this.nWorkerVolumeInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "WorkerVolumeControlInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nWorkerVolumeInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nWorkerVolumeInterval.Location = new System.Drawing.Point(247, 16);
+            this.nWorkerVolumeInterval.Location = new System.Drawing.Point(251, 16);
             this.nWorkerVolumeInterval.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
             this.nWorkerVolumeInterval.Name = "nWorkerVolumeInterval";
-            this.nWorkerVolumeInterval.Size = new System.Drawing.Size(118, 20);
+            this.nWorkerVolumeInterval.Size = new System.Drawing.Size(120, 20);
             this.nWorkerVolumeInterval.TabIndex = 5;
             this.nWorkerVolumeInterval.Value = global::WinMqtt.Properties.Settings.Default.WorkerVolumeControlInterval;
             // 
@@ -600,14 +614,14 @@
             this.nWorkerPerformanceInterval.AutoSize = true;
             this.nWorkerPerformanceInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "WorkerPerformanceInfoInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nWorkerPerformanceInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nWorkerPerformanceInterval.Location = new System.Drawing.Point(247, 42);
+            this.nWorkerPerformanceInterval.Location = new System.Drawing.Point(251, 42);
             this.nWorkerPerformanceInterval.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
             this.nWorkerPerformanceInterval.Name = "nWorkerPerformanceInterval";
-            this.nWorkerPerformanceInterval.Size = new System.Drawing.Size(118, 20);
+            this.nWorkerPerformanceInterval.Size = new System.Drawing.Size(120, 20);
             this.nWorkerPerformanceInterval.TabIndex = 6;
             this.nWorkerPerformanceInterval.Value = global::WinMqtt.Properties.Settings.Default.WorkerPerformanceInfoInterval;
             // 
@@ -617,7 +631,7 @@
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label17.Location = new System.Drawing.Point(3, 65);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(116, 26);
+            this.label17.Size = new System.Drawing.Size(118, 26);
             this.label17.TabIndex = 7;
             this.label17.Text = "Disks";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -629,9 +643,9 @@
             this.cbWorkerDisks.Checked = global::WinMqtt.Properties.Settings.Default.WorkerDiskInfoEnabled;
             this.cbWorkerDisks.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerDiskInfoEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cbWorkerDisks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbWorkerDisks.Location = new System.Drawing.Point(125, 68);
+            this.cbWorkerDisks.Location = new System.Drawing.Point(127, 68);
             this.cbWorkerDisks.Name = "cbWorkerDisks";
-            this.cbWorkerDisks.Size = new System.Drawing.Size(116, 20);
+            this.cbWorkerDisks.Size = new System.Drawing.Size(118, 20);
             this.cbWorkerDisks.TabIndex = 8;
             // 
             // nWorkerDisksInterval
@@ -639,20 +653,110 @@
             this.nWorkerDisksInterval.AutoSize = true;
             this.nWorkerDisksInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "WorkerDiskInfoInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.nWorkerDisksInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nWorkerDisksInterval.Location = new System.Drawing.Point(247, 68);
+            this.nWorkerDisksInterval.Location = new System.Drawing.Point(251, 68);
             this.nWorkerDisksInterval.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
             this.nWorkerDisksInterval.Name = "nWorkerDisksInterval";
-            this.nWorkerDisksInterval.Size = new System.Drawing.Size(118, 20);
+            this.nWorkerDisksInterval.Size = new System.Drawing.Size(120, 20);
             this.nWorkerDisksInterval.TabIndex = 9;
             this.nWorkerDisksInterval.Value = global::WinMqtt.Properties.Settings.Default.WorkerDiskInfoInterval;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label19.Location = new System.Drawing.Point(251, 91);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(120, 20);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "-- not available --";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Location = new System.Drawing.Point(3, 111);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(118, 26);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Camera";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbWorkerCamera
+            // 
+            this.cbWorkerCamera.AutoSize = true;
+            this.cbWorkerCamera.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkerCamera.Checked = global::WinMqtt.Properties.Settings.Default.WorkerCameraEnabled;
+            this.cbWorkerCamera.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerCameraEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkerCamera.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkerCamera.Location = new System.Drawing.Point(127, 114);
+            this.cbWorkerCamera.Name = "cbWorkerCamera";
+            this.cbWorkerCamera.Size = new System.Drawing.Size(118, 20);
+            this.cbWorkerCamera.TabIndex = 14;
+            // 
+            // nWorkerCameraInterval
+            // 
+            this.nWorkerCameraInterval.AutoSize = true;
+            this.nWorkerCameraInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "WorkerCameraInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nWorkerCameraInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nWorkerCameraInterval.Location = new System.Drawing.Point(251, 114);
+            this.nWorkerCameraInterval.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.nWorkerCameraInterval.Name = "nWorkerCameraInterval";
+            this.nWorkerCameraInterval.Size = new System.Drawing.Size(120, 20);
+            this.nWorkerCameraInterval.TabIndex = 15;
+            this.nWorkerCameraInterval.Value = global::WinMqtt.Properties.Settings.Default.WorkerCameraInterval;
+            // 
+            // nWorkerScreenshotInterval
+            // 
+            this.nWorkerScreenshotInterval.AutoSize = true;
+            this.nWorkerScreenshotInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "WorkerCameraInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nWorkerScreenshotInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nWorkerScreenshotInterval.Location = new System.Drawing.Point(251, 140);
+            this.nWorkerScreenshotInterval.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.nWorkerScreenshotInterval.Name = "nWorkerScreenshotInterval";
+            this.nWorkerScreenshotInterval.Size = new System.Drawing.Size(120, 20);
+            this.nWorkerScreenshotInterval.TabIndex = 18;
+            this.nWorkerScreenshotInterval.Value = global::WinMqtt.Properties.Settings.Default.WorkerCameraInterval;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Location = new System.Drawing.Point(3, 137);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(118, 26);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "Screenshot";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbWorkerScreenshot
+            // 
+            this.cbWorkerScreenshot.AutoSize = true;
+            this.cbWorkerScreenshot.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbWorkerScreenshot.Checked = global::WinMqtt.Properties.Settings.Default.WorkerCameraEnabled;
+            this.cbWorkerScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerCameraEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbWorkerScreenshot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbWorkerScreenshot.Location = new System.Drawing.Point(127, 140);
+            this.cbWorkerScreenshot.Name = "cbWorkerScreenshot";
+            this.cbWorkerScreenshot.Size = new System.Drawing.Size(118, 20);
+            this.cbWorkerScreenshot.TabIndex = 17;
+            // 
             // tabSensors
             // 
-            this.tabSensors.Controls.Add(this.boxSensors);
+            this.tabSensors.Controls.Add(this.ChkComputerUsed);
+            this.tabSensors.Controls.Add(this.ChkBatterySensor);
             this.tabSensors.Location = new System.Drawing.Point(4, 22);
             this.tabSensors.Name = "tabSensors";
             this.tabSensors.Size = new System.Drawing.Size(374, 335);
@@ -660,25 +764,12 @@
             this.tabSensors.Text = "Sensors";
             this.tabSensors.UseVisualStyleBackColor = true;
             // 
-            // boxSensors
-            // 
-            this.boxSensors.AutoSize = true;
-            this.boxSensors.Controls.Add(this.ChkComputerUsed);
-            this.boxSensors.Controls.Add(this.ChkBatterySensor);
-            this.boxSensors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boxSensors.Location = new System.Drawing.Point(0, 0);
-            this.boxSensors.Name = "boxSensors";
-            this.boxSensors.Size = new System.Drawing.Size(374, 335);
-            this.boxSensors.TabIndex = 41;
-            this.boxSensors.TabStop = false;
-            this.boxSensors.Text = "Sensors (obsolete)";
-            // 
             // ChkComputerUsed
             // 
             this.ChkComputerUsed.AutoSize = true;
             this.ChkComputerUsed.Checked = global::WinMqtt.Properties.Settings.Default.SensorIsComputerUsedEnabled;
             this.ChkComputerUsed.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "SensorIsComputerUsedEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkComputerUsed.Location = new System.Drawing.Point(10, 46);
+            this.ChkComputerUsed.Location = new System.Drawing.Point(8, 26);
             this.ChkComputerUsed.Name = "ChkComputerUsed";
             this.ChkComputerUsed.Size = new System.Drawing.Size(107, 17);
             this.ChkComputerUsed.TabIndex = 5;
@@ -690,7 +781,7 @@
             this.ChkBatterySensor.AutoSize = true;
             this.ChkBatterySensor.Checked = global::WinMqtt.Properties.Settings.Default.SensorBatteryEnabled;
             this.ChkBatterySensor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "SensorBatteryEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkBatterySensor.Location = new System.Drawing.Point(10, 23);
+            this.ChkBatterySensor.Location = new System.Drawing.Point(8, 3);
             this.ChkBatterySensor.Name = "ChkBatterySensor";
             this.ChkBatterySensor.Size = new System.Drawing.Size(59, 17);
             this.ChkBatterySensor.TabIndex = 0;
@@ -699,7 +790,13 @@
             // 
             // tabPresets
             // 
-            this.tabPresets.Controls.Add(this.boxPresets);
+            this.tabPresets.Controls.Add(this.ChkProcesses);
+            this.tabPresets.Controls.Add(this.ChkMonitor);
+            this.tabPresets.Controls.Add(this.chkSuspend);
+            this.tabPresets.Controls.Add(this.chktoast);
+            this.tabPresets.Controls.Add(this.chkShutdown);
+            this.tabPresets.Controls.Add(this.chkReboot);
+            this.tabPresets.Controls.Add(this.chkHibernate);
             this.tabPresets.Location = new System.Drawing.Point(4, 22);
             this.tabPresets.Name = "tabPresets";
             this.tabPresets.Size = new System.Drawing.Size(374, 335);
@@ -707,217 +804,292 @@
             this.tabPresets.Text = "Presets";
             this.tabPresets.UseVisualStyleBackColor = true;
             // 
-            // boxPresets
-            // 
-            this.boxPresets.Controls.Add(this.ChkProcesses);
-            this.boxPresets.Controls.Add(this.ChkMonitor);
-            this.boxPresets.Controls.Add(this.chktoast);
-            this.boxPresets.Controls.Add(this.chkTTS);
-            this.boxPresets.Controls.Add(this.chkReboot);
-            this.boxPresets.Controls.Add(this.chkHibernate);
-            this.boxPresets.Controls.Add(this.chkShutdown);
-            this.boxPresets.Controls.Add(this.chkSuspend);
-            this.boxPresets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boxPresets.Location = new System.Drawing.Point(0, 0);
-            this.boxPresets.Name = "boxPresets";
-            this.boxPresets.Size = new System.Drawing.Size(374, 335);
-            this.boxPresets.TabIndex = 36;
-            this.boxPresets.TabStop = false;
-            this.boxPresets.Text = "Enable Presets";
-            // 
             // ChkProcesses
             // 
             this.ChkProcesses.AutoSize = true;
             this.ChkProcesses.Checked = global::WinMqtt.Properties.Settings.Default.CmdProcessEnabled;
             this.ChkProcesses.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdProcessEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkProcesses.Location = new System.Drawing.Point(201, 43);
+            this.ChkProcesses.Location = new System.Drawing.Point(191, 12);
             this.ChkProcesses.Name = "ChkProcesses";
             this.ChkProcesses.Size = new System.Drawing.Size(75, 17);
             this.ChkProcesses.TabIndex = 33;
             this.ChkProcesses.Text = "Processes";
             this.ChkProcesses.UseVisualStyleBackColor = true;
-            this.ChkProcesses.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
             // 
             // ChkMonitor
             // 
             this.ChkMonitor.AutoSize = true;
             this.ChkMonitor.Checked = global::WinMqtt.Properties.Settings.Default.CmdMonitorEnabled;
             this.ChkMonitor.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdMonitorEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkMonitor.Location = new System.Drawing.Point(201, 20);
+            this.ChkMonitor.Location = new System.Drawing.Point(199, 98);
             this.ChkMonitor.Name = "ChkMonitor";
             this.ChkMonitor.Size = new System.Drawing.Size(61, 17);
             this.ChkMonitor.TabIndex = 32;
             this.ChkMonitor.Text = "Monitor";
             this.ChkMonitor.UseVisualStyleBackColor = true;
-            this.ChkMonitor.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
-            // 
-            // chktoast
-            // 
-            this.chktoast.AutoSize = true;
-            this.chktoast.Checked = global::WinMqtt.Properties.Settings.Default.CmdToastEnabled;
-            this.chktoast.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdToastEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chktoast.Location = new System.Drawing.Point(134, 20);
-            this.chktoast.Name = "chktoast";
-            this.chktoast.Size = new System.Drawing.Size(53, 17);
-            this.chktoast.TabIndex = 31;
-            this.chktoast.Text = "Toast";
-            this.chktoast.UseVisualStyleBackColor = true;
-            this.chktoast.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
-            // 
-            // chkTTS
-            // 
-            this.chkTTS.AutoSize = true;
-            this.chkTTS.Checked = global::WinMqtt.Properties.Settings.Default.CmdTTSEnabled;
-            this.chkTTS.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdTTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkTTS.Location = new System.Drawing.Point(134, 43);
-            this.chkTTS.Name = "chkTTS";
-            this.chkTTS.Size = new System.Drawing.Size(47, 17);
-            this.chkTTS.TabIndex = 30;
-            this.chkTTS.Text = "TTS";
-            this.chkTTS.UseVisualStyleBackColor = true;
-            this.chkTTS.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
-            // 
-            // chkReboot
-            // 
-            this.chkReboot.AutoSize = true;
-            this.chkReboot.Checked = global::WinMqtt.Properties.Settings.Default.CmdRebootEnabled;
-            this.chkReboot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdRebootEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkReboot.Location = new System.Drawing.Point(134, 66);
-            this.chkReboot.Name = "chkReboot";
-            this.chkReboot.Size = new System.Drawing.Size(61, 17);
-            this.chkReboot.TabIndex = 18;
-            this.chkReboot.Text = "Reboot";
-            this.chkReboot.UseVisualStyleBackColor = true;
-            this.chkReboot.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
-            // 
-            // chkHibernate
-            // 
-            this.chkHibernate.AutoSize = true;
-            this.chkHibernate.Checked = global::WinMqtt.Properties.Settings.Default.CmdHibernateEnabled;
-            this.chkHibernate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdHibernateEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkHibernate.Location = new System.Drawing.Point(134, 89);
-            this.chkHibernate.Name = "chkHibernate";
-            this.chkHibernate.Size = new System.Drawing.Size(72, 17);
-            this.chkHibernate.TabIndex = 16;
-            this.chkHibernate.Text = "Hibernate";
-            this.chkHibernate.UseVisualStyleBackColor = true;
-            this.chkHibernate.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
-            // 
-            // chkShutdown
-            // 
-            this.chkShutdown.AutoSize = true;
-            this.chkShutdown.Checked = global::WinMqtt.Properties.Settings.Default.CmdShutdownEnabled;
-            this.chkShutdown.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdShutdownEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkShutdown.Location = new System.Drawing.Point(24, 88);
-            this.chkShutdown.Name = "chkShutdown";
-            this.chkShutdown.Size = new System.Drawing.Size(74, 17);
-            this.chkShutdown.TabIndex = 15;
-            this.chkShutdown.Text = "Shutdown";
-            this.chkShutdown.UseVisualStyleBackColor = true;
-            this.chkShutdown.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
             // 
             // chkSuspend
             // 
             this.chkSuspend.AutoSize = true;
             this.chkSuspend.Checked = global::WinMqtt.Properties.Settings.Default.CmdSuspendEnabled;
             this.chkSuspend.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdSuspendEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSuspend.Location = new System.Drawing.Point(24, 66);
+            this.chkSuspend.Location = new System.Drawing.Point(6, 98);
             this.chkSuspend.Name = "chkSuspend";
             this.chkSuspend.Size = new System.Drawing.Size(68, 17);
             this.chkSuspend.TabIndex = 14;
             this.chkSuspend.Text = "Suspend";
             this.chkSuspend.UseVisualStyleBackColor = true;
-            this.chkSuspend.CheckStateChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
+            // 
+            // chktoast
+            // 
+            this.chktoast.AutoSize = true;
+            this.chktoast.Checked = global::WinMqtt.Properties.Settings.Default.CmdToastEnabled;
+            this.chktoast.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdToastEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chktoast.Location = new System.Drawing.Point(132, 12);
+            this.chktoast.Name = "chktoast";
+            this.chktoast.Size = new System.Drawing.Size(53, 17);
+            this.chktoast.TabIndex = 31;
+            this.chktoast.Text = "Toast";
+            this.chktoast.UseVisualStyleBackColor = true;
+            // 
+            // chkShutdown
+            // 
+            this.chkShutdown.AutoSize = true;
+            this.chkShutdown.Checked = global::WinMqtt.Properties.Settings.Default.CmdShutdownEnabled;
+            this.chkShutdown.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdShutdownEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkShutdown.Location = new System.Drawing.Point(6, 120);
+            this.chkShutdown.Name = "chkShutdown";
+            this.chkShutdown.Size = new System.Drawing.Size(74, 17);
+            this.chkShutdown.TabIndex = 15;
+            this.chkShutdown.Text = "Shutdown";
+            this.chkShutdown.UseVisualStyleBackColor = true;
+            // 
+            // chkReboot
+            // 
+            this.chkReboot.AutoSize = true;
+            this.chkReboot.Checked = global::WinMqtt.Properties.Settings.Default.CmdRebootEnabled;
+            this.chkReboot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdRebootEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkReboot.Location = new System.Drawing.Point(116, 98);
+            this.chkReboot.Name = "chkReboot";
+            this.chkReboot.Size = new System.Drawing.Size(61, 17);
+            this.chkReboot.TabIndex = 18;
+            this.chkReboot.Text = "Reboot";
+            this.chkReboot.UseVisualStyleBackColor = true;
+            // 
+            // chkHibernate
+            // 
+            this.chkHibernate.AutoSize = true;
+            this.chkHibernate.Checked = global::WinMqtt.Properties.Settings.Default.CmdHibernateEnabled;
+            this.chkHibernate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "CmdHibernateEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkHibernate.Location = new System.Drawing.Point(116, 121);
+            this.chkHibernate.Name = "chkHibernate";
+            this.chkHibernate.Size = new System.Drawing.Size(72, 17);
+            this.chkHibernate.TabIndex = 16;
+            this.chkHibernate.Text = "Hibernate";
+            this.chkHibernate.UseVisualStyleBackColor = true;
             // 
             // tabSound
             // 
+            this.tabSound.Controls.Add(this.boxAudioOutput);
             this.tabSound.Controls.Add(this.boxTTS);
-            this.tabSound.Controls.Add(this.boxAudioDevices);
             this.tabSound.Location = new System.Drawing.Point(4, 22);
             this.tabSound.Name = "tabSound";
             this.tabSound.Size = new System.Drawing.Size(374, 335);
             this.tabSound.TabIndex = 5;
-            this.tabSound.Text = "Sound";
+            this.tabSound.Text = "Audio";
             this.tabSound.UseVisualStyleBackColor = true;
+            // 
+            // boxAudioOutput
+            // 
+            this.boxAudioOutput.AutoSize = true;
+            this.boxAudioOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.boxAudioOutput.Controls.Add(this.label22);
+            this.boxAudioOutput.Controls.Add(this.cbbVolumeDevice);
+            this.boxAudioOutput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.boxAudioOutput.Location = new System.Drawing.Point(0, 0);
+            this.boxAudioOutput.Name = "boxAudioOutput";
+            this.boxAudioOutput.Size = new System.Drawing.Size(374, 58);
+            this.boxAudioOutput.TabIndex = 60;
+            this.boxAudioOutput.TabStop = false;
+            this.boxAudioOutput.Text = "Output";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(8, 21);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(77, 13);
+            this.label22.TabIndex = 57;
+            this.label22.Text = "Volume device";
+            // 
+            // cbbVolumeDevice
+            // 
+            this.cbbVolumeDevice.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbbVolumeDevice.Enabled = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
+            this.cbbVolumeDevice.FormattingEnabled = true;
+            this.cbbVolumeDevice.Location = new System.Drawing.Point(91, 18);
+            this.cbbVolumeDevice.Name = "cbbVolumeDevice";
+            this.cbbVolumeDevice.Size = new System.Drawing.Size(275, 21);
+            this.cbbVolumeDevice.TabIndex = 56;
             // 
             // boxTTS
             // 
             this.boxTTS.AutoSize = true;
-            this.boxTTS.Controls.Add(this.chkTtsEnabled);
-            this.boxTTS.Controls.Add(this.CmdTestSpeaker);
+            this.boxTTS.Controls.Add(this.cbTTSEnabled);
+            this.boxTTS.Controls.Add(this.btnTTSTest);
             this.boxTTS.Controls.Add(this.label11);
-            this.boxTTS.Controls.Add(this.cmbSpeaker);
-            this.boxTTS.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxTTS.Location = new System.Drawing.Point(0, 59);
+            this.boxTTS.Controls.Add(this.cbbTTSSpeaker);
+            this.boxTTS.Location = new System.Drawing.Point(0, 118);
             this.boxTTS.Name = "boxTTS";
-            this.boxTTS.Size = new System.Drawing.Size(374, 83);
+            this.boxTTS.Size = new System.Drawing.Size(374, 86);
             this.boxTTS.TabIndex = 56;
             this.boxTTS.TabStop = false;
             this.boxTTS.Text = "Text-to-speech";
             // 
-            // chkTtsEnabled
+            // cbTTSEnabled
             // 
-            this.chkTtsEnabled.AutoSize = true;
-            this.chkTtsEnabled.Checked = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
-            this.chkTtsEnabled.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkTtsEnabled.Location = new System.Drawing.Point(8, 19);
-            this.chkTtsEnabled.Name = "chkTtsEnabled";
-            this.chkTtsEnabled.Size = new System.Drawing.Size(83, 17);
-            this.chkTtsEnabled.TabIndex = 59;
-            this.chkTtsEnabled.Text = "Enable TTS";
-            this.chkTtsEnabled.UseVisualStyleBackColor = true;
-            this.chkTtsEnabled.CheckedChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
+            this.cbTTSEnabled.AutoSize = true;
+            this.cbTTSEnabled.Checked = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
+            this.cbTTSEnabled.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbTTSEnabled.Location = new System.Drawing.Point(8, 19);
+            this.cbTTSEnabled.Name = "cbTTSEnabled";
+            this.cbTTSEnabled.Size = new System.Drawing.Size(83, 17);
+            this.cbTTSEnabled.TabIndex = 59;
+            this.cbTTSEnabled.Text = "Enable TTS";
+            this.cbTTSEnabled.UseVisualStyleBackColor = true;
+            this.cbTTSEnabled.CheckedChanged += new System.EventHandler(this.ChkTtsEnabled_CheckedChanged);
             // 
-            // CmdTestSpeaker
+            // btnTTSTest
             // 
-            this.CmdTestSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.CmdTestSpeaker.Enabled = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
-            this.CmdTestSpeaker.Location = new System.Drawing.Point(258, 40);
-            this.CmdTestSpeaker.Name = "CmdTestSpeaker";
-            this.CmdTestSpeaker.Size = new System.Drawing.Size(42, 24);
-            this.CmdTestSpeaker.TabIndex = 58;
-            this.CmdTestSpeaker.Text = "test";
-            this.CmdTestSpeaker.UseVisualStyleBackColor = true;
-            this.CmdTestSpeaker.Click += new System.EventHandler(this.CmdTestSpeaker_Click);
+            this.btnTTSTest.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.btnTTSTest.Enabled = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
+            this.btnTTSTest.Location = new System.Drawing.Point(258, 43);
+            this.btnTTSTest.Name = "btnTTSTest";
+            this.btnTTSTest.Size = new System.Drawing.Size(42, 24);
+            this.btnTTSTest.TabIndex = 58;
+            this.btnTTSTest.Text = "test";
+            this.btnTTSTest.UseVisualStyleBackColor = true;
+            this.btnTTSTest.Click += new System.EventHandler(this.btnTTSTest_Click);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 45);
+            this.label11.Location = new System.Drawing.Point(8, 48);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 13);
             this.label11.TabIndex = 57;
             this.label11.Text = "TTS speaker";
             // 
-            // cmbSpeaker
+            // cbbTTSSpeaker
             // 
-            this.cmbSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbSpeaker.Enabled = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
-            this.cmbSpeaker.FormattingEnabled = true;
-            this.cmbSpeaker.Location = new System.Drawing.Point(83, 42);
-            this.cmbSpeaker.Name = "cmbSpeaker";
-            this.cmbSpeaker.Size = new System.Drawing.Size(166, 21);
-            this.cmbSpeaker.TabIndex = 56;
+            this.cbbTTSSpeaker.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "TTSEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.cbbTTSSpeaker.Enabled = global::WinMqtt.Properties.Settings.Default.TTSEnabled;
+            this.cbbTTSSpeaker.FormattingEnabled = true;
+            this.cbbTTSSpeaker.Location = new System.Drawing.Point(83, 45);
+            this.cbbTTSSpeaker.Name = "cbbTTSSpeaker";
+            this.cbbTTSSpeaker.Size = new System.Drawing.Size(166, 21);
+            this.cbbTTSSpeaker.TabIndex = 56;
             // 
-            // boxAudioDevices
+            // tabVideo
             // 
-            this.boxAudioDevices.AutoSize = true;
-            this.boxAudioDevices.Controls.Add(this.cmbAudioOutput);
-            this.boxAudioDevices.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxAudioDevices.Location = new System.Drawing.Point(0, 0);
-            this.boxAudioDevices.Name = "boxAudioDevices";
-            this.boxAudioDevices.Size = new System.Drawing.Size(374, 59);
-            this.boxAudioDevices.TabIndex = 52;
-            this.boxAudioDevices.TabStop = false;
-            this.boxAudioDevices.Text = "Audio device";
+            this.tabVideo.Controls.Add(this.boxWebcam);
+            this.tabVideo.Controls.Add(this.boxScreenshot);
+            this.tabVideo.Location = new System.Drawing.Point(4, 22);
+            this.tabVideo.Name = "tabVideo";
+            this.tabVideo.Size = new System.Drawing.Size(374, 335);
+            this.tabVideo.TabIndex = 3;
+            this.tabVideo.Text = "Video";
+            this.tabVideo.UseVisualStyleBackColor = true;
             // 
-            // cmbAudioOutput
+            // boxWebcam
             // 
-            this.cmbAudioOutput.FormattingEnabled = true;
-            this.cmbAudioOutput.Location = new System.Drawing.Point(8, 19);
-            this.cmbAudioOutput.Name = "cmbAudioOutput";
-            this.cmbAudioOutput.Size = new System.Drawing.Size(166, 21);
-            this.cmbAudioOutput.TabIndex = 51;
+            this.boxWebcam.AutoSize = true;
+            this.boxWebcam.Controls.Add(this.label20);
+            this.boxWebcam.Controls.Add(this.CmdWebCamTest);
+            this.boxWebcam.Controls.Add(this.cbbCameraDevice);
+            this.boxWebcam.Dock = System.Windows.Forms.DockStyle.Top;
+            this.boxWebcam.Location = new System.Drawing.Point(0, 83);
+            this.boxWebcam.Name = "boxWebcam";
+            this.boxWebcam.Size = new System.Drawing.Size(374, 89);
+            this.boxWebcam.TabIndex = 56;
+            this.boxWebcam.TabStop = false;
+            this.boxWebcam.Text = "Webcam";
+            // 
+            // label20
+            // 
+            this.label20.Location = new System.Drawing.Point(10, 16);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(85, 26);
+            this.label20.TabIndex = 56;
+            this.label20.Text = "Camera device";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CmdWebCamTest
+            // 
+            this.CmdWebCamTest.Location = new System.Drawing.Point(101, 46);
+            this.CmdWebCamTest.Name = "CmdWebCamTest";
+            this.CmdWebCamTest.Size = new System.Drawing.Size(80, 24);
+            this.CmdWebCamTest.TabIndex = 55;
+            this.CmdWebCamTest.Text = "Test";
+            this.CmdWebCamTest.UseVisualStyleBackColor = true;
+            this.CmdWebCamTest.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // cbbCameraDevice
+            // 
+            this.cbbCameraDevice.FormattingEnabled = true;
+            this.cbbCameraDevice.Location = new System.Drawing.Point(101, 19);
+            this.cbbCameraDevice.Name = "cbbCameraDevice";
+            this.cbbCameraDevice.Size = new System.Drawing.Size(170, 21);
+            this.cbbCameraDevice.TabIndex = 54;
+            // 
+            // boxScreenshot
+            // 
+            this.boxScreenshot.AutoSize = true;
+            this.boxScreenshot.Controls.Add(this.nScreenshotInterval);
+            this.boxScreenshot.Controls.Add(this.label5);
+            this.boxScreenshot.Controls.Add(this.chkScreenshot);
+            this.boxScreenshot.Dock = System.Windows.Forms.DockStyle.Top;
+            this.boxScreenshot.Location = new System.Drawing.Point(0, 0);
+            this.boxScreenshot.Name = "boxScreenshot";
+            this.boxScreenshot.Size = new System.Drawing.Size(374, 83);
+            this.boxScreenshot.TabIndex = 53;
+            this.boxScreenshot.TabStop = false;
+            this.boxScreenshot.Text = "Screenshot";
+            // 
+            // nScreenshotInterval
+            // 
+            this.nScreenshotInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "ScreenshotInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.nScreenshotInterval.Location = new System.Drawing.Point(106, 44);
+            this.nScreenshotInterval.Maximum = new decimal(new int[] {
+            86400000,
+            0,
+            0,
+            0});
+            this.nScreenshotInterval.Name = "nScreenshotInterval";
+            this.nScreenshotInterval.Size = new System.Drawing.Size(165, 20);
+            this.nScreenshotInterval.TabIndex = 34;
+            this.nScreenshotInterval.Value = global::WinMqtt.Properties.Settings.Default.WorkerScreenshotInterval;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(15, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 26);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Inverval (secs.)";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chkScreenshot
+            // 
+            this.chkScreenshot.AutoSize = true;
+            this.chkScreenshot.Checked = global::WinMqtt.Properties.Settings.Default.WorkerScreenshotEnable;
+            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "ScreenshotEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkScreenshot.Location = new System.Drawing.Point(18, 19);
+            this.chkScreenshot.Name = "chkScreenshot";
+            this.chkScreenshot.Size = new System.Drawing.Size(59, 17);
+            this.chkScreenshot.TabIndex = 0;
+            this.chkScreenshot.Text = "Enable";
+            this.chkScreenshot.UseVisualStyleBackColor = true;
             // 
             // tabApplicaiton
             // 
@@ -955,206 +1127,6 @@
             this.chkStartUp.UseVisualStyleBackColor = true;
             this.chkStartUp.CheckedChanged += new System.EventHandler(this.ChkStartUp_CheckedChanged);
             // 
-            // tabCamera
-            // 
-            this.tabCamera.Controls.Add(this.boxWebcam);
-            this.tabCamera.Controls.Add(this.boxSlideshow);
-            this.tabCamera.Controls.Add(this.boxScreenshot);
-            this.tabCamera.Location = new System.Drawing.Point(4, 22);
-            this.tabCamera.Name = "tabCamera";
-            this.tabCamera.Size = new System.Drawing.Size(374, 335);
-            this.tabCamera.TabIndex = 3;
-            this.tabCamera.Text = "Camera";
-            this.tabCamera.UseVisualStyleBackColor = true;
-            // 
-            // boxWebcam
-            // 
-            this.boxWebcam.AutoSize = true;
-            this.boxWebcam.Controls.Add(this.ChkEnableWebCamPublish);
-            this.boxWebcam.Controls.Add(this.CmdWebCamTest);
-            this.boxWebcam.Controls.Add(this.cmbWebcam);
-            this.boxWebcam.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxWebcam.Location = new System.Drawing.Point(0, 168);
-            this.boxWebcam.Name = "boxWebcam";
-            this.boxWebcam.Size = new System.Drawing.Size(374, 69);
-            this.boxWebcam.TabIndex = 56;
-            this.boxWebcam.TabStop = false;
-            this.boxWebcam.Text = "Webcam";
-            // 
-            // ChkEnableWebCamPublish
-            // 
-            this.ChkEnableWebCamPublish.AutoSize = true;
-            this.ChkEnableWebCamPublish.Checked = global::WinMqtt.Properties.Settings.Default.WebCamPublishEnabled;
-            this.ChkEnableWebCamPublish.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkEnableWebCamPublish.Location = new System.Drawing.Point(15, 29);
-            this.ChkEnableWebCamPublish.Name = "ChkEnableWebCamPublish";
-            this.ChkEnableWebCamPublish.Size = new System.Drawing.Size(59, 17);
-            this.ChkEnableWebCamPublish.TabIndex = 56;
-            this.ChkEnableWebCamPublish.Text = "Enable";
-            this.ChkEnableWebCamPublish.UseVisualStyleBackColor = true;
-            this.ChkEnableWebCamPublish.CheckedChanged += new System.EventHandler(this.ChkEnableWebCamPublish_CheckedChanged);
-            // 
-            // CmdWebCamTest
-            // 
-            this.CmdWebCamTest.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.CmdWebCamTest.Enabled = global::WinMqtt.Properties.Settings.Default.WebCamPublishEnabled;
-            this.CmdWebCamTest.Location = new System.Drawing.Point(264, 26);
-            this.CmdWebCamTest.Name = "CmdWebCamTest";
-            this.CmdWebCamTest.Size = new System.Drawing.Size(80, 24);
-            this.CmdWebCamTest.TabIndex = 55;
-            this.CmdWebCamTest.Text = "Test";
-            this.CmdWebCamTest.UseVisualStyleBackColor = true;
-            this.CmdWebCamTest.Visible = false;
-            this.CmdWebCamTest.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // cmbWebcam
-            // 
-            this.cmbWebcam.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::WinMqtt.Properties.Settings.Default, "WebCamPublishEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cmbWebcam.Enabled = global::WinMqtt.Properties.Settings.Default.WebCamPublishEnabled;
-            this.cmbWebcam.FormattingEnabled = true;
-            this.cmbWebcam.Location = new System.Drawing.Point(88, 29);
-            this.cmbWebcam.Name = "cmbWebcam";
-            this.cmbWebcam.Size = new System.Drawing.Size(170, 21);
-            this.cmbWebcam.TabIndex = 54;
-            // 
-            // boxSlideshow
-            // 
-            this.boxSlideshow.AutoSize = true;
-            this.boxSlideshow.Controls.Add(this.CmdSelectSlideShowPath);
-            this.boxSlideshow.Controls.Add(this.label12);
-            this.boxSlideshow.Controls.Add(this.ChkSlideshow);
-            this.boxSlideshow.Controls.Add(this.txtSlideshowFolder);
-            this.boxSlideshow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxSlideshow.Location = new System.Drawing.Point(0, 83);
-            this.boxSlideshow.Name = "boxSlideshow";
-            this.boxSlideshow.Size = new System.Drawing.Size(374, 85);
-            this.boxSlideshow.TabIndex = 54;
-            this.boxSlideshow.TabStop = false;
-            this.boxSlideshow.Text = "Slideshow";
-            // 
-            // CmdSelectSlideShowPath
-            // 
-            this.CmdSelectSlideShowPath.Location = new System.Drawing.Point(264, 42);
-            this.CmdSelectSlideShowPath.Name = "CmdSelectSlideShowPath";
-            this.CmdSelectSlideShowPath.Size = new System.Drawing.Size(80, 24);
-            this.CmdSelectSlideShowPath.TabIndex = 52;
-            this.CmdSelectSlideShowPath.Text = "Browse";
-            this.CmdSelectSlideShowPath.UseVisualStyleBackColor = true;
-            this.CmdSelectSlideShowPath.Click += new System.EventHandler(this.CmdSelectSlideShowPath_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 48);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 13);
-            this.label12.TabIndex = 51;
-            this.label12.Text = "Filepath";
-            // 
-            // ChkSlideshow
-            // 
-            this.ChkSlideshow.AutoSize = true;
-            this.ChkSlideshow.Checked = global::WinMqtt.Properties.Settings.Default.SlideshowEnabled;
-            this.ChkSlideshow.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "SlideshowEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ChkSlideshow.Location = new System.Drawing.Point(15, 19);
-            this.ChkSlideshow.Name = "ChkSlideshow";
-            this.ChkSlideshow.Size = new System.Drawing.Size(59, 17);
-            this.ChkSlideshow.TabIndex = 50;
-            this.ChkSlideshow.Text = "Enable";
-            this.ChkSlideshow.UseVisualStyleBackColor = true;
-            // 
-            // txtSlideshowFolder
-            // 
-            this.txtSlideshowFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::WinMqtt.Properties.Settings.Default, "SlideshowFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtSlideshowFolder.Location = new System.Drawing.Point(91, 44);
-            this.txtSlideshowFolder.Name = "txtSlideshowFolder";
-            this.txtSlideshowFolder.Size = new System.Drawing.Size(167, 20);
-            this.txtSlideshowFolder.TabIndex = 49;
-            this.txtSlideshowFolder.Text = global::WinMqtt.Properties.Settings.Default.SlideshowFolder;
-            // 
-            // boxScreenshot
-            // 
-            this.boxScreenshot.AutoSize = true;
-            this.boxScreenshot.Controls.Add(this.nScreenshotInterval);
-            this.boxScreenshot.Controls.Add(this.label5);
-            this.boxScreenshot.Controls.Add(this.chkScreenshot);
-            this.boxScreenshot.Dock = System.Windows.Forms.DockStyle.Top;
-            this.boxScreenshot.Location = new System.Drawing.Point(0, 0);
-            this.boxScreenshot.Name = "boxScreenshot";
-            this.boxScreenshot.Size = new System.Drawing.Size(374, 83);
-            this.boxScreenshot.TabIndex = 53;
-            this.boxScreenshot.TabStop = false;
-            this.boxScreenshot.Text = "Screenshot";
-            // 
-            // nScreenshotInterval
-            // 
-            this.nScreenshotInterval.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::WinMqtt.Properties.Settings.Default, "ScreenshotInterval", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.nScreenshotInterval.Location = new System.Drawing.Point(106, 44);
-            this.nScreenshotInterval.Maximum = new decimal(new int[] {
-            86400000,
-            0,
-            0,
-            0});
-            this.nScreenshotInterval.Name = "nScreenshotInterval";
-            this.nScreenshotInterval.Size = new System.Drawing.Size(165, 20);
-            this.nScreenshotInterval.TabIndex = 34;
-            this.nScreenshotInterval.Value = global::WinMqtt.Properties.Settings.Default.ScreenshotInterval;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(15, 39);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 26);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "Inverval (secs.)";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // chkScreenshot
-            // 
-            this.chkScreenshot.AutoSize = true;
-            this.chkScreenshot.Checked = global::WinMqtt.Properties.Settings.Default.ScreenshotEnable;
-            this.chkScreenshot.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "ScreenshotEnable", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkScreenshot.Location = new System.Drawing.Point(18, 19);
-            this.chkScreenshot.Name = "chkScreenshot";
-            this.chkScreenshot.Size = new System.Drawing.Size(59, 17);
-            this.chkScreenshot.TabIndex = 0;
-            this.chkScreenshot.Text = "Enable";
-            this.chkScreenshot.UseVisualStyleBackColor = true;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Location = new System.Drawing.Point(3, 91);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(116, 20);
-            this.label18.TabIndex = 10;
-            this.label18.Text = "Media player";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cbWorkerMediaPlayer
-            // 
-            this.cbWorkerMediaPlayer.AutoSize = true;
-            this.cbWorkerMediaPlayer.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cbWorkerMediaPlayer.Checked = global::WinMqtt.Properties.Settings.Default.WorkerMediaPlayerEnabled;
-            this.cbWorkerMediaPlayer.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::WinMqtt.Properties.Settings.Default, "WorkerMediaPlayerEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.cbWorkerMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbWorkerMediaPlayer.Location = new System.Drawing.Point(125, 94);
-            this.cbWorkerMediaPlayer.Name = "cbWorkerMediaPlayer";
-            this.cbWorkerMediaPlayer.Size = new System.Drawing.Size(116, 14);
-            this.cbWorkerMediaPlayer.TabIndex = 11;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(247, 91);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(118, 20);
-            this.label19.TabIndex = 12;
-            this.label19.Text = "-- not available --";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1180,36 +1152,31 @@
             ((System.ComponentModel.ISupportInitialize)(this.nMqttPort)).EndInit();
             this.tabWorkers.ResumeLayout(false);
             this.tabWorkers.PerformLayout();
-            this.boxWorkers.ResumeLayout(false);
-            this.boxWorkers.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nWorkerVolumeInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nWorkerPerformanceInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nWorkerDisksInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerCameraInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nWorkerScreenshotInterval)).EndInit();
             this.tabSensors.ResumeLayout(false);
             this.tabSensors.PerformLayout();
-            this.boxSensors.ResumeLayout(false);
-            this.boxSensors.PerformLayout();
             this.tabPresets.ResumeLayout(false);
-            this.boxPresets.ResumeLayout(false);
-            this.boxPresets.PerformLayout();
+            this.tabPresets.PerformLayout();
             this.tabSound.ResumeLayout(false);
             this.tabSound.PerformLayout();
+            this.boxAudioOutput.ResumeLayout(false);
+            this.boxAudioOutput.PerformLayout();
             this.boxTTS.ResumeLayout(false);
             this.boxTTS.PerformLayout();
-            this.boxAudioDevices.ResumeLayout(false);
-            this.tabApplicaiton.ResumeLayout(false);
-            this.tabApplicaiton.PerformLayout();
-            this.tabCamera.ResumeLayout(false);
-            this.tabCamera.PerformLayout();
+            this.tabVideo.ResumeLayout(false);
+            this.tabVideo.PerformLayout();
             this.boxWebcam.ResumeLayout(false);
-            this.boxWebcam.PerformLayout();
-            this.boxSlideshow.ResumeLayout(false);
-            this.boxSlideshow.PerformLayout();
             this.boxScreenshot.ResumeLayout(false);
             this.boxScreenshot.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nScreenshotInterval)).EndInit();
+            this.tabApplicaiton.ResumeLayout(false);
+            this.tabApplicaiton.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1217,7 +1184,7 @@
         #endregion
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabConnection;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnTestMqttConnection;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
@@ -1235,36 +1202,25 @@
         private System.Windows.Forms.CheckBox ChkProcesses;
         private System.Windows.Forms.CheckBox ChkMonitor;
         private System.Windows.Forms.CheckBox chktoast;
-        private System.Windows.Forms.CheckBox chkTTS;
         private System.Windows.Forms.CheckBox chkReboot;
         private System.Windows.Forms.CheckBox chkHibernate;
         private System.Windows.Forms.CheckBox chkShutdown;
         private System.Windows.Forms.CheckBox chkSuspend;
-        private System.Windows.Forms.TabPage tabCamera;
+        private System.Windows.Forms.TabPage tabVideo;
         private System.Windows.Forms.CheckBox chkScreenshot;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.CheckBox ChkSlideshow;
-        private System.Windows.Forms.TextBox txtSlideshowFolder;
         private System.Windows.Forms.TabPage tabSound;
-        private System.Windows.Forms.Button CmdTestSpeaker;
+        private System.Windows.Forms.Button btnTTSTest;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cmbSpeaker;
-        private System.Windows.Forms.ComboBox cmbAudioOutput;
+        private System.Windows.Forms.ComboBox cbbTTSSpeaker;
         private System.Windows.Forms.TabPage tabApplicaiton;
         private System.Windows.Forms.CheckBox chkMinimizeToTray;
         private System.Windows.Forms.CheckBox chkStartUp;
-        private System.Windows.Forms.ComboBox cmbWebcam;
+        private System.Windows.Forms.ComboBox cbbCameraDevice;
         private System.Windows.Forms.Button CmdWebCamTest;
-        private System.Windows.Forms.CheckBox ChkEnableWebCamPublish;
-        private System.Windows.Forms.CheckBox chkTtsEnabled;
-        private System.Windows.Forms.Button CmdSelectSlideShowPath;
+        private System.Windows.Forms.CheckBox cbTTSEnabled;
         private System.Windows.Forms.GroupBox boxWebcam;
-        private System.Windows.Forms.GroupBox boxSlideshow;
         private System.Windows.Forms.GroupBox boxScreenshot;
-        private System.Windows.Forms.GroupBox boxPresets;
-        private System.Windows.Forms.GroupBox boxSensors;
         private System.Windows.Forms.GroupBox boxMqttClient;
-        private System.Windows.Forms.GroupBox boxAudioDevices;
         private System.Windows.Forms.GroupBox boxTTS;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox boxHomeAssistantDiscovery;
@@ -1279,7 +1235,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage tabWorkers;
-        private System.Windows.Forms.GroupBox boxWorkers;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label13;
@@ -1296,5 +1251,15 @@
         private System.Windows.Forms.CheckBox cbWorkerMediaPlayer;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox cbWorkerCamera;
+        private System.Windows.Forms.NumericUpDown nWorkerCameraInterval;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown nWorkerScreenshotInterval;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.CheckBox cbWorkerScreenshot;
+        private System.Windows.Forms.GroupBox boxAudioOutput;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cbbVolumeDevice;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Speech.Synthesis;
-using System.Globalization;
 
 namespace WinMqtt.HardwareSensors
 {
@@ -8,19 +7,20 @@ namespace WinMqtt.HardwareSensors
     {
         public static List<string> GetSpeakers()
         {
-            List<string> result = new List<string>() ;
-            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-                foreach (InstalledVoice i in synthesizer.GetInstalledVoices(CultureInfo.CurrentCulture))
-                {
-                    result.Add((i.VoiceInfo.Name));
-                }
+            var result = new List<string>() ;
+            var synthesizer = new SpeechSynthesizer();
+            foreach (var i in synthesizer.GetInstalledVoices())
+                result.Add((i.VoiceInfo.Name));
+
+            synthesizer.Dispose();
             return result;
         }
         public static void Speak(string Text,string Device)
         {
-            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+            var synthesizer = new SpeechSynthesizer();
             synthesizer.SelectVoice(Device);
             synthesizer.Speak(Text);
+            synthesizer.Dispose();
         }
     }
 }

@@ -13,10 +13,8 @@ namespace WinMqtt.Workers
         protected override bool IsEnabled => Utils.Settings.WorkerDiskInfoEnabled;
         protected override decimal UpdateInterval => Utils.Settings.WorkerDiskInfoInterval;
 
-        public override List<MqttMessage> PrepareDiscoveryMessages()
+        protected override List<MqttMessage> PrepareDiscoveryMessages()
         {
-            if (!IsEnabled) return null;
-
             var result = new List<MqttMessage>();
 
             foreach (var drive in Drives)
@@ -54,10 +52,8 @@ namespace WinMqtt.Workers
         }
 
         const long BYTES_TO_GBYTES = 1024 * 1024 * 1024;
-        public override List<MqttMessage> PrepareUpdateStatusMessages()
+        protected override List<MqttMessage> PrepareUpdateStatusMessages()
         {
-            if (!IsEnabled) return null;
-
             var result = new List<MqttMessage>();
 
             foreach (var drive in Drives)

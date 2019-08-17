@@ -10,40 +10,10 @@ using System.Windows.Forms;
 
 namespace WinMqtt.Mqtt
 {
-    public class MqttPublish : IMqttPublish
+    public class MqttPublish
     {
         private readonly string GLocalScreetshotFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "primonitor.jpg");
         private readonly string GLocalWebcamFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "webcam.png");
-
-        public MqttPublish()
-        {
-        }
-
-        public async void SendDiscoveryInfo()
-        {
-            List<Task> task = new List<Task>();
-
-            if (Mqtt.IsConnected == false)
-                Mqtt.Connect();
-
-            if (Mqtt.IsConnected)
-            {
-                foreach (var kvp in Mqtt.Workers)
-                {
-                    task.Add(Task.Run(() =>
-                    {
-                        var worker = kvp.Value;
-                        var msgs = worker.PrepareDiscoveryMessages();
-                        if (msgs == null) return;
-                        foreach (var msg in msgs)
-                            Mqtt.Publish(msg.Topic, JsonConvert.SerializeObject(msg.Payload), msg.Retain);
-                    }));
-                }
-                return;
-            }
-
-            await Task.WhenAll(task).ConfigureAwait(false);
-        }
 
         public async void SendWorkerUpdates()
         {
@@ -58,14 +28,6 @@ namespace WinMqtt.Mqtt
             {
                 if (Utils.Settings.SensorIsComputerUsedEnabled)
                     task.Add(Task.Run(() => PublishStatus()));
-                if (Utils.Settings.SlideshowEnabled)
-                {
-                    if (Utils.Settings.SlideshowFolder.Length > 5)
-                    {
-                        string folder = Utils.Settings.SlideshowFolder;
-                        task.Add(Task.Run(() => MqttCameraSlide(folder)));
-                    }
-                }
                 if (Utils.Settings.SensorBatteryEnabled)
                     task.Add(Task.Run(() => PublishBattery()));
                 if (Utils.Settings.WebCamPublishEnabled)
@@ -121,14 +83,6 @@ namespace WinMqtt.Mqtt
                 Mqtt.Publish(new MqttImageMessage("webcamera", GLocalWebcamFile));
             else
                 MessageBox.Show($"Failed to save image");
-        }
-
-        private void MqttCameraSlide(string folder)
-        {
-            var rand = new Random();
-            var files = Directory.GetFiles(folder, "*.jpg");
-            string topic = "slideshow";
-            //Mqtt.PublishByte(topic, File.ReadAllBytes(files[rand.Next(files.Length)]));
         }
     }
 }

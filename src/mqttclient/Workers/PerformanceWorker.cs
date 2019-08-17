@@ -13,10 +13,8 @@ namespace WinMqtt.Workers
         protected override bool IsEnabled => Utils.Settings.WorkerPerformanceInfoEnabled;
         protected override decimal UpdateInterval => Utils.Settings.WorkerPerformanceInfoInterval;
 
-        public override List<MqttMessage> PrepareDiscoveryMessages()
+        protected override List<MqttMessage> PrepareDiscoveryMessages()
         {
-            if (!IsEnabled) return null;
-
             var result = new List<MqttMessage>();
 
             foreach (var attr in ATTRIBUTES)
@@ -46,14 +44,13 @@ namespace WinMqtt.Workers
             return result;
         }
 
-        public override List<MqttMessage> PrepareUpdateStatusMessages()
+        protected override List<MqttMessage> PrepareUpdateStatusMessages()
         {
-            if (!IsEnabled) return null;
-
-            var result = new List<MqttMessage>();
-
-            result.Add(new MqttMessage(StateTopic("cpu"), GetCpuProcessorTime()));
-            result.Add(new MqttMessage(StateTopic("ram"), GetFreeMemory()));
+            var result = new List<MqttMessage>
+            {
+                new MqttMessage(StateTopic("cpu"), GetCpuProcessorTime()),
+                new MqttMessage(StateTopic("ram"), GetFreeMemory())
+            };
 
             return result;
         }
@@ -70,14 +67,16 @@ namespace WinMqtt.Workers
         }
 
         // If having errors - try this: https://stackoverflow.com/a/24404034
-        private decimal GetCpuProcessorTime()
+        private double GetCpuProcessorTime()
         {
             var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             cpuCounter.NextValue();
 
             Thread.Sleep(1000);
 
-            return Math.Round(Convert.ToDecimal(cpuCounter.NextValue() + ""), 2);
+            var cpuTime = Math.Round(cpuCounter.NextValue().Convert<double>(), 2);
+            cpuCounter.Dispose();
+            return cpuTime;
         }
     }
 }

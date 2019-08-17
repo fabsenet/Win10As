@@ -86,24 +86,24 @@ namespace WinMqtt.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ScreenshotEnable {
+        public bool WorkerScreenshotEnable {
             get {
-                return ((bool)(this["ScreenshotEnable"]));
+                return ((bool)(this["WorkerScreenshotEnable"]));
             }
             set {
-                this["ScreenshotEnable"] = value;
+                this["WorkerScreenshotEnable"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public decimal ScreenshotInterval {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public decimal WorkerScreenshotInterval {
             get {
-                return ((decimal)(this["ScreenshotInterval"]));
+                return ((decimal)(this["WorkerScreenshotInterval"]));
             }
             set {
-                this["ScreenshotInterval"] = value;
+                this["WorkerScreenshotInterval"] = value;
             }
         }
         
@@ -158,30 +158,6 @@ namespace WinMqtt.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SlideshowEnabled {
-            get {
-                return ((bool)(this["SlideshowEnabled"]));
-            }
-            set {
-                this["SlideshowEnabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SlideshowFolder {
-            get {
-                return ((string)(this["SlideshowFolder"]));
-            }
-            set {
-                this["SlideshowFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ApplicationRunAtStart {
             get {
                 return ((bool)(this["ApplicationRunAtStart"]));
@@ -206,24 +182,24 @@ namespace WinMqtt.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool WebCamPublishEnabled {
+        public bool WorkerCameraEnabled {
             get {
-                return ((bool)(this["WebCamPublishEnabled"]));
+                return ((bool)(this["WorkerCameraEnabled"]));
             }
             set {
-                this["WebCamPublishEnabled"] = value;
+                this["WorkerCameraEnabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string WebCamPublishDestination {
+        public string WorkerCameraDevice {
             get {
-                return ((string)(this["WebCamPublishDestination"]));
+                return ((string)(this["WorkerCameraDevice"]));
             }
             set {
-                this["WebCamPublishDestination"] = value;
+                this["WorkerCameraDevice"] = value;
             }
         }
         
@@ -284,18 +260,6 @@ namespace WinMqtt.Properties {
             }
             set {
                 this["CmdHibernateEnabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CmdTTSEnabled {
-            get {
-                return ((bool)(this["CmdTTSEnabled"]));
-            }
-            set {
-                this["CmdTTSEnabled"] = value;
             }
         }
         
@@ -452,6 +416,54 @@ namespace WinMqtt.Properties {
             }
             set {
                 this["WorkerMediaPlayerEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public decimal WorkerCameraInterval {
+            get {
+                return ((decimal)(this["WorkerCameraInterval"]));
+            }
+            set {
+                this["WorkerCameraInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WorkerScreenshotSaveLocation {
+            get {
+                return ((string)(this["WorkerScreenshotSaveLocation"]));
+            }
+            set {
+                this["WorkerScreenshotSaveLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WorkerCameraSaveLocation {
+            get {
+                return ((string)(this["WorkerCameraSaveLocation"]));
+            }
+            set {
+                this["WorkerCameraSaveLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WorkerVolumeControlDevice {
+            get {
+                return ((string)(this["WorkerVolumeControlDevice"]));
+            }
+            set {
+                this["WorkerVolumeControlDevice"] = value;
             }
         }
     }

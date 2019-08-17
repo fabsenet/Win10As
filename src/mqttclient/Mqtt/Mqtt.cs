@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Speech.Synthesis;
 using System.Text;
-using System.Windows.Forms;
-using WinMqtt.HardwareSensors;
 using WinMqtt.Workers;
 using Newtonsoft.Json;
 using uPLibrary.Networking.M2Mqtt;
@@ -114,7 +110,7 @@ namespace WinMqtt.Mqtt
                 payload = (byte[])message.Payload;
             else
             {
-                var strPayload = "";
+                string strPayload;
                 if (message.Payload is string)
                     strPayload = message.Payload + "";
                 else

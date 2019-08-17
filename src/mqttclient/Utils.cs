@@ -43,27 +43,26 @@ namespace WinMqtt
 
             var type = typeof(T);
 
-            if (
-                type == typeof(float) || 
-                type == typeof(double) || 
-                type == typeof(decimal)
-            )
+            if (type == typeof(float) || type == typeof(double) || type == typeof(decimal))
             {
                 if (Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
-                    value = ($"{value}").Replace(".", ",");
+                    value = $"{value}".Replace(".", ",");
                 else if (Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
-                    value = ($"{value}").Replace(",", ".");
+                    value = $"{value}".Replace(",", ".");
             }
-            else if (
-                type == typeof(short) ||
-                type == typeof(ushort) ||
-                type == typeof(int) ||
-                type == typeof(uint) ||
-                type == typeof(long) ||
-                type == typeof(ulong)
-            )
+            else if (type == typeof(short) || type == typeof(ushort) ||
+                type == typeof(int) || type == typeof(uint) ||
+                type == typeof(long) || type == typeof(ulong))
             {
                 value = value.Convert<float>();
+            }
+            else if (type == typeof(bool))
+            {
+                var tmp = $"{value}".ToLower();
+                if (new[] { "1", "yes", "on" }.Contains(tmp))
+                    return (T)(object)true;
+                else if (new[] { "0", "no", "off" }.Contains(tmp))
+                    return (T)(object)false;
             }
             return (T)System.Convert.ChangeType(value, type);
         }

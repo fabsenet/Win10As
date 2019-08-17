@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Forms;
 using uPLibrary.Networking.M2Mqtt;
-using Win10SensorLibrary.HardwareSensors;
+using WinMqtt.Workers;
 
 namespace WinMqtt.Forms
 {
@@ -21,122 +21,76 @@ namespace WinMqtt.Forms
 
             Utils.Settings.MqttTopic = topic;
 
-            if (Utils.Settings.TTSEnabled)
-            {
-                cmbSpeaker.DataSource = HardwareSensors.Speaker.GetSpeakers();
-                cmbSpeaker.SelectedItem = Utils.Settings.TTSSpeaker;
-            }
-
-            if (ChkEnableWebCamPublish.Checked)
-            {
-                LoadCameraDevices();
-                if (Convert.ToString(Utils.Settings.WebCamPublishDestination, CultureInfo.CurrentCulture).Length > 0)
-                    cmbWebcam.SelectedText = Convert.ToString(Utils.Settings.WebCamPublishDestination, CultureInfo.CurrentCulture);
-            }
-
-            LoadAudioDevices();
+            cbbVolumeDevice.DataSource = Audio.GetDevices();
+            cbbVolumeDevice.SelectedItem = Utils.Settings.WorkerVolumeControlDevice;
+            cbbCameraDevice.DataSource = Camera.GetDevices();
+            cbbCameraDevice.SelectedItem = Utils.Settings.WorkerCameraDevice;
+            cbbTTSSpeaker.DataSource = HardwareSensors.Speaker.GetSpeakers();
+            cbbTTSSpeaker.SelectedItem = Utils.Settings.TTSSpeaker;
         }
 
-        private void CmdTestSpeaker_Click(object sender, EventArgs e)
+        private void SaveComboBoxSettings()
         {
-            if (cmbSpeaker.SelectedItem.ToString().Length > 0)
-            {
-                HardwareSensors.Speaker.Speak("testing", cmbSpeaker.SelectedItem.ToString());
-            }
+            Utils.Settings.TTSSpeaker = $"{cbbTTSSpeaker.SelectedItem}";
+            Utils.Settings.WorkerCameraDevice = $"{cbbCameraDevice.SelectedItem}";
+            Utils.Settings.WorkerVolumeControlDevice = $"{cbbVolumeDevice.SelectedItem}";
+
+            Utils.Settings.Save();
+        }
+
+        private void btnTTSTest_Click(object sender, EventArgs e)
+        {
+            if ($"{cbbTTSSpeaker.SelectedItem}" != "")
+                HardwareSensors.Speaker.Speak("Test", $"{cbbTTSSpeaker.SelectedItem}");
         }
 
         private void ChkStartUp_CheckedChanged(object sender, EventArgs e)
         {
-            {
-                Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            var rk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-                if (chkStartUp.Checked)
-                    rk.SetValue(Utils.AppId, Application.ExecutablePath.ToString(CultureInfo.CurrentCulture));
-                else
-                    rk.DeleteValue(Utils.AppId, false);
-            }
-        }
-
-        private void LoadAudioDevices()
-        {
-            cmbAudioOutput.DataSource = Audio.GetAudioDevices();
-        }
-
-        private void LoadCameraDevices()
-        {
-            cmbWebcam.DataSource = HardwareSensors.Camera.GetDevices();
+            if (chkStartUp.Checked)
+                rk.SetValue(Utils.AppId, Application.ExecutablePath.ToString(CultureInfo.CurrentCulture));
+            else
+                rk.DeleteValue(Utils.AppId, false);
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (cmbWebcam.SelectedValue.ToString().Length > 0)
+            if (cbbCameraDevice.SelectedValue.ToString().Length > 0)
             {
-                try
-                {
-                    string Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\cameratest.jpeg";
+                var Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\cameratest.jpeg";
 
-                    if (HardwareSensors.Camera.Save(Filename))
-                    {
-                        MessageBox.Show($"camera image saved to {Filename}");
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Failed to save image");
-                    }
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-
+                if (Camera.Save())
+                    MessageBox.Show($"camera image saved to {Filename}");
+                else
+                    MessageBox.Show($"Failed to save image");
             }
-        }
-
-        private void ChkEnableWebCamPublish_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ChkEnableWebCamPublish.Checked)
-                LoadCameraDevices();
-            else
-                cmbWebcam.DataSource = null;
         }
 
         private void ChkTtsEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkTtsEnabled.Checked)
+            if (cbTTSEnabled.Checked)
             {
-                cmbSpeaker.DataSource = HardwareSensors.Speaker.GetSpeakers();
-                cmbSpeaker.SelectedItem = Utils.Settings.TTSSpeaker;
+                cbbTTSSpeaker.DataSource = HardwareSensors.Speaker.GetSpeakers();
+                cbbTTSSpeaker.SelectedItem = Utils.Settings.TTSSpeaker;
             }
         }
 
-        private void Button1_Click_1(object sender, EventArgs e)
+        private void btnTestMqttConnection_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var client = new MqttClient(tbMqttServer.Text, Convert.ToInt16(Utils.Settings.MqttPort, CultureInfo.CurrentCulture), false, null, null, MqttSslProtocols.None, null);
-                byte code = client.Connect(Guid.NewGuid().ToString(), tbMqttUsername.Text, tbMqttPassword.Text);
-                MessageBox.Show($"Connection ok id: {client.ClientId}");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Connection failed");
-                //throw;
-            }
-        }
+            var client = new MqttClient(tbMqttServer.Text, Utils.Settings.MqttPort.Convert<int>(), false, null, null, MqttSslProtocols.None, null);
+            client.Connect(Guid.NewGuid().ToString(), tbMqttUsername.Text, tbMqttPassword.Text);
 
-        private void CmdSelectSlideShowPath_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                Utils.Settings.SlideshowFolder = folderBrowserDialog1.SelectedPath;
+            if (client.IsConnected)
+                MessageBox.Show("Connection settings are correct.");
+            else
+                MessageBox.Show("Failed to connect to selected server.");
         }
 
         private void OptionsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            SaveComboBoxSettings();
             Utils.MainForm.ReloadApp();
-            Utils.Settings.Save();
         }
     }
 }

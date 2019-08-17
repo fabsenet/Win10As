@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
 using WinMqtt.Mqtt;
+using WinMqtt.HardwareSensors;
+using WinMqtt.Workers;
 
 namespace WinMqtt.Forms
 {
@@ -13,9 +15,20 @@ namespace WinMqtt.Forms
             Utils.MainForm = this;
 
             InitializeComponent();
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            //Version version = Assembly.GetExecutingAssembly().GetName().Version;
             toolStripStatusLabel2.Text = "";
             SetupNotify();
+
+            //var vol = Audio.GetVolume();
+            //var BatteryChargeStatus = SystemInformation.PowerStatus.BatteryChargeStatus;
+            //var BatteryFullLifetime = SystemInformation.PowerStatus.BatteryFullLifetime;
+            //var BatteryLifePercent = SystemInformation.PowerStatus.BatteryLifePercent;
+            //var BatteryLifeRemaining = SystemInformation.PowerStatus.BatteryLifeRemaining;
+            //var PowerLineStatus = SystemInformation.PowerStatus.PowerLineStatus;
+
+
+            //var idleTime = IdleTimeFinder.GetIdleTime();
+            //var ts = idleTime.TotalSeconds;
         }
 
         private void SetupNotify()
@@ -55,11 +68,14 @@ namespace WinMqtt.Forms
                 Clipboard.SetText(lbLogs.SelectedItems[0].ToString());
         }
 
-        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenSettings()
         {
-            var frmSettingsFrom = new OptionsForm();
-            frmSettingsFrom.Show();
+            var form = new OptionsForm();
+            form.ShowDialog();
+            form.Dispose();
         }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e) => OpenSettings();
 
         public void ReloadApp()
         {
@@ -110,26 +126,18 @@ namespace WinMqtt.Forms
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            try
+            if (Utils.Settings.MqttServer.Length > 3)
             {
-                if (Utils.Settings.MqttServer.Length > 3)
-                {
-                    MqttConnection.Connect();
-                    if (MqttConnection.IsConnected)
-                        toolStripStatusLabel1.Text = "connected to " + Utils.Settings.MqttServer;
-                    else
-                        toolStripStatusLabel1.Text = "not connected";
-                }
+                MqttConnection.Connect();
+                if (MqttConnection.IsConnected)
+                    toolStripStatusLabel1.Text = "connected to " + Utils.Settings.MqttServer;
                 else
-                {
                     toolStripStatusLabel1.Text = "not connected";
-                    var frmSettingsFrom = new OptionsForm();
-                    frmSettingsFrom.Show();
-                }
             }
-            catch (Exception)
+            else
             {
-                throw;
+                toolStripStatusLabel1.Text = "not connected";
+                OpenSettings();
             }
         }
 

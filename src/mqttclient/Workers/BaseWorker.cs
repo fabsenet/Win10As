@@ -45,18 +45,22 @@ namespace WinMqtt.Workers
         #endregion
 
         #region MQTT messages
-        public abstract List<MqttMessage> PrepareDiscoveryMessages();
+        protected abstract List<MqttMessage> PrepareDiscoveryMessages();
         public void SendDiscoveryMessages()
         {
+            if (!IsEnabled) return;
+
             var msgs = PrepareDiscoveryMessages();
             if (msgs == null) return;
             foreach (var msg in msgs)
                 MqttConnection.Publish(msg);
         }
 
-        public abstract List<MqttMessage> PrepareUpdateStatusMessages();
+        protected abstract List<MqttMessage> PrepareUpdateStatusMessages();
         public void SendUpdateStatusMessages()
         {
+            if (!IsEnabled) return;
+
             var msgs = PrepareUpdateStatusMessages();
             if (msgs == null) return;
             foreach (var msg in msgs)
