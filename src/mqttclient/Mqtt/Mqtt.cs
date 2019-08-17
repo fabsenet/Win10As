@@ -105,12 +105,12 @@ namespace WinMqtt.Mqtt
                 return;
             }
 
+            string strPayload = null;
             byte[] payload;
             if (message.Payload is byte[])
                 payload = (byte[])message.Payload;
             else
             {
-                string strPayload;
                 if (message.Payload is string)
                     strPayload = message.Payload + "";
                 else
@@ -120,7 +120,7 @@ namespace WinMqtt.Mqtt
             }
 
             _client.Publish(message.Topic, payload, 0, message.Retain);
-            Log.Add($"Message published: '{message.Topic}', payload: '{payload}'");
+            Log.Add($"Message published: '{message.Topic}', payload: '{strPayload ?? message.Payload}'");
         }
 
         public static void Disconnect()

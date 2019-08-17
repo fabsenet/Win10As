@@ -31,6 +31,8 @@ namespace WinMqtt
                     return "media_player";
                 case SensorType.Climate:
                     return "climate";
+                case SensorType.Camera:
+                    return "camera";
             }
 
             return "UNSUPPORTED";

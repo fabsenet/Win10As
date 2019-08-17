@@ -131,5 +131,5 @@ namespace WinMqtt.Workers
         #endregion
     }
 
-    public enum SensorType { BinarySensor, Switch, Light, Sensor, MediaPlayer, Climate };
+    public enum SensorType { BinarySensor, Camera, Climate, Switch, Light, Sensor, MediaPlayer };
 }

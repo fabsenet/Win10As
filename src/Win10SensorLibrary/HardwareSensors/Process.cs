@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace WinMqtt
 {
-    public static class Process
+    public static class _Process
     {
         public static string IsRunning(string exename, string location)
         {

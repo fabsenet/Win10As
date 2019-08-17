@@ -57,14 +57,7 @@ namespace WinMqtt.Forms
         private void Button2_Click(object sender, EventArgs e)
         {
             if (cbbCameraDevice.SelectedValue.ToString().Length > 0)
-            {
-                var Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\cameratest.jpeg";
-
-                if (Camera.Save())
-                    MessageBox.Show($"camera image saved to {Filename}");
-                else
-                    MessageBox.Show($"Failed to save image");
-            }
+                Camera.Save("preview", true);
         }
 
         private void ChkTtsEnabled_CheckedChanged(object sender, EventArgs e)
@@ -91,6 +84,16 @@ namespace WinMqtt.Forms
         {
             SaveComboBoxSettings();
             Utils.MainForm.ReloadApp();
+        }
+
+        private void BtnWebcamBrowseSaveDir_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                var result = fbd.ShowDialog();
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                    Utils.Settings.WorkerCameraSaveLocation = fbd.SelectedPath;
+            }
         }
     }
 }
