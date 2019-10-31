@@ -12,14 +12,14 @@ namespace mqttclient.Mqtt
 {
     public class MqttPublish : IMqttPublish
     {
-        private readonly IAudio _audioobj;
+        private readonly IAudio _audio;
         private readonly IMqtt _mqtt;
         private readonly string GLocalScreetshotFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "primonitor.jpg");
         private readonly string GLocalWebcamFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "webcam.png");
         public MqttPublish(IMqtt mqtt, IAudio audio)
         {
             _mqtt = mqtt;
-            _audioobj = audio;
+            _audio = audio;
         }
         public async void PublishSystemData()
         {
@@ -79,11 +79,11 @@ namespace mqttclient.Mqtt
         }
         private void PublishAudio()
         {
-            _mqtt.Publish("volume", _audioobj.GetVolume(), true);
+            _mqtt.Publish("volume", _audio.GetVolume(), true);
 
             try
             {
-                if (_audioobj.IsMuted() == true)
+                if (_audio.IsMuted() == true)
                 {
                     _mqtt.Publish("mute", "1");
                 }

@@ -9,5 +9,6 @@ namespace mqttclient.HardwareSensors
         void Mute(bool Enable);
         void Volume(int level);
         void ChangeOutputDevice(string DeviceFullname);
+        List<string> GetAudioDevices();
     }
 }

@@ -5,15 +5,18 @@ using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace mqttclient.HardwareSensors
 {
-    public class Audio : IAudio
+    public class Audio : IAudio, IDisposable
     {
-        CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+        /// <summary>
+        /// Creating the CoreAudioController is somehow a very intensive operation so only do it, it you have to
+        /// </summary>
+        Lazy<CoreAudioController> cac = new Lazy<CoreAudioController>();
 
         public void Mute(Boolean Enable)
         {
             try
             {
-                defaultPlaybackDevice.Mute(Enable);
+                cac.Value.DefaultPlaybackDevice.Mute(Enable);
             }
             catch (Exception)
             {
@@ -26,7 +29,7 @@ namespace mqttclient.HardwareSensors
         {
             try
             {
-                return defaultPlaybackDevice.IsMuted;
+                return cac.Value.DefaultPlaybackDevice.IsMuted;
             }
             catch (Exception)
             {
@@ -39,7 +42,7 @@ namespace mqttclient.HardwareSensors
         {
             try
             {
-                defaultPlaybackDevice.Volume = Convert.ToDouble(level);
+                cac.Value.DefaultPlaybackDevice.Volume = Convert.ToDouble(level);
             }
             catch (Exception)
             {
@@ -52,7 +55,7 @@ namespace mqttclient.HardwareSensors
         {
             try
             {
-                return defaultPlaybackDevice.Volume + "%";
+                return cac.Value.DefaultPlaybackDevice.Volume + "%";
             }
             catch (Exception)
             {
@@ -60,30 +63,65 @@ namespace mqttclient.HardwareSensors
             }
 
         }
-        static public List<string> GetAudioDevices()
+        public List<string> GetAudioDevices()
         {
-            CoreAudioController cac = new CoreAudioController();
             List<string> tmp = new List<string>();
 
-            foreach (CoreAudioDevice de in cac.GetPlaybackDevices())
+            foreach (CoreAudioDevice de in cac.Value.GetPlaybackDevices())
             {
                 tmp.Add(de.FullName);
             }
 
             return tmp;
-
         }
+
         public void ChangeOutputDevice(string DeviceFullname)
         {
-            CoreAudioController cac = new CoreAudioController();
-            foreach (CoreAudioDevice de in cac.GetPlaybackDevices())
+            foreach (CoreAudioDevice de in cac.Value.GetPlaybackDevices())
             {
                 if (de.FullName.ToLower(CultureInfo.CurrentCulture) == DeviceFullname.ToLower(CultureInfo.CurrentCulture))
                 {
-                    defaultPlaybackDevice = de;
+                    cac.Value.DefaultPlaybackDevice = de;
                 }
 
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    cac.Value.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~Audio()
+        // {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+
     }
 }

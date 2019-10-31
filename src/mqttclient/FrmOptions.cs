@@ -1,4 +1,5 @@
 ﻿
+using mqttclient.HardwareSensors;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -13,13 +14,14 @@ namespace mqttclient
 {
     public partial class FrmOptions : Form
     {
+        private readonly IAudio audio;
+
         public string TriggerFile { get; set; }
-        public FrmMqttMain ParentForm { get; set; }
-        public FrmOptions(FrmMqttMain Mainform)
+        public FrmOptions(IAudio audio)
         {
 
             InitializeComponent();
-            ParentForm = Mainform;
+            this.audio = audio ?? throw new ArgumentNullException(nameof(audio));
             TriggerFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "triggers.json");
             LoadSettings();
             if (txtmqtttopic.TextLength == 0)
@@ -167,15 +169,6 @@ namespace mqttclient
 
                 try
                 {
-                    ParentForm.ReloadApp();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error durring ReloadApp error:" + ex.Message);
-                    throw;
-                }
-                try
-                {
                     Close();
                 }
                 catch (Exception ex)
@@ -192,6 +185,7 @@ namespace mqttclient
             }
 
         }
+
         private void CmdTestSpeaker_Click(object sender, EventArgs e)
         {
             if (cmbSpeaker.SelectedItem.ToString().Length > 0)
@@ -217,7 +211,7 @@ namespace mqttclient
         }
         private void LoadAudioDevices()
         {
-            cmbAudioOutput.DataSource = HardwareSensors.Audio.GetAudioDevices();
+            cmbAudioOutput.DataSource = audio.GetAudioDevices();
         }
         private void LoadCameraDevices()
         {

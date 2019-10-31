@@ -10,11 +10,13 @@ namespace mqttclient
     public partial class FrmMqttMain : Form
     {
         private readonly IMqttPublish _mqttPublish;
+        private readonly Func<FrmOptions> frmSettingsFrom;
         private readonly IMqtt _mqtt;
-        public FrmMqttMain(IMqtt mqtt, IMqttPublish mqttPublish, MainFormContainer mainFormContainer)
+        public FrmMqttMain(IMqtt mqtt, IMqttPublish mqttPublish, MainFormContainer mainFormContainer, Func<FrmOptions> frmSettingsFrom)
         {
             _mqtt = mqtt;
             _mqttPublish = mqttPublish;
+            this.frmSettingsFrom = frmSettingsFrom ?? throw new ArgumentNullException(nameof(frmSettingsFrom));
             mainFormContainer.MainForm = this;
 
             try
@@ -24,7 +26,7 @@ namespace mqttclient
                 toolStripStatusLabel2.Text = "";
                 MqttSettings.Init();
                 SetupNotify();
-
+                Properties.Settings.Default.SettingsSaving += (_, __) => ReloadApp();
             }
             catch (Exception ex)
             {
@@ -93,8 +95,7 @@ namespace mqttclient
         }
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frmSettingsFrom = new FrmOptions(this);
-            frmSettingsFrom.Show();
+            frmSettingsFrom().Show();
         }
         public void ReloadApp()
         {
@@ -159,8 +160,7 @@ namespace mqttclient
                 else
                 {
                     toolStripStatusLabel1.Text = "not connected";
-                    var frmSettingsFrom = new FrmOptions(this);
-                    frmSettingsFrom.Show();
+                    frmSettingsFrom().Show();
                 }
             }
             catch (Exception)
